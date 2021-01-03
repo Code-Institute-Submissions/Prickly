@@ -60,8 +60,39 @@
 # User Experience (UX)
 
 ## Strategy Plane
+The main target audience for Prickly
+- Age 15 - 35 as the product itself is filled with puns that might not be attractive to an older demographic.
+- Users interested in cacti.
+- Users interested in decorating their space.
+- Users working with computers and interested in health benefits connected to cacti and computers.
+- Users who don't feel discouraged by monthly subscription services.
+
+The user can purchase individual items on the site which makes the site available to anyone visiting. However, due to the younger target audience, the main business model is subscription based to match up with multiple modern products. Each month users have the opportunity, based on their subscription value, to choosing new products that are delivered to them. This creates a fun aspect, inviting users to return and possibly purchase more products.
+
+Research
+- This is a B2C model, hence the website makes use of larger images/graphics and less text
+- There are only a few cacti dedicated e-commerce sites, and none that I came across offering subscription services
+- People purchasing items online are mostly impulse shopping and not many users like to register for new pages. This is why a subscription model is used to increase the number of returning users.
+
+Features worth doing
+- A Roadmap was used to identify which objectives are worth achieving. All objectives/high-level features were listed and scored on a 1-5 scale (5 being the most important) if they are Important or Viable. The importance score was summed together while the Viability scored was averaged and multiplied by the number of features. Since these numbers did not equal, they were plotted on the Importance/Viability graph to identify the most important ones and the ones that, for now, will be left out.
+
+    <img src="./readme_docs/strategy-table.png"/>
+
+
+    <img src="./readme_docs/strategy-chart.png"/>
+
+
+
 
 ### Business Goals
+- Earn profit by allowing anyone to purchase products
+- Connect the business to users to access a larger audience by having social media links accessible 
+- Outperform competitors by providing excellent products, services, and customer support
+- Provide unique designs by collaborating each month with a different artist on accessory designs
+
+
+
 
 ### User Stories
 
