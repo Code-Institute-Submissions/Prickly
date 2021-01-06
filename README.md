@@ -99,6 +99,12 @@ Features worth doing
 - #### Common user stories
     1. xxx
 
+- #### As a frequent site user I want to
+
+- #### As a casual shopper I want to
+
+- #### As a 
+
 - #### As a first time visitor
     1. xxx
     
@@ -119,17 +125,80 @@ Features worth doing
 
 - ### Wireframes
     - <details>
-        <summary>Home Page</summary>
-        <img src="./" height="400px"/>
+        <summary>Home</summary>
+        <img src="./readme_docs/wireframes/Home.png"/>
     </details>
 
-
-
-- ### Mockups
     - <details>
-        <summary>Home Page</summary>
-        <img src="./" height="400px"/>
+        <summary>Shop</summary>
+        <img src="./readme_docs/wireframes/Shop.png"/>
     </details>
+    
+    - <details>
+        <summary>Product</summary>
+        <img src="./readme_docs/wireframes/Product.png"/>
+    </details>
+
+    - <details>
+        <summary>Memberships</summary>
+        <img src="./readme_docs/wireframes/Memberships.png"/>
+    </details>
+
+    - <details>
+        <summary>Why Cacti</summary>
+        <img src="./readme_docs/wireframes/Why_Cacti.png"/>
+    </details>
+
+    - <details>
+        <summary>Shopping Bag</summary>
+        <img src="./readme_docs/wireframes/Shopping_Bag.png"/>
+    </details>
+
+    - <details>
+        <summary>Checkout</summary>
+        <img src="./readme_docs/wireframes/Checkout.png"/>
+    </details>
+
+    - <details>
+        <summary>Order History</summary>
+        <img src="./readme_docs/wireframes/Order_History.png"/>
+    </details>
+
+    - <details>
+        <summary>Order Details</summary>
+        <img src="./readme_docs/wireframes/Order_Details.png"/>
+    </details>
+
+    - <details>
+        <summary>Register</summary>
+        <img src="./readme_docs/wireframes/Register.png"/>
+    </details>
+
+    - <details>
+        <summary>Log In</summary>
+        <img src="./readme_docs/wireframes/Log_In.png"/>
+    </details>
+
+    - <details>
+        <summary>My Details</summary>
+        <img src="./readme_docs/wireframes/About_Me.png"/>
+    </details>
+
+    - <details>
+        <summary>Contact Us</summary>
+        <img src="./readme_docs/wireframes/Contact_Us.png"/>
+    </details>
+
+    - <details>
+        <summary>Shipping and Returns</summary>
+        <img src="./readme_docs/wireframes/Shipping_Returns.png"/>
+    </details>
+
+    - <details>
+        <summary>FAQ</summary>
+        <img src="./readme_docs/wireframes/FAQ.png"/>
+    </details>
+
 
 
 ## Surface Plane
