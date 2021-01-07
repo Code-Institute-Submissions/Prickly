@@ -3,7 +3,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
-
     {% block meta %}
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -20,17 +19,31 @@
     {% block add_css %}
     {% endblock add_css %}
 
+    {% block main_js %}
+    {% endblock main_js %}
+
     {% block title %}
         <title>Foundation Starter Template</title>
     {% endblock title %}
-
   </head>
+
   <body>
-    <h1>Hello, world!</h1>
+    {% if messages %}
+    {% endif %}
 
-    <!-- Foundation framework js files -->
-    <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/foundation.js"></script>
+    {% block add_header %}
+    {% endblock add_header %}
 
+    {% block content %}
+    {% endblock content %}
+
+    {% block main_postloadjs %}
+        <!-- Foundation framework js files -->
+        <script src="assets/js/vendor.js"></script>
+        <script src="assets/js/foundation.js"></script>
+    {% endblock main_postloadjs %}
+
+    {% block add_postloadjs %}
+    {% endblock add_postloadjs %}
   </body>
 </html>
