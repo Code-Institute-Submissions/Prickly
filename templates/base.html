@@ -1,0 +1,36 @@
+{ load static }
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+
+    {% block meta %}
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    {% endblock meta %}
+
+    {% block main_css %}
+        <!-- Foundation framework css style -->
+        <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+        <!-- Base css accross all pages -->
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock main_css %}
+    
+    {% block add_css %}
+    {% endblock add_css %}
+
+    {% block title %}
+        <title>Foundation Starter Template</title>
+    {% endblock title %}
+
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+
+    <!-- Foundation framework js files -->
+    <script src="assets/js/vendor.js"></script>
+    <script src="assets/js/foundation.js"></script>
+
+  </body>
+</html>
