@@ -2,47 +2,99 @@
 
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
-    {% block meta %}
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    {% endblock meta %}
+<head>
+	{% block meta %}
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+	{% endblock meta %}
 
-    {% block main_css %}
-        <!-- Foundation framework css style -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <!-- Base css accross all pages -->
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% endblock main_css %}
-    
-    {% block add_css %}
-    {% endblock add_css %}
+	{% block main_css %}
+		<!-- Foundation framework css style -->
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<!-- Base css accross all pages -->
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	{% endblock main_css %}
+	
+	{% block add_css %}
+	{% endblock add_css %}
 
-    {% block main_js %}
-    {% endblock main_js %}
+	{% block main_js %}
+	{% endblock main_js %}
 
-    {% block title %}
-        <title>Foundation Starter Template</title>
-    {% endblock title %}
-  </head>
+	{% block title %}
+		<title>Prickly</title>
+	{% endblock title %}
+</head>
 
-  <body>
-    {% if messages %}
-    {% endif %}
+<body>
+	<header>
+		<nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<a class="navbar-brand" href="#">
+						Prickly
+					</a>
+					<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Shop
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="#">Cacti</a></li>
+								<li><a class="dropdown-item" href="#">Pots</a></li>
+								<li><a class="dropdown-item" href="#">Accessories</a></li>
+								<li><a class="dropdown-item" href="#">Shop All</a></li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Memberships</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Why Cacti</a>
+						</li>
+					</ul>
+					<div class="navbar-icons d-flex">
+						<form class="d-flex">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+						<a href="#">Cart</a>
+						<a href="#">Account</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    {% block add_header %}
-    {% endblock add_header %}
+	{% if messages %}
+	{% endif %}
+	
+	{% block add_header %}
+	{% endblock add_header %}
 
-    {% block content %}
-    {% endblock content %}
+	{% block content %}
+	{% endblock content %}
 
-    {% block main_postloadjs %}
-        <!-- Bootstrap framework js files -->
-        <script src="assets/js/bootstrap.min.js"></script>
-    {% endblock main_postloadjs %}
+	{% block main_postloadjs %}
+		<!-- Bootstrap framework js files -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<!-- Add Popper CDN as recommended on Bootstrap site -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" 
+			integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" 
+			crossorigin="anonymous"></script>
+	{% endblock main_postloadjs %}
 
-    {% block add_postloadjs %}
-    {% endblock add_postloadjs %}
-  </body>
+	{% block add_postloadjs %}
+	{% endblock add_postloadjs %}
+</body>
 </html>
