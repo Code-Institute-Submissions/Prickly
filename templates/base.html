@@ -1,4 +1,4 @@
-{ load static }
+{% load static %}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -11,7 +11,7 @@
 
     {% block main_css %}
         <!-- Foundation framework css style -->
-        <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <!-- Base css accross all pages -->
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock main_css %}
@@ -38,9 +38,8 @@
     {% endblock content %}
 
     {% block main_postloadjs %}
-        <!-- Foundation framework js files -->
-        <script src="assets/js/vendor.js"></script>
-        <script src="assets/js/foundation.js"></script>
+        <!-- Bootstrap framework js files -->
+        <script src="assets/js/bootstrap.min.js"></script>
     {% endblock main_postloadjs %}
 
     {% block add_postloadjs %}
