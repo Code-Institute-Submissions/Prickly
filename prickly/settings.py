@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # social login
     'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
+    # Apps created
+    'home',
 ]
 
 MIDDLEWARE = [
