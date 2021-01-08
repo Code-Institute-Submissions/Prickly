@@ -66,22 +66,36 @@
 					</ul>
 						<ul class="list-inline list-unstyled">
 							<li class="list-inline-item">
-								<a data-bs-toggle="collapse" href="#collapseExample" 
-									role="button" aria-expanded="false" aria-controls="collapseExample">
+								<a data-bs-toggle="collapse" href="#searchCollapse" 
+									role="button" aria-expanded="false" aria-controls="searchCollapse">
 									Search
 								</a>
 							</li>
 							<li class="list-inline-item">
 								<a href="#">Cart</a>
 							</li>
-							<li class="list-inline-item">
-								<a href="#">Account</a>
+							<li class="list-inline-item dropdown">
+								<a href="#" class="dropdown-toggle" id="accountDropdown" role="button" 
+									data-bs-toggle="dropdown" aria-expanded="false">
+									Account
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="accountDropdown">
+									{% if request.user.is_authenticated %}
+										<li><a class="dropdown-item" href="#">Order History</a></li>
+										<li><a class="dropdown-item" href="#">My Membership</a></li>
+										<li><a class="dropdown-item" href="#">My Details</a></li>
+										<li><a class="dropdown-item" href="#">Log Out</a></li>
+									{% else %}
+										<li><a class="dropdown-item" href="#">Register</a></li>
+										<li><a class="dropdown-item" href="#">Log In</a></li>
+									{% endif %}
+								</ul>
 							</li>
 						</ul>
 				</div>
 			</div>
 		</nav>
-		<div class="collapse collapsed-search" id="collapseExample">
+		<div class="collapse collapsed-search" id="searchCollapse">
 			<div class="card card-body">
 				<form class="d-flex mx-auto">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
