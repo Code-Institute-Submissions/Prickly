@@ -1,0 +1,118 @@
+/* Import fonts from Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&family=Caveat:wght@400;600&family=Quicksand:wght@300;400;500;600&display=swap');
+
+
+/* ---------- COMMON STYLES ---------- */
+
+:root {
+    --color-main: #152c35;
+    --color-light-steel: #b3bcc9;
+    --color-light-pink: #e5dbdc;
+    --font-headings: 'Bodoni Moda', serif;
+    --font-accent: 'Caveat', cursive;
+}
+
+html {
+    height: 100%;
+}
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.txt-darkblue {
+    color: var(--color-main);
+}
+
+.font-heading {
+    font-family: var(--font-headings);
+    font-weight: 600;
+}
+
+.font-accent {
+    font-family: var(--font-accent);
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    margin-bottom: 5rem;
+}
+
+nav.navbar {
+    height: 5rem;
+    background-color: var(--color-light-steel);
+}
+
+nav.navbar li>a {
+    color: var(--color-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Icon styles */
+.navbar-icons li a i {
+    border: 1px solid var(--color-light-pink);
+    padding: 0.3rem;
+}
+
+.navbar-icons li a i:hover {
+    background-color: var(--color-light-pink);
+}
+
+/* Removing Default arrow for account icon */
+.navbar .list-inline-item .dropdown-toggle::after {
+    display: none;
+}
+
+ul.dropdown-menu.show {
+    right: 0;
+    left: auto;
+}
+
+.navbar-brand:hover {
+    color: var(--color-main);
+}
+
+/* creating the hover and active effect */
+.navbar-nav a.nav-link.active, .navbar-nav a.nav-link:hover {
+    background-color: var(--color-light-pink);
+    background: linear-gradient(var(--color-light-steel), var(--color-light-steel) 50%, var(--color-light-pink) 50%, var(--color-light-pink) 80%, var(--color-light-steel) 0);
+}
+
+/* Offsetting navbar height for collapsable search bar */
+.collapsed-search {
+    margin-top: 5rem;
+    margin-bottom: -5rem;
+}
+
+/* collapse search element style */
+.collapsed-search .card {
+    background-color: var(--color-light-steel);
+    padding: 0.5rem 0;
+}
+
+.collapsed-search input {
+    font-size: 0.75rem;
+    color: var(--color-main);
+    border-color: var(--color-main);
+    background-color: var(--color-light-pink);
+}
+
+.collapsed-search input::placeholder {
+    color: var(--color-main);
+    opacity: 1;
+}
+
+.collapsed-search button {
+    color: var(--color-main);
+    border-color: var(--color-light-pink);
+}
+
+.collapsed-search button:hover {
+    color: var(--color-main);
+    background-color: var(--color-light-pink);
+    border-color: var(--color-light-pink);
+}
+
+
