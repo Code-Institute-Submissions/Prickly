@@ -44,7 +44,7 @@ header {
 }
 
 nav.navbar {
-    height: 5rem;
+    height: 4.25rem;
 }
 
 nav.navbar, .navbar-nav {
@@ -148,6 +148,12 @@ span.hamburger-inner::after,
 span.hamburger-inner {
     width: 33px;
     background-color: var(--color-main);
+}
+
+@media (min-width: 768px) {
+    nav.navbar {
+        height: 5rem;
+    }
 }
 
 
