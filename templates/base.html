@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 		<!-- Base css accross all pages -->
 		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		<!-- Hamburger animation used from jonsuh.com -->
+		<link href="{% static 'css/hamburger.min.css' %}" rel="stylesheet">
 	{% endblock main_css %}
 	
 	{% block add_css %}
@@ -34,16 +36,23 @@
 	<header>
 		<nav class="navbar fixed-top navbar-expand-md">
 			<div class="container-fluid">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+				<button class="navbar-toggler hamburger hamburger--elastic" type="button" data-bs-toggle="collapse" 
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="hamburger-box">
+					  <span class="hamburger-inner"></span>
+					</span>
+				  </button>
+				<!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
-				</button>
+				</button> -->
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<a class="navbar-brand ms-5 txt-darkblue font-heading" href="{% url 'home' %}">
 						Prickly
 					</a>
-					<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+					<ul class="navbar-nav mx-auto mb-2 mb-md-0">
 						<li class="nav-item">
 							<a class="nav-link {% block main_nav_home %}{% endblock %}" aria-current="page" href="{% url 'home' %}">Home</a>
 						</li>
@@ -125,6 +134,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" 
 			integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" 
 			crossorigin="anonymous"></script>
+		<!-- Base js  -->
+		<script src="{% static 'js/base.js' %}"></script>
+		
 	{% endblock main_postloadjs %}
 
 	{% block add_postloadjs %}
