@@ -17,10 +17,15 @@ html {
 }
 body {
     font-family: 'Quicksand', sans-serif;
+    color: var(--color-main);
 }
 
 .txt-darkblue {
     color: var(--color-main);
+}
+
+.clr-steel {
+    background-color: var(--color-light-steel);
 }
 
 .font-heading {
@@ -143,6 +148,50 @@ span.hamburger-inner::after,
 span.hamburger-inner {
     width: 33px;
     background-color: var(--color-main);
+}
+
+
+/* ---------- FOOTER ---------- */
+footer {
+    line-height: 1.1;
+}
+
+.footer-group p {
+    font-size: 0.9rem;
+}
+
+.footer-group li a {
+    font-size: 0.8rem;
+}
+
+
+.footer-group li a,
+footer .list-inline-item a,
+.logo,
+.logo:hover {
+    color: var(--color-main);
+    text-decoration: none;
+}
+
+.footer-group li a{
+    border-bottom: 1px solid var(--color-light-pink);
+}
+
+footer .list-inline-item {
+    height: 2.5rem;
+    width: 2.5rem;
+    text-align: center;
+    border: 1px solid var(--color-light-pink);
+}
+
+footer .list-inline-item a {
+    line-height: 2.5rem;
+}
+
+.footer-group li a:hover,
+footer .list-inline-item a:hover,
+footer .list-inline-item:hover {
+    background-color: var(--color-light-pink);
 }
 
 
