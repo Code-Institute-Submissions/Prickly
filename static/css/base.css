@@ -40,6 +40,9 @@ header {
 
 nav.navbar {
     height: 5rem;
+}
+
+nav.navbar, .navbar-nav {
     background-color: var(--color-light-steel);
 }
 
@@ -48,6 +51,10 @@ nav.navbar li>a {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+nav a.nav-link {
+    width: fit-content;
 }
 
 /* Icon styles */
@@ -78,6 +85,8 @@ ul.dropdown-menu.show {
     color: var(--color-main);
 }
 
+/* mobile collapse header styles */
+
 /* creating the hover and active effect */
 .navbar-nav a.nav-link.active, .navbar-nav a.nav-link:hover {
     background-color: var(--color-light-pink);
@@ -91,32 +100,40 @@ ul.dropdown-menu.show {
 }
 
 /* collapse search element style */
-.collapsed-search .card {
+.search-nav {
     background-color: var(--color-light-steel);
     padding: 0.5rem 0;
 }
 
-.collapsed-search input {
+.search-nav input {
     font-size: 0.75rem;
     color: var(--color-main);
+}
+
+.search-nav input,
+.search-nav .form-control:focus {
     border-color: var(--color-main);
     background-color: var(--color-light-pink);
 }
 
-.collapsed-search input::placeholder {
+.search-nav input::placeholder {
     color: var(--color-main);
     opacity: 1;
 }
 
-.collapsed-search button {
+.search-nav button {
     color: var(--color-main);
     border-color: var(--color-light-pink);
 }
 
-.collapsed-search button:hover {
+.search-nav button:hover {
     color: var(--color-main);
     background-color: var(--color-light-pink);
     border-color: var(--color-light-pink);
+}
+
+.search-nav .form-control:focus {
+    box-shadow: 0 0 0 0.25rem var(--color-light-pink);
 }
 
 /* Hamburger menu styles */

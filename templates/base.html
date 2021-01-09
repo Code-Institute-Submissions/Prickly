@@ -35,29 +35,54 @@
 	<!-- Navbar Fixed to the top -->
 	<header>
 		<nav class="navbar fixed-top navbar-expand-md">
-			<div class="container-fluid">
+			<div class="container-fluid p-0 p-md-1">
 				<button class="navbar-toggler hamburger hamburger--elastic" type="button" data-bs-toggle="collapse" 
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="hamburger-box">
-					  <span class="hamburger-inner"></span>
+						<span class="hamburger-inner"></span>
 					</span>
-				  </button>
-				<!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button> -->
+				</button>
+				<ul class="list-inline list-unstyled me-2 mb-0 d-flex d-md-none navbar-icons">
+					<li class="list-inline-item mx-2">
+						<a href="#">
+							<i class="fas fa-shopping-cart"></i>
+						</a>
+					</li>
+					<li class="list-inline-item dropdown mx-2">
+						<a href="#" class="dropdown-toggle" id="accountDropdown" role="button" 
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-user"></i>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="accountDropdown">
+							{% if request.user.is_authenticated %}
+							<li><a class="dropdown-item" href="#">Order History</a></li>
+							<li><a class="dropdown-item" href="#">My Membership</a></li>
+							<li><a class="dropdown-item" href="#">My Details</a></li>
+							<li><a class="dropdown-item" href="#">Log Out</a></li>
+							{% else %}
+							<li><a class="dropdown-item" href="#">Register</a></li>
+							<li><a class="dropdown-item" href="#">Log In</a></li>
+							{% endif %}
+						</ul>
+					</li>
+				</ul>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<a class="navbar-brand ms-5 txt-darkblue font-heading" href="{% url 'home' %}">
+					<a class="navbar-brand ms-5 d-none d-md-flex txt-darkblue font-heading" href="{% url 'home' %}">
 						Prickly
 					</a>
 					<ul class="navbar-nav mx-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link {% block main_nav_home %}{% endblock %}" aria-current="page" href="{% url 'home' %}">Home</a>
+						<div class="card card-body border-0 rounded-0 d-md-none search-nav">
+							<form class="d-flex mx-auto">
+								<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-outline-dark btn-sm rounded-0" type="submit">Search</button>
+							</form>
+						</div>
+						<li class="nav-item px-2 p-md-0">
+							<a class="nav-link mx-1 {% block main_nav_home %}{% endblock %}" aria-current="page" href="{% url 'home' %}">Home</a>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle {% block main_nav_shop %}{% endblock %}" href="#" id="navbarDropdown" role="button" 
+						<li class="nav-item dropdown px-2 p-md-0">
+							<a class="nav-link mx-1 dropdown-toggle {% block main_nav_shop %}{% endblock %}" href="#" id="navbarDropdown" role="button" 
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Shop
 							</a>
@@ -68,14 +93,14 @@
 								<li><a class="dropdown-item" href="#">Shop All</a></li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link {% block main_nav_memberships %}{% endblock %}" href="#">Memberships</a>
+						<li class="nav-item px-2 p-md-0">
+							<a class="nav-link mx-1 {% block main_nav_memberships %}{% endblock %}" href="#">Memberships</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link {% block main_nav_cacti %}{% endblock %}" href="#">Why Cacti</a>
+						<li class="nav-item px-2 p-md-0">
+							<a class="nav-link mx-1 {% block main_nav_cacti %}{% endblock %}" href="#">Why Cacti</a>
 						</li>
 					</ul>
-					<ul class="list-inline list-unstyled me-5 mb-0 navbar-icons">
+					<ul class="list-inline list-unstyled me-5 mb-0 d-none d-md-flex navbar-icons">
 						<li class="list-inline-item mx-2">
 							<a data-bs-toggle="collapse" href="#searchCollapse" 
 								role="button" aria-expanded="false" aria-controls="searchCollapse">
@@ -109,13 +134,14 @@
 			</div>
 		</nav>
 		<div class="collapse collapsed-search" id="searchCollapse">
-			<div class="card card-body border-0 rounded-0">
+			<div class="card card-body border-0 rounded-0 search-nav">
 				<form class="d-flex mx-auto">
 					<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-dark btn-sm rounded-0" type="submit">Search</button>
 				</form>
 			</div>
 		</div>
+
 	</header>
 
 	{% if messages %}
