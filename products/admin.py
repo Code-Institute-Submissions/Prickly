@@ -6,36 +6,6 @@ Customize fields being displayed in admin view
 """
 
 
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    exclude = (
-        'product_code',
-        'avg_rating',
-    )
-    fields = (
-        'name',
-        'description',
-        'category',
-        'price',
-        'many_colors',
-        'color',
-        'main_pic',
-        'pic2',
-        'pic3',
-        'pic4',
-        'release_date'
-    )
-    list_display = (
-        'name',
-        'category',
-        'price',
-        'added_date',
-        'release_date',
-    )
-    ordering = ('product_code',)
-    date_hierarchy = 'added_date'
-
-
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
@@ -43,9 +13,32 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Color)
-class ColorAdmin(admin.ModelAdmin):
+class ColorInline(admin.StackedInline):
+    model = Color
+    extra = 1
+
+
+class ProductAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Required', {'fields': ['name',
+                                 'description',
+                                 'category',
+                                 'price',
+                                 'release_date', ]}),
+        ('Product Images', {'fields': ['main_pic',
+                                       'pic2',
+                                       'pic3',
+                                       'pic4'], }),
+    ]
+    inlines = [ColorInline]
     list_display = (
         'name',
-        'color_hex',
+        'category',
+        'price',
+        'added_date',
+        'release_date',
     )
+    date_hierarchy = 'added_date'
+
+
+admin.site.register(Product, ProductAdmin)
