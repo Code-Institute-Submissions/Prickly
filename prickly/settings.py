@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     # social logins
     'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
+
+    # colorfield in Products.Color model
+    'colorfield',
 ]
 
 MIDDLEWARE = [
