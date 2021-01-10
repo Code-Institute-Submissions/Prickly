@@ -32,6 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Apps created
+    'home.apps.HomeConfig',
+    'products.apps.ProductsConfig',
+
+    # Default apps installed
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,11 +47,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # social login
+
+    # social logins
     'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
-    # Apps created
-    'home',
 ]
 
 MIDDLEWARE = [
