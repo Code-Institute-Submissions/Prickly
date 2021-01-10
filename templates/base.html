@@ -62,10 +62,10 @@
 							<li><a class="dropdown-item" href="#">Order History</a></li>
 							<li><a class="dropdown-item" href="#">My Membership</a></li>
 							<li><a class="dropdown-item" href="#">My Details</a></li>
-							<li><a class="dropdown-item" href="#">Log Out</a></li>
+							<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
 							{% else %}
-							<li><a class="dropdown-item" href="#">Register</a></li>
-							<li><a class="dropdown-item" href="#">Log In</a></li>
+							<li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+							<li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
 							{% endif %}
 						</ul>
 					</li>
@@ -125,10 +125,10 @@
 									<li><a class="dropdown-item" href="#">Order History</a></li>
 									<li><a class="dropdown-item" href="#">My Membership</a></li>
 									<li><a class="dropdown-item" href="#">My Details</a></li>
-									<li><a class="dropdown-item" href="#">Log Out</a></li>
+									<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
 								{% else %}
-									<li><a class="dropdown-item" href="#">Register</a></li>
-									<li><a class="dropdown-item" href="#">Log In</a></li>
+									<li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+									<li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
 								{% endif %}
 							</ul>
 						</li>
