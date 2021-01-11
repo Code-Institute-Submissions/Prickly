@@ -1,4 +1,5 @@
 import math
+import uuid
 #  import ColorField for Color.color_hex
 from colorfield.fields import ColorField
 from django.db import models
@@ -35,7 +36,8 @@ class Product(models.Model):
         (NO, 'No'),
     ]
 
-    product_code = models.CharField(max_length=20, blank=True)
+    product_code = models.CharField(max_length=32, default=uuid.uuid4,
+                                    editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=300)
@@ -54,7 +56,7 @@ class Product(models.Model):
     added_date = models.DateTimeField(auto_now_add=True)
     release_date = models.DateTimeField('product release date',
                                         help_text=('Select today/now as the '
-                                                   'inout if the product is '
+                                                   'input if the product is '
                                                    'being published now.'))
 
     def clean(self):
@@ -69,9 +71,6 @@ class Product(models.Model):
             raise ValidationError(_("Price has to be a positive number."))
         elif self.release_date < self.added_date:
             raise ValidationError(_("Release date can't be in past."))
-
-    def __str__(self):
-        return self.name
 
     def release_countdown(self):
         """
@@ -90,6 +89,9 @@ class Product(models.Model):
 
             countdown_display = f'{countdown_days} days'
             return countdown_display
+
+    def __str__(self):
+        return self.name
 
 
 class Color(models.Model):
