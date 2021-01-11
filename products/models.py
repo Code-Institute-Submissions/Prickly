@@ -1,6 +1,8 @@
 #  import ColorField for Color.color_hex
 from colorfield.fields import ColorField
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 # Creating categories model
@@ -46,6 +48,17 @@ class Product(models.Model):
                                         help_text=('Select today/now as the '
                                                    'inout if the product is '
                                                    'being published now.'))
+
+    def clean(self):
+        # Raise validation error if release date is set in past or
+        # price is set 0 and below
+        if self.price <= 0 and self.release_date < self.added_date:
+            raise ValidationError(_("Price has to be a positive number and "
+                                    "Release Date can't be in past."))
+        elif self.price <= 0:
+            raise ValidationError(_("Price has to be a positive number."))
+        elif self.release_date < self.added_date:
+            raise ValidationError(_("Release date can't be in past."))
 
     def __str__(self):
         return self.name
