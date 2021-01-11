@@ -64,12 +64,12 @@ class Product(models.Model):
         Raise a validation error if release date is set in past,
         price is set to 0 and below or both
         """
-        if self.price <= 0 and self.release_date < self.added_date:
+        if self.price <= 0 and self.release_date.day < timezone.now().day:
             raise ValidationError(_("Price has to be a positive number and "
                                     "Release Date can't be in past."))
         elif self.price <= 0:
             raise ValidationError(_("Price has to be a positive number."))
-        elif self.release_date < self.added_date:
+        elif self.release_date.day < timezone.now().day:
             raise ValidationError(_("Release date can't be in past."))
 
     def release_countdown(self):
