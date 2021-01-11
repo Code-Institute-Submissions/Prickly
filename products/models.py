@@ -5,9 +5,11 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 
-# Creating categories model
 class Category(models.Model):
-
+    """
+    Creates a category model containing the names of
+    product categories
+    """
     class Meta:
         verbose_name_plural = 'Categories'
 
@@ -18,8 +20,12 @@ class Category(models.Model):
         return self.name
 
 
-# Creating a products table
 class Product(models.Model):
+    """
+    Creates Product model containing data about each individual
+    product
+    """
+    # Allows user to indicate if product will come in multiple colors
     YES = 'Y'
     NO = 'N'
     MANY_COLORS = [
@@ -50,8 +56,10 @@ class Product(models.Model):
                                                    'being published now.'))
 
     def clean(self):
-        # Raise validation error if release date is set in past or
-        # price is set 0 and below
+        """
+        Raise a validation error if release date is set in past,
+        price is set to 0 and below or both
+        """
         if self.price <= 0 and self.release_date < self.added_date:
             raise ValidationError(_("Price has to be a positive number and "
                                     "Release Date can't be in past."))
@@ -69,6 +77,11 @@ class Product(models.Model):
 
 
 class Color(models.Model):
+    """
+    Creates a Color model containing all colors added to
+    each product. These are used if a product comes in more
+    than one color
+    """
     name = models.CharField(max_length=20)
     color_hex = ColorField(default='#FFFFFF')
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
