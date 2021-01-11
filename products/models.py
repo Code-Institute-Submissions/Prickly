@@ -1,8 +1,10 @@
+import math
 #  import ColorField for Color.color_hex
 from colorfield.fields import ColorField
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -71,9 +73,23 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # Returns days/hours until the product release if release date is in future
     def release_countdown(self):
-        pass
+        """
+        Return time to release in days or hours of there are
+        less than 1 days left
+        """
+        date_now = timezone.now()
+        if self.release_date > date_now:
+            countdown = self.release_date - date_now
+            countdown_days = countdown.days
+            # Calculate hours using .seconds
+            countdown_hours = math.ceil(countdown.seconds / (60*60))
+            if countdown_days < 1:
+                countdown_display = f'{countdown_hours} hours'
+                return countdown_display
+
+            countdown_display = f'{countdown_days} days'
+            return countdown_display
 
 
 class Color(models.Model):
