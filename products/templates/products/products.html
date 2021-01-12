@@ -7,4 +7,11 @@
 
 {% block content%}
     <h1>Shop</h1>
+    {% for product in products %}
+        <img src="{{ product.main_pic.url }}" alt="">
+        <p>This is {{ product.name }}</p>
+        <p>Description: {{ product.description }}</p>
+        <p>Te product costs {{ product.price }}</p>
+         <p><a href="#">Buy Now</a></p>
+    {% endfor %}
 {% endblock %}

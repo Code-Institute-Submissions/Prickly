@@ -40,7 +40,7 @@ class Product(models.Model):
                                     editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=300)
+    description = models.TextField()
     avg_rating = models.DecimalField('average product rating', max_digits=2,
                                      decimal_places=1, default=0,
                                      null=True, blank=True)
