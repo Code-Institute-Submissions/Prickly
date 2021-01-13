@@ -201,3 +201,12 @@ footer .list-inline-item:hover {
 }
 
 
+/* ---------- SHOP ---------- */
+/* Toggle class for sort items to be visible on a button click */
+.sort-width {
+    display: none;
+}
+
+#sort-trigger {
+    cursor: pointer;
+}
