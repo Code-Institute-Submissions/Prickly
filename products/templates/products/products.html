@@ -8,7 +8,7 @@
 {% block content%}
     <!-- Shop Header -->
     <div class="container">
-        <ul class="list-inline list-unstyled d-flex justify-content-center">
+        <ul class="list-inline list-unstyled d-flex justify-content-center mb-0">
             <!-- Loop through categories and display in the header -->
             {% for category in categories %}
                 <li class="list-inline-item shop-category {% if category.name == active_category %}fs-5{% endif %}">
@@ -28,13 +28,40 @@
 
     <!-- Product Item container -->
     <div class="container">
+        <div class="text-end d-flex justify-content-end">
+            <!-- Sorting Icon container -->
+            <div class="sort-width" id="sort-container">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=name" class="mx-2">
+                    <i class="fas fa-sort-alpha-down"></i>
+                </a>
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-name" class="mx-2">
+                    <i class="fas fa-sort-alpha-up"></i>
+                </a>
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=added_date" class="mx-2">
+                    <i class="far fa-calendar-alt"></i><i class="fas fa-long-arrow-alt-down"></i>
+                </a>
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-added_date" class="mx-2">
+                    <i class="far fa-calendar-alt"></i><i class="fas fa-long-arrow-alt-up"></i>
+                </a>
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=price" class="mx-2">
+                    <i class="far fa-money-bill-alt"></i><i class="fas fa-long-arrow-alt-down"></i>
+                </a>
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-price" class="mx-2">
+                    <i class="far fa-money-bill-alt"></i><i class="fas fa-long-arrow-alt-up"></i>
+                </a>
+            </div>
+            <!-- Trigger element that hides/displays sorting icons -->
+            <p id="sort-trigger">
+                <i class="fas fa-filter border rounded-0 p-1"></i>
+            </p>
+        </div>
         <div class="row">
             <!-- For each Product display a card with image, title, rating, price and button to buy the item -->
             {% for product in products %}
                 <div class="col-sm-6 col-md-4 col-xl-3">
-                    <div class="card my-3 mx-auto" style="max-width: 300px;">
+                    <div class="card my-3 mx-auto rounded-0" style="max-width: 300px;">
                         <img class="img-fluid" src="{{ product.main_pic.url }}" alt="An image of a {{ product.name }}">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text"></p>
                             <p class="card-rating">
@@ -60,4 +87,18 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+
+{% block add_postloadjs %}
+  {{ block.super }}
+    <script type="text/javascript">
+        const sort = document.getElementById('sort-trigger')
+        const container = document.getElementById('sort-container')
+
+        sort.addEventListener('click', function () {
+            container.classList.toggle('sort-width');
+        })
+    </script>
+
 {% endblock %}

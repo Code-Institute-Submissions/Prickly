@@ -7,6 +7,7 @@ def all_products(request):
     """
     Return a page with all products displayed,
     Allow user to select category and filter objects by it
+    Allow user to sort items
     """
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -17,6 +18,13 @@ def all_products(request):
         if 'category' in request.GET:
             item_category = request.GET['category']
             products = products.filter(category__name=item_category)
+            # Sorting functionality for all items and each category
+            if 'sort' in request.GET:
+                sort_by = request.GET['sort']
+                if item_category == 'All':
+                    products = Product.objects.order_by(sort_by)
+
+                products = products.order_by(sort_by)
 
     context = {
         'products': products,
