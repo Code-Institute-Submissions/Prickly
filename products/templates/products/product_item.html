@@ -3,9 +3,12 @@
 
 {% block content %}
     <div class="container mt-1 mt-md-5">
+        <!-- Back button -->
         <button class="btn btn-small btn-outline-secondary rounded-0 text-uppercase" onclick="history.go(-1)">
             Back
         </button>
+
+        <!-- Main Product Detail view -->
         <div class="row text-center">
             <div class="col-12 col-md-6">
                 <img src="{{ product.main_pic.url }}" alt="The main picture of {{ product.name }}">
@@ -21,13 +24,16 @@
                     {{ product.avg_rating }}
                 </div>
                 <p>{{ product.description }}</p>
+                <!-- Quantitiy container -->
                 <div class="qty-container">
                     <input type="number" min="1" max="10" step="1" value="1" onkeydown="return false" class="p-2 qty-value">
-                    <p class="fs-4 mt-2" id="item-price-{{ product.price }}">€ {{ product.price }}</p>
-                    <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase p-2">
-                        Put in the cart <i class="fas fa-cart-arrow-down"></i>
-                    </button>
                 </div>
+                <!-- Price, this changes as the quantity updates -->
+                <p class="fs-4 mt-2" id="item-price-{{ product.price }}">€ {{ product.price }}</p>
+                <!-- Button to add item in the cart -->
+                <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase p-2">
+                    Put in the cart <i class="fas fa-cart-arrow-down"></i>
+                </button>
             </div>
         </div>
     </div>
