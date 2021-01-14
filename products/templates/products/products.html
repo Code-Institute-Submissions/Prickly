@@ -60,7 +60,9 @@
             {% for product in products %}
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card my-3 mx-auto rounded-0" style="max-width: 300px;">
-                        <img class="img-fluid" src="{{ product.main_pic.url }}" alt="An image of a {{ product.name }}">
+                        <a href="{% url 'product_item' product.pk %}">
+                            <img class="img-fluid" src="{{ product.main_pic.url }}" alt="An image of a {{ product.name }}">
+                        </a>
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text"></p>
