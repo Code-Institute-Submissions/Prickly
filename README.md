@@ -19,7 +19,7 @@
     1. [Scope Plane](#scope-plane)
     1. [Structure Plane](#structure-plane)
     1. [Skeleton Plane](#skeleton-plane)
-        - [Wireframes](#wirefr)
+        - [Wireframes](#wireframes)
 
     1. [Surface Plane](#surface-plane)
         - [Color sheme](#color-scheme)
@@ -320,11 +320,12 @@ Instructions to run the project on your local device using an IDE
 1. Create a file `env.py` to store environment variables
 1. Add environment variable in the format as shown below and also demonstrated in the [sample_env.py](sample_env.py) file
 
-        os.environ.setdefault('SECRET_KEY', '')
+        os.environ.setdefault('SECRET_KEY', '<your-variable-goes-here>')
         os.environ.setdefault('DEVELOPMENT', '1')
-        os.environ.setdefault('STRIPE_PUBLIC_KEY', '')
-        os.environ.setdefault('STRIPE_SECRET_KEY', '')
-        os.environ.setdefault('STRIPE_WH_SECRET', '')
+        os.environ.setdefault('ALLOWED_HOSTS', '<your-variable-goes-here>')
+        os.environ.setdefault('STRIPE_PUBLIC_KEY', '<your-variable-goes-here>')
+        os.environ.setdefault('STRIPE_SECRET_KEY', '<your-variable-goes-here>')
+        os.environ.setdefault('STRIPE_WH_SECRET', '<your-variable-goes-here>')
     where 
     -  `SECRET_KEY` value is a key of your choice, to ensure appropriate seccurity measures, this can be generated using [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
     -  `DEVELOPMENT` is set to `1` and is ised in settings.py logic to ensure file is dynamic between local and remote setups
@@ -353,7 +354,7 @@ Instructions to run the project on your local device using an IDE
                             <li>To get the `STRIPE_WH_SECRET` value, click on the added link under Endpoints and copy the Signing secret key in your variable</li>
                         </ul>
                 </details>
-
+    - `ALLOWED_HOSTS` this should be set to your ngrok url
 1. Run the application
 
         python3 manage.py runserver
@@ -361,6 +362,95 @@ Instructions to run the project on your local device using an IDE
 1. Website should be available on a link similar to `http://127.0.0.1:8000`. (check your IDE terminal)
 1. Note: `python3` and `pip3` commands can vary depending on version/machine/IDE you're using. Always check docs if unsure.
 
+## Remote
+### Pre-requisites
+- Set up [Heroku](https://dashboard.heroku.com/apps) Account and app
+        <details>
+            <summary>Heroku Basic Set Up</summary>
+            <ul>
+                <li>Register to the Heroku website by clicking on this [sign up link(https://signup.heroku.com/login)]</li>
+                <li>Create a new app on the Heroku website, enter a unique name and choose a region closest to you.
+                    <img src="/.">
+                </li>
+            </ul>
+        </details>
+
+
+### Steps
+1. In Heroku, go to **Resources** and search for **Heroku Postgres**, we will use this as our development database
+    - Select 'Hobby Dev - Free' and click to Submit Order Form
+
+1. Install **dj_database-url** to configure your Django app
+
+        pip3 install dj-database-url
+
+1. Install **psycopg2** to use it as PostgresSQL database adapter
+
+        pip3 install psycopg2-binary
+
+1. Comment out the 'SQLite and Postgres databases' section in the `settings.py` file and uncomment 'Postgres Database' section. Add your `DATABASE_URL` link obtained from Heroku Config Vars
+
+        DATABASES = {
+            'default': dj_database_url.parse('your-url-goes-here')
+        }
+1. Migrate your models to Postgres SQL database
+
+        python3 manage.py migrate
+
+1. If you have a JSON file with products displayed on the site, import them now in this order
+
+        python3 manage.py loaddata categories
+        python3 manage.py loaddata products
+
+1. Create a superuser that will be used to access the admin page as well as to manage the database. Enter username, password, and e-mail as required
+
+        python3 manage.py createsuperuser
+
+1. In `settings.py` delete the 'Postgres SQL Database' section (make sure you don't commit your DATABASE_URL link!) and un-comment 'SQLite and Postgres SQL Databases' section - this will allow for use of  either of the databases interchangeably
+
+1. If you didn't use JSON filer for product import, now is a good time to navigate to `your-ulr/admin/` page and add the Products and Categories in
+
+1. Install **gunicorn** which will act as a web server
+
+        pip3 install gunicorn
+
+1. Freeze dependencies in a  requirements.txt file
+
+        pip3 freeze --local > requirements.txt
+
+1. Create a Procfile that tells Heroku to create a web dyno and add the following line in it, where `the-name-of-your-app` is the name of your django project
+
+        web: gunicorn the-name-of-your-app.wsgi:application
+
+1. `Add`, `commit` and `push` your changes up to GitHub
+
+1. Go to Heroku and add all of the following environmental variables (Settings > Reveal Config Vars)
+
+    | Key | Value |
+    --- | ---
+    AWS_ACCESS_KEY_ID | `<your_aws_access__key>`
+    AWS_SECRET_ACCESS_KEY | `<your_aws_secret_access_key>`
+    DATABASE_URL | `generated automatically`
+    EMAIL_HOST_PASS | `<your_email_key>`
+    EMAIL_HOST_USER | `<your_email>`
+    SECRET_KEY | `<your_secret_key>`
+    STRIPE_PUBLIC_KEY | `<your_stripe_public_key>`
+    STRIPE_SECRET_KEY | `<your_stripe_secret_key>`
+    STRIPE_WH_SECRET | `<your_stripe_webhook_key>`
+    USE_AWS | `True`
+    ALLOWED_HOSTS | `<your-heroku-app-url>`
+    
+1. In Heroku go to **Deploy** that's located at the top of the site
+        <img src="/.">
+
+1. Click on the **GitHub** option and connect your GitHub account as well as your repo from GitHub (search for the repo name)
+        <img src="/.">
+
+1. Click on **Enable Automatic Deploys** and then **Deploy Branch**, you should see a successful build here
+                    <img src="/.">
+
+1. Open your app
+    <img src="./" height="70px" />
 
 
 # Credits
