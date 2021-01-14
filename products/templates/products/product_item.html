@@ -3,6 +3,9 @@
 
 {% block content %}
     <div class="container mt-1 mt-md-5">
+        <button class="btn btn-small btn-outline-secondary rounded-0 text-uppercase" onclick="history.go(-1)">
+            Back
+        </button>
         <div class="row text-center">
             <div class="col-12 col-md-6">
                 <img src="{{ product.main_pic.url }}" alt="The main picture of {{ product.name }}">
@@ -28,9 +31,8 @@
                         <i class="fas fa-plus p-1 border rounded-0"></i>
                     </button> -->
                     <p class="fs-4 mt-2">€ {{ product.price }}</p>
-                    <a href="{}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">More cacti goodies</a>
-                    <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">
-                        Put in the cart <i class="fas fa-shopping-cart"></i>
+                    <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase p-2">
+                        Put in the cart <i class="fas fa-cart-arrow-down"></i>
                     </button>
                 </div>
             </div>
