@@ -268,21 +268,99 @@ All testing was documented in [TESTING.md](https://github.com/LigaMoon/Prickly/b
 :bar_chart: </a>  :point_left: testing.md
 
 
+
 # Deployment
 
 ## Local
+Instructions to run the project on your local device using an IDE
 
 ### Pre-requisites
+- [Python 3](https://www.python.org/downloads/) - used to write the code and to run the project
+- [PIP](https://pypi.org/project/pip/) - used to install packages
+- [Git](https://git-scm.com/downloads) - used for version control
+- [Visual Studio Code](https://code.visualstudio.com/) or any IDE of your choice - used to compile the code.
+- [Stripe](https://stripe.com/en-ie) Account
+
+
+
 
 ### Recommended
+- A virtual environment of your choice - used to contain all installations and packages and prevents clashing projects that might use the same package but different versions.
+    - Python 3 has a built-in virtual environment [venv](https://docs.python.org/3/tutorial/venv.html). The commands might differ depending on your Operating System, it is advised to read the docs to ensure accuracy. To initialize on MacOS:
+
+            python3 -m venv .venv
+        where `.venv` is the name/path you are giving to the virtual environment
 
 ### Steps
+1. Go to the project [repository](https://github.com/LigaMoon/Prickly)
+1. Get the files used by using one of the methods below:
+    1. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
 
-## Remote
+    <img src="./static/graphics/readme/zip.png" height="200px" /> 
+    
+    1. Clone the repository by running the following command from your IDE
 
-### Pre-requisites
+            gh repo clone LigaMoon/Prickly
+    
+1. In your IDE, navigate to the project directory where you located downloaded files/cloned the repo
 
-### Steps
+        cd path/to/your/folder
+1. Activate your virtual environment. If using Python's venv:
+
+        source .venv/bin/activate
+    on MacOS and Unix where .venv is the name you gave previously
+
+        .venv\Scripts\activate.bat
+    on Windows where .venv is the name you gave previously
+
+1. Install all reqauirements from [requirements.txt](requrements.txt) file
+    
+        pip3 install -r requirements.txt
+
+1. Create a file `env.py` to store environment variables
+1. Add environment variable in the format as shown below and also demonstrated in the [sample_env.py](sample_env.py) file
+
+        os.environ.setdefault('SECRET_KEY', '')
+        os.environ.setdefault('DEVELOPMENT', '1')
+        os.environ.setdefault('STRIPE_PUBLIC_KEY', '')
+        os.environ.setdefault('STRIPE_SECRET_KEY', '')
+        os.environ.setdefault('STRIPE_WH_SECRET', '')
+    where 
+    -  `SECRET_KEY` value is a key of your choice, to ensure appropriate seccurity measures, this can be generated using [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
+    -  `DEVELOPMENT` is set to `1` and is ised in settings.py logic to ensure file is dynamic between local and remote setups
+    - `STRIPE_PUBLIC_KEY` and `STRIPE_SECRET_KEY` values are obatined from the [Stripe](https://stripe.com/en-ie) website
+                <details>
+                        <summary>How to get Stripe API values</summary>
+                        <ul>
+                            <li>Once logged in, you will be redirected to the **Overview** page, if not, navigate there by clicking **Overview** on the left hand side
+                                <img src="/.">
+                            </li>
+                            <li>Get the API values by clicking on **Get your test API keys** as shown in the image above</li>
+                            <li>Add Publishable key as `STRIPE_PUBLIC_KEY` and Secret key as `STRIPE_SECRET_KEY` environmental variable values</li>
+                        </ul>
+                </details>
+    - `STRIPE_WH_SECRET` value is obtained from the [Stripe](https://stripe.com/en-ie) website in conjunction of using [ngrok](https://ngrok.com) to host the server
+                    <details>
+                        <summary>Getting Webhooks API value</summary>
+                        <ul>
+                            <li>Set up ngrok to generate a tunnel on your localhost port to use in Stripe webhooks later. Read on [ngrok](nhrok.com/downloads) website downloads page to learn how.</li>
+                            <li>Go to your [stripe dashboard](dashboard.stripe.com) and naviagte to **Developers** > **Webhooks**
+                                <img src="/.">
+                            </li>
+                            <li>Click **Add endpoint** and enter your ngrok link followed by `/checkout/wh/` as shown in the image below</li>
+                                <img src="/.">
+                            <li>Click on **recieve all events** and then Add endpoint to finish the setup</li>
+                            <li>To get the `STRIPE_WH_SECRET` value, click on the added link under Endpoints and copy the Signing secret key in your variable</li>
+                        </ul>
+                </details>
+
+1. Run the application
+
+        python3 manage.py runserver
+
+1. Website should be available on a link similar to `http://127.0.0.1:8000`. (check your IDE terminal)
+1. Note: `python3` and `pip3` commands can vary depending on version/machine/IDE you're using. Always check docs if unsure.
+
 
 
 # Credits
