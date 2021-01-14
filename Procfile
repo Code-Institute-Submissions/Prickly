@@ -1,0 +1,1 @@
+web: gunicorn prickly.wsgi:application
