@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Product, Category, Color
 
@@ -33,3 +33,14 @@ def all_products(request):
     }
 
     return render(request, 'products/products.html', context)
+
+
+def product_item(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    colors = Color.objects.filter(product=product.pk)
+    template = 'products/product_item.html'
+    context = {
+        'product': product,
+        'colors': colors,
+    }
+    return render(request, template, context)
