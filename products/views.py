@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.contrib import messages
+from django.db.models import Q
 from .models import Product, Category, Color
 
 
@@ -25,6 +26,22 @@ def all_products(request):
                     products = Product.objects.order_by(sort_by)
 
                 products = products.order_by(sort_by)
+
+    # Search entered keywoard in name, description or category
+    if 'search' in request.GET:
+        search_query = request.GET['search']
+        if not search_query:
+            # If user didn't enter a value, return an error message
+            messages.error(request, "Please enter a search value.")
+            return redirect(reverse('products'))
+
+        # Use icontains to return case insensitive results
+        name_q = Q(name__icontains=search_query)
+        desc_q = Q(description__icontains=search_query)
+        cat_q = Q(category__name__icontains=search_query)
+        # Search in either name or description
+        combined_query = Q(name_q) | Q(desc_q) | Q(cat_q)
+        products = products.filter(combined_query)
 
     context = {
         'products': products,

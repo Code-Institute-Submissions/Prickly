@@ -76,8 +76,8 @@
 					</a>
 					<ul class="navbar-nav mx-auto mb-2 mb-md-0">
 						<div class="card card-body border-0 rounded-0 d-md-none search-nav">
-							<form class="d-flex mx-auto">
-								<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search">
+							<form method="GET" action="{% url 'products' %}" class="d-flex mx-auto">
+								<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search" name="search">
 								<button class="btn btn-outline-dark btn-sm rounded-0" type="submit">Search</button>
 							</form>
 						</div>
@@ -105,8 +105,9 @@
 					</ul>
 					<ul class="list-inline list-unstyled me-5 mb-0 d-none d-md-flex navbar-icons">
 						<li class="list-inline-item mx-2">
-							<a data-bs-toggle="collapse" href="#searchCollapse" 
-								role="button" aria-expanded="false" aria-controls="searchCollapse">
+							<a data-bs-toggle="collapse" href="#searchCollapse"
+								role="button" aria-expanded="false" aria-controls="searchCollapse"
+								id="search-btn">
 								<i class="fas fa-search"></i>
 							</a>
 						</li>
@@ -136,10 +137,10 @@
 				</div>
 			</div>
 		</nav>
-		<div class="collapse collapsed-search" id="searchCollapse">
+		<div class="large-nav collapse collapsed-search" id="searchCollapse">
 			<div class="card card-body border-0 rounded-0 search-nav">
-				<form class="d-flex mx-auto">
-					<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search">
+				<form method="GET" action="{% url 'products' %}" class="d-flex mx-auto">
+					<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search" name="search">
 					<button class="btn btn-outline-dark btn-sm rounded-0" type="submit">Search</button>
 				</form>
 			</div>
@@ -206,6 +207,13 @@
 	{% endblock main_postloadjs %}
 
 	{% block add_postloadjs %}
+	{{ block.super }}
+		<!-- when search icon is clicked, scroll to top to reveal the collapse element -->
+		<script type="text/javascript">
+			document.querySelector('#search-btn').addEventListener('click', function() {
+				window.scrollTo(0,0);
+			});
+		</script>
 	{% endblock add_postloadjs %}
 </body>
 </html>
