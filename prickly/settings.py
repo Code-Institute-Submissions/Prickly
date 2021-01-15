@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Apps created
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
+    'shopping_cart.apps.ShoppingCartConfig',
 
     # Default apps installed
     'django.contrib.admin',
