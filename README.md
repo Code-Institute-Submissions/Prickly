@@ -374,19 +374,110 @@ Instructions to run the project on your local device using an IDE
                 </li>
             </ul>
         </details>
+- Create AWS account and upload static files used in the project
+        <details>
+            <summary>AWS S3 static file storage setup</summary>
+            <ul>
+                <li>Go to [aws.amazon.com](https://aws.amazon.com/) website and Register, you might have to enter your credit card details, however, while using free tier there should be no charges. That being said, you should monitor your own usage.</li>
+                <li>After registration, go back to the [AWS](https://aws.amazon.com/) site and click the orange 'sign in to the Console' button.</li>
+                <li>Sign in as 'Root User' with your e-mail address and password used in registration.</li>
+                <li>At the top of the site, search for S3 and click on it to open.</li>
+                <li>Click on the **Create bucket** button located on the top right.
+                    <img src="/.">
+                </li>
+                <li>Name should match the Heroku app name, Region is set to the closest tot you, untick the 'Block all public access' and tick the acknowledgement next to the warning symbol.</li>
+                <li>Go to the end and click **Create Bucket**</li>
+                <li>To Enable static website hosting
+                    <ul>
+                        <li>Select the bucket by clicking on it and go to **Properties** located at the top.</li>
+                        <li>Scroll down to the very bottom and click on 'Edit' under **Static website hosting**.</li>
+                        <li>Select 'Enable' and enter the default values for Index document and Error document as these won't be used.
+                                <img src="/.">
+                        </li>
+                        <li>Click **Save changes**</li>
+                    </ul>
+                </li>
+                <li>Make changes in Permissions
+                    <ul>
+                        <li>Go to **Permissions** located at the top</li>
+                        <li>Scroll down and click 'Edit' under **Cross-origin resource sharing (CORS)** which will provide access between Heroku and the bucket</li>
+                        <li>Scroll down to the very bottom and click on 'Edit' under **Static website hosting**.</li>
+                        <li>Add the following JSON code (indent it properly) and save changes.
+                            <pre>
+                                [
+                                    {
+                                        "AllowedHeaders": [
+                                            "Authorization"
+                                        ],
+                                        "AllowedMethods": [
+                                            "GET"
+                                        ],
+                                        "AllowedOrigins": [
+                                            "*"
+                                        ],
+                                        "ExposeHeaders": []
+                                    }
+                                ]
+                            </pre>
+                        </li>
+                        <li>Click 'Edit' under **bucket policy** and click on 'Policy Generator' which will open in a new tab.</li>
+                        <li>'Select Type or Policy' set to 'S3 Bucket Policy', 'Principal' set to '*', under 'Actions' add 'GetObject, GetObjectAcl, PutObject, PutObjectAcl, DeleteObject'</li>
+                        <li>Go back to the previous tab and copy the **Bucket ARN** and paste it under **Amazon Resource Name (ARN)**
+                             <img src="/.">
+                        </li>
+                        <li>Click 'Add Statement' and then click 'Generate Policy'.</li>
+                        <li>Copy the code, paste it in the **bucket policy** field (previous tab) and add `/*` after the ARN to allow all resources in the bucket</li>
+                        <li>Click 'Save Changes'.</li>
+                        <li>Still in permissions click 'Edit' under **Access control list (ACL)**</li>
+                        <li>Under 'Everyone', tick 'List'</li>
+                        <li>Tick 'I understand the effects....' and Save changes.</li>
+                    </ul>
+                </li>
+                <li>At the top search for **IAM** and click on it.</li>
+                <li> Create a Group
+                    <ul>
+                        <li>On the left hand side, under 'Access management' click on **Groups**
+                            <img src="/.">
+                        </li>
+                        <li>On the top right click 'Create New Group' and name it something that makes sense to you.</li>
+                        <li>Click 'Next Step' and then 'Create Group' (skips the policy for now, we will create it in one of the following steps).</li>
+                    </ul>
+                </li>
+                <li> Create a Policy
+                    <ul>
+                        <li>On the left hand side, under 'Access management' click on **Policies**.</li>
+                        <li>On the top right click 'Create policy' select JSON and click on 'Import Managed Policy'.
+                            <img src="/.">
+                        </li>
+                        <li>Search for 'S3', select **AmazonS3FullAccess** and click 'Import'.</li>
+                        <li>Since we only want full access to our Bucket, go back to copy your ARN from before and add it under 'Resource' twice, the second time with `/*` after the ARN.
+                            <img src="/.">
+                        </li>
+                        <li>Click on 'Review policy', add name and description and 'Create policy'.</li>
+                    </ul>
+                </li>
+                <li> Attach the Policy to the Group created
+                    <ul>
+                        <li>Go to **Groups** on the left hand side.</li>
+                        <li>Click on the relevant group and click on 'Attach Policy'.</li>
+                        <li>Search for the policy just created, select it and click 'Attach Policy'.</li>
+                    </ul>
+                </li>
+                <li> Create Users to put in the Group
+                    <ul>
+                        <li>Click on **Users** on the left hand side adn click 'Add user'.</li>
+                        <li>Add name and tick to give 'Programmatic access', then click 'Next: Permissions'.</li>
+                        <li>Select the group to put the user in and keep clicking 'Next; until the very end and click 'Create user'.</li>
+                        <li>Click on 'Download .csv' file, this is important as you won't have access to it again!</li>
+                        <li>Use the values from this file to later set your     `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables. </li>
+                    </ul>
+                </li>
+        </details>
 
 
 ### Steps
 1. In Heroku, go to **Resources** and search for **Heroku Postgres**, we will use this as our development database
     - Select 'Hobby Dev - Free' and click to Submit Order Form
-
-1. Install **dj_database-url** to configure your Django app
-
-        pip3 install dj-database-url
-
-1. Install **psycopg2** to use it as PostgresSQL database adapter
-
-        pip3 install psycopg2-binary
 
 1. Comment out the 'SQLite and Postgres databases' section in the `settings.py` file and uncomment 'Postgres Database' section. Add your `DATABASE_URL` link obtained from Heroku Config Vars
 
@@ -408,13 +499,7 @@ Instructions to run the project on your local device using an IDE
 
 1. In `settings.py` delete the 'Postgres SQL Database' section (make sure you don't commit your DATABASE_URL link!) and un-comment 'SQLite and Postgres SQL Databases' section - this will allow for use of  either of the databases interchangeably
 
-1. If you didn't use JSON filer for product import, now is a good time to navigate to `your-ulr/admin/` page and add the Products and Categories in
-
-1. Install **gunicorn** which will act as a web server
-
-        pip3 install gunicorn
-
-1. Freeze dependencies in a  requirements.txt file
+1. Freeze dependencies in a  requirements.txt file (if it hasn't been created/updated before)
 
         pip3 freeze --local > requirements.txt
 
@@ -451,6 +536,14 @@ Instructions to run the project on your local device using an IDE
 
 1. Open your app
     <img src="./" height="70px" />
+
+1. You should see `static/` folder with your static files in it in you S3 bucket.
+
+1. In your S3 bucket, add `media/` folder.
+
+1. If you didn't use JSON filer for product import, now is a good time to navigate to `your-ulr/admin/` page and add the Products and Categories in.
+
+1. Your app should be deployed and you should be able to see your added products.
 
 
 # Credits
