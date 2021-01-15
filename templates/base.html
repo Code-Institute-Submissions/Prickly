@@ -137,7 +137,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="large-nav collapse collapsed-search" id="searchCollapse">
+		<div class="large-nav collapse collapsed-search fixed-top" id="searchCollapse">
 			<div class="card card-body border-0 rounded-0 search-nav">
 				<form method="GET" action="{% url 'products' %}" class="d-flex mx-auto">
 					<input class="form-control form-control-sm me-2 rounded-0" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -207,13 +207,6 @@
 	{% endblock main_postloadjs %}
 
 	{% block add_postloadjs %}
-	{{ block.super }}
-		<!-- when search icon is clicked, scroll to top to reveal the collapse element -->
-		<script type="text/javascript">
-			document.querySelector('#search-btn').addEventListener('click', function() {
-				window.scrollTo(0,0);
-			});
-		</script>
 	{% endblock add_postloadjs %}
 </body>
 </html>
