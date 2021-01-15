@@ -135,7 +135,7 @@ WSGI_APPLICATION = 'prickly.wsgi.application'
 
 # Postgres Database
 # DATABASES = {
-#     'default': dj_database_url.parse('')
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 # }
 
 # SQLite and Postgres Databases

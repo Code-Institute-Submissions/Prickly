@@ -36,7 +36,7 @@ class Product(models.Model):
         (NO, 'No'),
     ]
 
-    product_code = models.CharField(max_length=32, default=uuid.uuid4,
+    product_code = models.CharField(max_length=36, default=uuid.uuid4,
                                     editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
