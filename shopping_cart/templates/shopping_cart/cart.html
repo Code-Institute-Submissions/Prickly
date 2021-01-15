@@ -1,43 +1,48 @@
 {% extends "base.html" %}
 {% load static%}
 
-{% block main_nav_home %}
-    active
-{% endblock %}
-
 {% block content%}
-    <div class="container mt-5">
-        <h2 class="text-uppercase">Items</h2>
-        <div class="row">
-            <div class="col row text-center">
-                <div class="col-3">Product Image</div>
-                <div class="col-9">
-                    <div class="row text-center">
-                        <div class="col">Product Name</div>
-                        <div class="col">Quantity</div>
-                        <div class="col">Price</div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col">Remove button</div>
+    <!-- Shopping cart contents -->
+    {% if cart_contents %}
+        <!-- If there are items in the cart, display them -->
+        <div class="container mt-5">
+            <h2 class="text-uppercase">Items</h2>
+            <div class="row">
+                <div class="col row text-center">
+                    <div class="col-3">Product Image</div>
+                    <div class="col-9">
+                        <div class="row text-center">
+                            <div class="col">Product Name</div>
+                            <div class="col">Quantity</div>
+                            <div class="col">Price</div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">Remove button</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <p>Item Total</p>
-                <p>Delivery Cost</p>
-                <p>Discount</p>
-                <p>Total</p>
+            <div class="row">
+                <div class="col text-center">
+                    <p>Item Total</p>
+                    <p>Delivery Cost</p>
+                    <p>Discount</p>
+                    <p>Total</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-end">
+                    <a href="{% url 'products' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">More Shopping</a>
+                </div>
+                <div class="col text-start">
+                    <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">Checkout</button>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col text-end">
-                <a href="{% url 'products' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">More Shopping</a>
-            </div>
-            <div class="col text-start">
-                <button class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">Checkout</button>
-            </div>
+    {% else %}
+        <!-- If the cart is empty, provide user with a button to the shop -->
+        <div class="col text-center mt-5">
+            <a href="{% url 'products' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">Buy something</a>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
