@@ -294,11 +294,11 @@ Instructions to run the project on your local device using an IDE
 ### Steps
 1. Go to the project [repository](https://github.com/LigaMoon/Prickly)
 1. Get the files used by using one of the methods below:
-    1. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
+    - Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
 
-    <img src="./static/graphics/readme/zip.png" height="200px" /> 
+        <img src="./readme_docs/zip.png" height="200px" /> 
     
-    1. Clone the repository by running the following command from your IDE
+    - Clone the repository by running the following command from your IDE
 
             gh repo clone LigaMoon/Prickly
     
@@ -334,8 +334,8 @@ Instructions to run the project on your local device using an IDE
                         <summary>How to get Stripe API values</summary>
                         <ul>
                             <li>Once logged in, you will be redirected to the **Overview** page, if not, navigate there by clicking **Overview** on the left hand side
-                                <img src="/.">
                             </li>
+                                <img src="./readme_docs/stripe-overview.png" height="200px">
                             <li>Get the API values by clicking on **Get your test API keys** as shown in the image above</li>
                             <li>Add Publishable key as `STRIPE_PUBLIC_KEY` and Secret key as `STRIPE_SECRET_KEY` environmental variable values</li>
                         </ul>
@@ -346,10 +346,9 @@ Instructions to run the project on your local device using an IDE
                         <ul>
                             <li>Set up ngrok to generate a tunnel on your localhost port to use in Stripe webhooks later. Read on [ngrok](nhrok.com/downloads) website downloads page to learn how.</li>
                             <li>Go to your [stripe dashboard](dashboard.stripe.com) and naviagte to **Developers** > **Webhooks**
-                                <img src="/.">
                             </li>
                             <li>Click **Add endpoint** and enter your ngrok link followed by `/checkout/wh/` as shown in the image below</li>
-                                <img src="/.">
+                                <img src="./readme_docs/stripe-endpoint.png" height="400px">
                             <li>Click on **recieve all events** and then Add endpoint to finish the setup</li>
                             <li>To get the `STRIPE_WH_SECRET` value, click on the added link under Endpoints and copy the Signing secret key in your variable</li>
                         </ul>
@@ -370,8 +369,8 @@ Instructions to run the project on your local device using an IDE
             <ul>
                 <li>Register to the Heroku website by clicking on this [sign up link(https://signup.heroku.com/login)]</li>
                 <li>Create a new app on the Heroku website, enter a unique name and choose a region closest to you.
-                    <img src="/.">
                 </li>
+                    <img src="./readme_docs/new-app.png">
             </ul>
         </details>
 - Create AWS account and upload static files used in the project
@@ -383,7 +382,6 @@ Instructions to run the project on your local device using an IDE
                 <li>Sign in as 'Root User' with your e-mail address and password used in registration.</li>
                 <li>At the top of the site, search for S3 and click on it to open.</li>
                 <li>Click on the **Create bucket** button located on the top right.
-                    <img src="/.">
                 </li>
                 <li>Name should match the Heroku app name, Region is set to the closest tot you, untick the 'Block all public access' and tick the acknowledgement next to the warning symbol.</li>
                 <li>Go to the end and click **Create Bucket**</li>
@@ -392,8 +390,8 @@ Instructions to run the project on your local device using an IDE
                         <li>Select the bucket by clicking on it and go to **Properties** located at the top.</li>
                         <li>Scroll down to the very bottom and click on 'Edit' under **Static website hosting**.</li>
                         <li>Select 'Enable' and enter the default values for Index document and Error document as these won't be used.
-                                <img src="/.">
                         </li>
+                            <img src="./readme_docs/aws-default-names.png">
                         <li>Click **Save changes**</li>
                     </ul>
                 </li>
@@ -423,8 +421,8 @@ Instructions to run the project on your local device using an IDE
                         <li>Click 'Edit' under **bucket policy** and click on 'Policy Generator' which will open in a new tab.</li>
                         <li>'Select Type or Policy' set to 'S3 Bucket Policy', 'Principal' set to '*', under 'Actions' add 'GetObject, GetObjectAcl, PutObject, PutObjectAcl, DeleteObject'</li>
                         <li>Go back to the previous tab and copy the **Bucket ARN** and paste it under **Amazon Resource Name (ARN)**
-                             <img src="/.">
                         </li>
+                            <img src="./readme_docs/aws-policy.png">
                         <li>Click 'Add Statement' and then click 'Generate Policy'.</li>
                         <li>Copy the code, paste it in the **bucket policy** field (previous tab) and add `/*` after the ARN to allow all resources in the bucket</li>
                         <li>Click 'Save Changes'.</li>
@@ -437,7 +435,6 @@ Instructions to run the project on your local device using an IDE
                 <li> Create a Group
                     <ul>
                         <li>On the left hand side, under 'Access management' click on **Groups**
-                            <img src="/.">
                         </li>
                         <li>On the top right click 'Create New Group' and name it something that makes sense to you.</li>
                         <li>Click 'Next Step' and then 'Create Group' (skips the policy for now, we will create it in one of the following steps).</li>
@@ -447,11 +444,10 @@ Instructions to run the project on your local device using an IDE
                     <ul>
                         <li>On the left hand side, under 'Access management' click on **Policies**.</li>
                         <li>On the top right click 'Create policy' select JSON and click on 'Import Managed Policy'.
-                            <img src="/.">
                         </li>
                         <li>Search for 'S3', select **AmazonS3FullAccess** and click 'Import'.</li>
                         <li>Since we only want full access to our Bucket, go back to copy your ARN from before and add it under 'Resource' twice, the second time with `/*` after the ARN.
-                            <img src="/.">
+                            <img src="./readme_docs/policy-json.png" height="200px">
                         </li>
                         <li>Click on 'Review policy', add name and description and 'Create policy'.</li>
                     </ul>
@@ -526,16 +522,20 @@ Instructions to run the project on your local device using an IDE
     ALLOWED_HOSTS | `<your-heroku-app-url>`
     
 1. In Heroku go to **Deploy** that's located at the top of the site
-        <img src="/.">
+
+    <img src="./readme_docs/deploy.png" height="100px" /> 
 
 1. Click on the **GitHub** option and connect your GitHub account as well as your repo from GitHub (search for the repo name)
-        <img src="/.">
+
+    <img src="./readme_docs/heroku-github-connect.png" height="150px" />
 
 1. Click on **Enable Automatic Deploys** and then **Deploy Branch**, you should see a successful build here
-                    <img src="/.">
+
+    <img src="./readme_docs/deploy-branch.png" height="200px" />
 
 1. Open your app
-    <img src="./" height="70px" />
+
+    <img src="./readme_docs/open-app.png" height="70px" />
 
 1. You should see `static/` folder with your static files in it in you S3 bucket.
 
