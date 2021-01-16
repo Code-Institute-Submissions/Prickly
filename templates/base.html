@@ -48,8 +48,11 @@
 				</a>
 				<ul class="list-inline list-unstyled me-2 mb-0 d-flex d-md-none navbar-icons">
 					<li class="list-inline-item mx-2">
-						<a href="#">
+						<a href="{% url 'cart' %}" class="shopping-cart-icon">
 							<i class="fas fa-shopping-cart"></i>
+							{% if cart_items %}
+								<span class="badge rounded-pill">{{ item_count }}</span>
+							{% endif %}
 						</a>
 					</li>
 					<li class="list-inline-item dropdown mx-2">
@@ -112,8 +115,11 @@
 							</a>
 						</li>
 						<li class="list-inline-item mx-2">
-							<a href="{% url 'cart' %}">
+							<a href="{% url 'cart' %}" class="shopping-cart-icon">
 								<i class="fas fa-shopping-cart"></i>
+								{% if cart_items %}
+									<span class="badge rounded-pill">{{ item_count }}</span>
+								{% endif %}
 							</a>
 						</li>
 						<li class="list-inline-item dropdown mx-2">
