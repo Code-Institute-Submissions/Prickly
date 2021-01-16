@@ -151,7 +151,7 @@ span.badge.rounded-pill {
     background-color: var(--color-light-pink);
     font-size: 0.5rem;
     height: 1rem;
-    width: 1rem;
+    width: auto;
     position: absolute;
     bottom: -0.5rem;
     left: 1.5rem;
