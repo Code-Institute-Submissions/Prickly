@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
 
 
 def cart(request):
@@ -50,3 +50,26 @@ def change_cart(request, product_id):
     request.session['cart'] = cart
     return redirect(reverse('cart'))
 
+
+def remove_item_from_cart(request, product_id):
+    """
+    Remove seleced item from the cart,
+    Try to remove a selected item from cart and return
+    successful status code 200 of item was successfully
+    removed
+    Otherwise return internal server error status code 500
+    """
+
+    try:
+        cart = request.session.get('cart', {})
+        # Remove item from the session cart
+        cart.pop(product_id)
+
+        # re-assign values to cart
+        request.session['cart'] = cart
+        # return successful status code
+        return HttpResponse(status=200)
+    except Exception as e:
+        # return internal server error status code
+        return HttpResponse(status=500)
+        print(e)
