@@ -21,6 +21,7 @@ def add_item_to_cart(request, product_id):
     # Check if product is already in the cart
     if product_id in list(cart.keys()):
         # If in the cart, increase quantity
+        print(cart[product_id], qty)
         cart[product_id] += qty
     else:
         # Add to the cart if not in it already
