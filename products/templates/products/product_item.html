@@ -27,11 +27,22 @@
                 <form method="POST" action="{% url 'add_item_to_cart' product.pk %}">
                     <!-- Token used to protect against cross site request forgeries -->
                     {% csrf_token %}
+                    
                     <!-- Quantitiy container -->
                     <div class="qty-container">
+                        <!-- Decrement button -->
+                        <button class="btn btn-sm decr-btn" type="button">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <!-- Quantity input -->
                         <input type="number" min="1" max="10" step="1" value="1" name="quantity" onkeydown="return false"
                         data-item_id="{{ product.pk }}" class="p-2 qty-value">
+                        <!-- Increment button -->
+                        <button class="btn btn-sm incr-btn" type="button">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
+
                     <!-- Price, this changes as the quantity updates -->
                     <p class="fs-4 mt-2" id="item-price-{{ product.price }}">€ {{ product.price }}</p>
                     <!-- Button to add item in the cart -->
@@ -49,14 +60,55 @@
 {% block add_postloadjs %}
   {{ block.super }}
     <script type="text/javascript">
-        // Display the total price of an item as quantity is changed
-        document.querySelector(".qty-value").addEventListener("change", (event) => {
-            let qty = parseInt(event.target.value);
+        // Set decrement value to 'inactive' by default
+        document.querySelector(".decr-btn").style.color = 'gray';
+
+        // Change price based on quantity argument
+        changePrice = qty => {
             const price = document.querySelector("[id^='item-price-'");
             let value = (price.getAttribute("id").split("-"))[2];
             newValue = value * qty;
             price.innerHTML = `€ ${newValue}.00`;
+        }
+
+        
+        // Display the total price of an item as quantity is changed with arrows 
+        document.querySelector(".qty-value").addEventListener("change", (event) => {
+            let qty = parseInt(event.target.value);
+            changePrice(qty);
         });
+
+        // Add increment functionality to '+' button
+        let incrBtn = document.querySelector(".incr-btn")
+        incrBtn.addEventListener("click", (e) => {
+            let qtySelector = document.querySelector(".qty-value");
+            let qty = parseInt(qtySelector.value);
+            if (qty < 10) {
+                decrBtn.style.color = 'black';
+                qtySelector.value = qty + 1;
+                changePrice(qtySelector.value);
+            }
+            else {
+                incrBtn.style.color = 'gray';
+            }
+        });
+
+        // Add decrement functionality to '-' button
+        let decrBtn = document.querySelector(".decr-btn")
+        decrBtn.addEventListener("click", (e) => {
+            let qtySelector = document.querySelector(".qty-value");
+            let qty = parseInt(qtySelector.value);
+            if (qty > 1) {
+                incrBtn.style.color = 'black';
+                qtySelector.value = qty -1;
+                changePrice(qtySelector.value);
+            }
+            else {
+                decrBtn.style.color = 'gray';
+            }
+        });
+
+
     </script>
 
 {% endblock %}
