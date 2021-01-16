@@ -1,5 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+from products.models import Product
 
 
 def cart_contents(request):
@@ -12,6 +14,26 @@ def cart_contents(request):
     item_count = 0
     delivery_type = None
     delivery_cost = 0
+    discount = 20
+
+    # retrieve cart session dictionary or initialize
+    cart = request.session.get('cart', {})
+
+    # Loop thorugh items in the cart
+    for product_id, qty in cart.items():
+        # Retrieve the product and get the quantity
+        product = get_object_or_404(Product, pk=product_id)
+        product_total = qty * product.price
+        item_count += qty
+        # Calculate total price of each type of items
+        total += qty * product.price
+        # Add these values to cart_items to be used globally
+        cart_items.append({
+            'product_id': product_id,
+            'quantity': qty,
+            'product': product,
+            'product_total': product_total,
+        })
 
     # Check the type of delivery and calculate delivery cost accordingly
     if delivery_type == 'standard':
@@ -30,7 +52,9 @@ def cart_contents(request):
         # Delivery charge is a % on orders over the limit
         delivery_cost = total * Decimal(settings.EXPRESS_DELIVERY_RATE / 100)
 
-    grand_total = total + delivery_cost
+    # If user is eligble for a discount, calculate it here
+    discount_price = total * Decimal(discount / 100)
+    grand_total = round((total + delivery_cost - discount_price), 2)
 
     context = {
         'cart_items': cart_items,
@@ -39,6 +63,7 @@ def cart_contents(request):
         'delivery_type': delivery_type,
         'delivery_cost': delivery_cost,
         'grand_total': grand_total,
+        'discount': discount,
     }
 
     return context
