@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Apps created
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
+    'shopping_cart.apps.ShoppingCartConfig',
 
     # Default apps installed
     'django.contrib.admin',
@@ -89,6 +90,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'shopping_cart.contexts.cart_contents',
             ],
         },
     },
@@ -218,3 +220,12 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+# Delivery and Shipping variables
+STANDARD_DELIVERY_LIMIT = 30
+STANDARD_DELIVERY_CONST = 7
+STANDARD_DELIVERY_RATE = 15
+EXPRESS_DELIVERY_LIMIT = 50
+EXPRESS_DELIVERY_CONST = 15
+EXPRESS_DELIVERY_RATE = 30
+FREE_DELIVERY_LIMIT = 70
