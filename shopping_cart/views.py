@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 
 def cart(request):
@@ -21,7 +21,6 @@ def add_item_to_cart(request, product_id):
     # Check if product is already in the cart
     if product_id in list(cart.keys()):
         # If in the cart, increase quantity
-        print(cart[product_id], qty)
         cart[product_id] += qty
     else:
         # Add to the cart if not in it already
@@ -30,3 +29,24 @@ def add_item_to_cart(request, product_id):
     # assign values to cart
     request.session['cart'] = cart
     return redirect(redirect_url)
+
+
+def change_cart(request, product_id):
+    """
+    Handle changes made in the cart
+    Update the quantity if changed
+    If quantity is 0, remove the item
+    """
+    qty = int(request.POST.get('quantity'))
+    cart = request.session.get('cart', {})
+
+    # If quantity is bigger than 0, change it, otherwise remove item
+    if qty > 0:
+        cart[product_id] = qty
+    else:
+        cart.pop(product_id)
+
+    # assign values to cart
+    request.session['cart'] = cart
+    return redirect(reverse('cart'))
+
