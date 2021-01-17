@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
     'shopping_cart.apps.ShoppingCartConfig',
+    'checkout.apps.CheckoutConfig',
 
     # Default apps installed
     'django.contrib.admin',
@@ -61,6 +62,8 @@ INSTALLED_APPS = [
     'colorfield',
     # storages needed for AWS connection
     'storages',
+    'django_countries',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -74,6 +77,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'prickly.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -90,8 +95,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'shopping_cart.contexts.cart_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
