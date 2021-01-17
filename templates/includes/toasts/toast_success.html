@@ -58,7 +58,7 @@
                             </a>
                         </div>
                         <div class="col text-start">
-                            <a href="{% url 'cart' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">
+                            <a href="{% url 'checkout' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">
                                 Checkout
                             </a>
                         </div>
@@ -71,4 +71,4 @@
     {% if not grand_total %}
         <script>notyf.success("{{ msg }}");</script>
     {% endif %}
-{% endif %
+{% endif %}
