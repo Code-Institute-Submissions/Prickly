@@ -1,4 +1,8 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, HttpResponse, get_object_or_404)
+from django.contrib import messages
+
+from products.models import Product
 
 
 def cart(request):
@@ -14,6 +18,7 @@ def add_item_to_cart(request, product_id):
     Redirect user back to the url they were at
     """
     # get cart session if avaialble, initiate otherwise
+    product = get_object_or_404(Product, pk=product_id)
     qty = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     cart = request.session.get('cart', {})
@@ -22,9 +27,11 @@ def add_item_to_cart(request, product_id):
     if product_id in list(cart.keys()):
         # If in the cart, increase quantity
         cart[product_id] += qty
+        messages.warning(request, f'Added more of "{product.name}".')
     else:
         # Add to the cart if not in it already
         cart[product_id] = qty
+        messages.warning(request, f'Added "{product.name}" to the cart.')
 
     # assign values to cart
     request.session['cart'] = cart
