@@ -181,6 +181,25 @@ span.hamburger-inner {
     top: 70px;
 }
 
+/* Bootstrap Toasts */
+.toast {
+    position: absolute;
+    right: 1rem;
+    background-color: #fff;
+    z-index: 9999;
+
+}
+
+@media (min-width: 768px) {
+    .toast {
+        width: 400px;
+    }
+
+    .toast .remove-item{
+        font-size: 0.5rem;
+    }
+}
+
 
 /* ---------- FOOTER ---------- */
 footer {
