@@ -39,7 +39,8 @@ class Order(models.Model):
                                     editable=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    full_name = models.CharField(max_length=70, editable=False)
+    full_name = models.CharField(max_length=70, editable=False,
+                                 default='')
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Enter phone number in a format: "
                                          "'+111111111' and no longer that "
@@ -58,11 +59,13 @@ class Order(models.Model):
     dispatch_date = models.DateTimeField('order dispatched on',
                                          null=True, blank=True)
     est_dispatch_dte = models.DateTimeField('estimated order dispatch date',
-                                            editable=False)
+                                            editable=False, null=True,
+                                            blank=True)
     delivery_date = models.DateTimeField('order delivered on',
                                          null=True, blank=True)
     est_deliery_dte = models.DateTimeField('estimated order delivery date',
-                                           editable=False)
+                                           editable=False, null=True,
+                                           blank=True)
     delivery_type = models.ForeignKey(DeliveryType, on_delete=models.CASCADE)
     delivery_cost = models.DecimalField(max_digits=7, decimal_places=2,
                                         default=0)
@@ -96,11 +99,12 @@ class Order(models.Model):
                                 + self.delivery_type.delivery_speed)
         self.save()
 
+    def full_name(self):
+        self.full_name = f'{self.first_name} {self.last_name}'
+        self.save()
+
     def save(self, *args, **kwargs):
-        """
-        Make order number uppercase before save
-        """
-        self.order_number = self.order_number.upper()
+        self.order_number = str(self.order_number).upper()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -112,8 +116,8 @@ class OrderLine(models.Model):
     Creates OrderLine Model containing data on each product
     added to the cart
     """
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE,
-                                 related_name='order_line')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,
+                              related_name='order_line')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     color = models.CharField(max_length=20, null=True, blank=True)
     quantity = models.IntegerField(default=0)
