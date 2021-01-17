@@ -69,6 +69,40 @@ class Order(models.Model):
     subtotal = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 
+    def total_amount(self):
+        """
+        Calculate the subtotal, delivery cost and the total,
+        depending on the delivery type selected and products
+        in the order
+        """
+        self.subtotal = self.order_line.aggregate(
+            Sum('line_total'))['line_total__sum'] or 0
+
+        if self.subtotal < self.delivery_type.limit:
+            self.delivery_cost = self.delivery_type.const
+        else:
+            self.delivery_cost = self.subtotal * Decimal(
+                self.delivery_type.rate / 100)
+        self.total = self.subtotal + self.delivery_cost
+        self.save()
+
+    def estimate_order_dates(self):
+        """
+        Calculate estimated order processing dates
+        """
+        self.est_dispatch_dte = (self.order_date
+                                 + self.delivery_type.dispatch_speed)
+        self.est_deliery_dte = (self.order_date
+                                + self.delivery_type.delivery_speed)
+        self.save()
+
+    def save(self, *args, **kwargs):
+        """
+        Make order number uppercase before save
+        """
+        self.order_number = self.order_number.upper()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.order_number
 
@@ -85,6 +119,14 @@ class OrderLine(models.Model):
     quantity = models.IntegerField(default=0)
     line_total = models.DecimalField(max_digits=7, decimal_places=2,
                                      default=0, editable=False)
+
+    def save(self, *args, **kwargs):
+        """
+        Calculate the total of a line item before saving
+        an entry
+        """
+        self.line_total = self.product.price * self.quantity
+        super().save(*args, **kwargs)
 
     def __str__(self):
         """
