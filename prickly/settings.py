@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'colorfield',
     # storages needed for AWS connection
     'storages',
+    'django_countries',
 ]
 
 MIDDLEWARE = [
