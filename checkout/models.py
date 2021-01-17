@@ -5,6 +5,8 @@ from decimal import Decimal
 from django.db import models
 from django.db.models import Sum
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 from django_countries.fields import CountryField
 
@@ -100,6 +102,9 @@ class Order(models.Model):
         self.save()
 
     def full_name(self):
+        """
+        Returns full name
+        """
         self.full_name = f'{self.first_name} {self.last_name}'
         self.save()
 
@@ -131,6 +136,14 @@ class OrderLine(models.Model):
         """
         self.line_total = self.product.price * self.quantity
         super().save(*args, **kwargs)
+
+    def clean(self):
+        """
+        Raise an Error if quantity entered is <1 or >10
+        """
+        if self.quantity < 1 or self.quantity > 10:
+            raise ValidationError(_('Please enter valid quantity.'
+                                    'Max 10 of the same product per person'))
 
     def __str__(self):
         """

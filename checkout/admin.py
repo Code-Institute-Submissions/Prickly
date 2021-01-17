@@ -11,6 +11,7 @@ class OrederLineAdminInLine(admin.StackedInline):
     model = OrderLine
     readonly_fields = ('line_total',)
     extra = 1
+    min_num = 1
 
 
 class OrderAdmin(admin.ModelAdmin):
