@@ -172,6 +172,15 @@ span.hamburger-inner {
     }
 }
 
+/* Notyf Toasts */
+.notyf .notyf__message {
+    color: var(--color-main);
+}
+
+.notyf {
+    position: inherit !important;
+}
+
 
 /* ---------- FOOTER ---------- */
 footer {
