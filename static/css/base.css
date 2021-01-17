@@ -177,8 +177,8 @@ span.hamburger-inner {
     color: var(--color-main);
 }
 
-.notyf {
-    position: inherit !important;
+.notyf .notyf__toast {
+    top: 70px;
 }
 
 
