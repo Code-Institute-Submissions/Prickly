@@ -7,6 +7,7 @@ from django.db.models import Sum
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from django_countries.fields import CountryField
 
@@ -91,25 +92,16 @@ class Order(models.Model):
         self.total = self.subtotal + self.delivery_cost
         self.save()
 
-    def estimate_order_dates(self):
-        """
-        Calculate estimated order processing dates
-        """
-        self.est_dispatch_dte = (self.order_date
-                                 + self.delivery_type.dispatch_speed)
-        self.est_deliery_dte = (self.order_date
-                                + self.delivery_type.delivery_speed)
-        self.save()
-
-    def full_name(self):
-        """
-        Returns full name
-        """
-        self.full_name = f'{self.first_name} {self.last_name}'
-        self.save()
-
     def save(self, *args, **kwargs):
+        date_now = timezone.now()
+        dispatch_days = timezone.timedelta(
+            days=self.delivery_type.dispatch_speed)
+        delivery_days = timezone.timedelta(
+            days=self.delivery_type.delivery_speed)
+        self.est_dispatch_dte = date_now + dispatch_days
+        self.est_deliery_dte = date_now + delivery_days
         self.order_number = str(self.order_number).upper()
+        self.full_name = f'{self.first_name} {self.last_name}'
         super().save(*args, **kwargs)
 
     def __str__(self):
