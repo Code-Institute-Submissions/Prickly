@@ -51,6 +51,10 @@ class OrderAdmin(admin.ModelAdmin):
         'order_date',
         'delivery_type',
         'total',
+        'subtotal',
+        'delivery_cost',
+        'est_dispatch_dte',
+        'est_deliery_dte',
     )
 
     date_hierarchy = 'order_date'
