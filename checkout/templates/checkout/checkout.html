@@ -7,7 +7,9 @@
 
 {% block content %}
 <div class="row p-2 p-lg-5">
+    <!-- Order Detail Summary -->
     <div class="col-12 col-md-6 order-md-last p-0 p-sm-2 p-lg-5">
+        <!-- Collapsable unit on small screen sizes to hide order sumary and only display total and a link -->
         <div class="d-md-none">
             <a href="#collapseOrderSummary" class="btn btn-sm text-secondary text-uppercase" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Order Summary <i class="fas fa-angle-down"></i>
@@ -18,21 +20,17 @@
             <!-- Loop through the items in the cart and display each in a row -->
             {% for item in cart_items %}
                 <div class="row text-center">
-                    <!-- Item image -->
                     <div class="col-12 col-sm-6 col-md-3 row">
                         <div class="col text-sm-end">
                             <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
                             <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
                         </div>
                     </div>
-                    <!-- Item details -->
                     <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
                         <div class="col-12 col-md-8">
                             <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
                             <p>€ {{ item.product.price }}</p>
-                            
                         </div>
- 
                         <div class="col-12 col-md-4">
                             <p class="fs-5">€ {{ item.product_total }}</p>
                         </div>
@@ -51,6 +49,7 @@
                 </div>
             </div>
         </div>
+        <!-- Order Details that are displayed on the side on screens md and above -->
         <div class="container border pt-5 d-none d-md-block" style="max-width: 720px;">
             <!-- Loop through the items in the cart and display each in a row -->
             {% for item in cart_items %}
@@ -67,9 +66,7 @@
                         <div class="col-12 col-md-8">
                             <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
                             <p>€ {{ item.product.price }}</p>
-                            
                         </div>
- 
                         <div class="col-12 col-md-4">
                             <p class="fs-5">€ {{ item.product_total }}</p>
                         </div>
@@ -89,14 +86,16 @@
 
     <!-- Delivery Form -->
     <div class="col-12 col-md-6 p-2 p-lg-5">
-        <form action="{% url 'checkout' %}" method="POST" id="order_info_form" class="px-lg-5">
+        <form action="{% url 'checkout' %}" method="POST" id="order-info-form" class="px-lg-5">
             {% csrf_token %}
+            <!-- Contact Details -->
             <fieldset class="mb-5">
                 <legend>Contact Info</legend>
                 {{ order_form.email | as_crispy_field }}
                 {{ order_form.phone_number | as_crispy_field }}
             </fieldset>
             <hr>
+            <!-- Shipping Details -->
             <fieldset class="mb-2">
                 <legend>Shipping Info</legend>
                 <div class="row">
@@ -122,6 +121,7 @@
                 <a class="text-secondary" href="{% url 'account_login' %}">login</a>
             </p>
             <hr>
+            <!-- Deliverydetails -->
             <fieldset class="mb-5">
                 <legend>Delivery Info</legend>
                 <div class="row">
@@ -140,25 +140,29 @@
                 </div>
             </fieldset>
             <hr>
+            <!-- Payment Detiald -->
             <fieldset class="mb-5">
                 <legend>Payment Info</legend>
+                <!-- Stripe card element -->
                 <div id="card-element"></div>
-                <div></div>
+                <!-- Display errors -->
+                <div id="card-errors" role="alert"></div>
             </fieldset>
             <div class="row">
+                <!-- Button to bring user back to the cart -->
                 <div class="col-6">
                     <a href="{% url 'cart' %}" class="btn text-secondary text-start text-uppercase">
                         <i class="fas fa-angle-left"></i>
                         Back to Cart
                     </a>
                 </div>
+                <!-- Submit payment button -->
                 <div class="col-6 text-end">
-                    <a href="" class="btn btn-outline-secondary rounded-0 text-uppercase">
+                    <button href="" id="submit-button" class="btn btn-outline-secondary rounded-0 text-uppercase" type="submit">
                         Make Payment
-                    </a>
+                    </button>
                 </div>
             </div>
-
         </form>
     </div>
 </div>
@@ -167,6 +171,7 @@
 
 {% block add_postloadjs %}
     {{ block.super }}
+    <!-- Add these values as id on an element so that JS can pick it up and use it in an external script -->
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe.js' %}"></script>
