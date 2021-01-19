@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static%}
+
+{% block content%}
+<div class="container">
+    <h1>Your order has been successfully proccessed.</h1>
+    <p>Your order number is {{ order.order_number }}</p>
+    <p>We sent confirmation to your e-mail: {{ order.email }} </p>
+    <p>Order Summary:</p>
+    <div class="container border pt-5" style="max-width: 720px;">
+        <!-- Loop through the items in the cart and display each in a row -->
+        {% for item in order.order_line.all %}
+            <div class="row text-center">
+                <!-- Item image -->
+                <div class="col-12 col-sm-6 col-md-3 row">
+                    <div class="col text-sm-end">
+                        <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
+                    </div>
+                </div>
+                <!-- Item details -->
+                <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
+                    <div class="col-12 col-md-8">
+                        <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
+                        <p>€ {{ item.product.price }}</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <p class="fs-5">€ {{ item.line_total }}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        <div class="row">
+            <div class="col text-center">
+                    <p>Subtotal: € {{ order.subtotal }}</p>
+                    <p>Delivery: € {{ order.delivery_cost }}</p>
+                <p class="fs-5">Total: € {{ order.total }}</p>
+                
+            </div>
+        </div>
+    </div> 
+</div>
+
+{% endblock %}

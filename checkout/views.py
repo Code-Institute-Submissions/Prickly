@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 
 from shopping_cart.contexts import cart_contents
 from .forms import OrderForm
 from products.models import Product
-from .models import OrderLine
+from .models import OrderLine, Order
 
 import stripe
 
@@ -61,8 +61,7 @@ def checkout(request):
                     return redirect(reverse('cart'))
 
             # Navigate user to the success checkout page
-            return redirect(reverse(
-                'checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             # If form is not valid, display an error message
             messages.error(request, 'There was an error with your form.'
@@ -76,7 +75,6 @@ def checkout(request):
 
         # Get total of the cart as an integer
         cart_now = cart_contents(request)
-        print(cart_now)
         total = cart_now['grand_total']
         stripe_total = round(total * 100)
         # Set the api key and create stripe intent with amount and currency
@@ -92,6 +90,27 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+    }
+
+    return render(request, template, context)
+
+
+def checkout_success(request, order_number):
+    """
+    Render successful order view with the order summary
+    displayed and a message that thge order was successfully
+    proccessed.
+    """
+    # Display a success message
+    order = get_object_or_404(Order, order_number=order_number)
+
+    # delete cart contents
+    if 'cart' in request.session:
+        del request.session['cart']
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
     }
 
     return render(request, template, context)
