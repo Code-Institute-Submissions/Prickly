@@ -64,8 +64,9 @@ def checkout(request):
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             # If form is not valid, display an error message
-            messages.error(request, 'There was an error with your form.'
+            messages.error(request, 'There was an error with your form. '
                                     'Please double check your information.')
+            return redirect(reverse('checkout'))
     else:
         # If request not POST, get cart contents. if empty, return an error msg
         cart = request.session.get('cart', {})

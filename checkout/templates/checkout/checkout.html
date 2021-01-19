@@ -6,167 +6,178 @@
 {% endblock %}
 
 {% block content %}
-<div class="row p-2 p-lg-5">
-    <!-- Order Detail Summary -->
-    <div class="col-12 col-md-6 order-md-last p-0 p-sm-2 p-lg-5">
-        <!-- Collapsable unit on small screen sizes to hide order sumary and only display total and a link -->
-        <div class="d-md-none">
-            <a href="#collapseOrderSummary" class="btn btn-sm text-secondary text-uppercase" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Order Summary <i class="fas fa-angle-down"></i>
-            </a>
-            <span class="float-end">€ {{ grand_total }}</span>
-        </div>
-        <div class="container d-md-none collapse" id="collapseOrderSummary">
-            <!-- Loop through the items in the cart and display each in a row -->
-            {% for item in cart_items %}
-                <div class="row text-center">
-                    <div class="col-12 col-sm-6 col-md-3 row">
-                        <div class="col text-sm-end">
-                            <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
-                            <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
+    <div class="row p-2 p-lg-5">
+        <!-- Order Detail Summary -->
+        <div class="col-12 col-md-6 order-md-last p-0 p-sm-2 p-lg-5">
+            <!-- Collapsable unit on small screen sizes to hide order sumary and only display total and a link -->
+            <div class="d-md-none">
+                <a href="#collapseOrderSummary" class="btn btn-sm text-secondary text-uppercase" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Order Summary <i class="fas fa-angle-down"></i>
+                </a>
+                <span class="float-end">€ {{ grand_total }}</span>
+            </div>
+            <div class="container d-md-none collapse" id="collapseOrderSummary">
+                <!-- Loop through the items in the cart and display each in a row -->
+                {% for item in cart_items %}
+                    <div class="row text-center">
+                        <div class="col-12 col-sm-6 col-md-3 row">
+                            <div class="col text-sm-end">
+                                <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
+                                <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
+                            <div class="col-12 col-md-8">
+                                <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
+                                <p>€ {{ item.product.price }}</p>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <p class="fs-5">€ {{ item.product_total }}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
-                        <div class="col-12 col-md-8">
-                            <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
-                            <p>€ {{ item.product.price }}</p>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <p class="fs-5">€ {{ item.product_total }}</p>
-                        </div>
+                    <hr>
+                {% endfor %}
+                <div class="row">
+                    <div class="col text-center">
+                        {% if discount > 0 %}
+                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ total }}</p>
+                            <p class="text-success">{{ discount }}% off </p>
+                        {% endif %}
+                            <p>Delivery: € {{ delivery_cost }}</p>
+                        <p class="fs-5">Total: € {{ grand_total }}</p>
                     </div>
                 </div>
-                <hr>
-            {% endfor %}
-            <div class="row">
-                <div class="col text-center">
-                    {% if discount > 0 %}
-                        <p class="text-decoration-line-through text-muted">Subtotal: € {{ total }}</p>
-                        <p class="text-success">{{ discount }}% off </p>
-                    {% endif %}
-                        <p>Delivery: € {{ delivery_cost }}</p>
-                    <p class="fs-5">Total: € {{ grand_total }}</p>
+            </div>
+            <!-- Order Details that are displayed on the side on screens md and above -->
+            <div class="container border pt-5 d-none d-md-block" style="max-width: 720px;">
+                <!-- Loop through the items in the cart and display each in a row -->
+                {% for item in cart_items %}
+                    <div class="row text-center">
+                        <!-- Item image -->
+                        <div class="col-12 col-sm-6 col-md-3 row">
+                            <div class="col text-sm-end">
+                                <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
+                                <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
+                            </div>
+                        </div>
+                        <!-- Item details -->
+                        <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
+                            <div class="col-12 col-md-8">
+                                <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
+                                <p>€ {{ item.product.price }}</p>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <p class="fs-5">€ {{ item.product_total }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+                <div class="row">
+                    <div class="col text-center">
+                            <p>Subtotal: € {{ total }}</p>
+                            <p>Delivery: € {{ delivery_cost }}</p>
+                        <p class="fs-5">Total: € {{ grand_total }}</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Order Details that are displayed on the side on screens md and above -->
-        <div class="container border pt-5 d-none d-md-block" style="max-width: 720px;">
-            <!-- Loop through the items in the cart and display each in a row -->
-            {% for item in cart_items %}
-                <div class="row text-center">
-                    <!-- Item image -->
-                    <div class="col-12 col-sm-6 col-md-3 row">
-                        <div class="col text-sm-end">
-                            <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
-                            <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
-                        </div>
-                    </div>
-                    <!-- Item details -->
-                    <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
-                        <div class="col-12 col-md-8">
-                            <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
-                            <p>€ {{ item.product.price }}</p>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <p class="fs-5">€ {{ item.product_total }}</p>
-                        </div>
-                    </div>
-                </div>
+
+        <!-- Delivery Form -->
+        <div class="col-12 col-md-6 p-2 p-lg-5">
+            <form action="{% url 'checkout' %}" method="POST" id="order-info-form" class="px-lg-5">
+                {% csrf_token %}
+                <!-- Contact Details -->
+                <fieldset class="mb-5">
+                    <legend>Contact Info</legend>
+                    {{ order_form.email | as_crispy_field }}
+                    {{ order_form.phone_number | as_crispy_field }}
+                </fieldset>
                 <hr>
-            {% endfor %}
-            <div class="row">
-                <div class="col text-center">
-                        <p>Subtotal: € {{ total }}</p>
-                        <p>Delivery: € {{ delivery_cost }}</p>
-                    <p class="fs-5">Total: € {{ grand_total }}</p>
+                <!-- Shipping Details -->
+                <fieldset class="mb-2">
+                    <legend>Shipping Info</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ order_form.first_name | as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ order_form.last_name | as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ order_form.address_line_1 | as_crispy_field }}
+                            {{ order_form.address_line_2 | as_crispy_field }}
+                            {{ order_form.city | as_crispy_field }}
+                            {{ order_form.region | as_crispy_field }}
+                            {{ order_form.country | as_crispy_field }}
+                            {{ order_form.postcode | as_crispy_field }}
+
+                        </div>
+                    </div>
+                </fieldset>
+                <p class="form-check-label mb-5" for="id-save-info">
+                    <a class="text-secondary" href="{% url 'account_signup' %}">Create an account</a> or 
+                    <a class="text-secondary" href="{% url 'account_login' %}">login</a>
+                </p>
+                <hr>
+                <!-- Deliverydetails -->
+                <fieldset class="mb-5">
+                    <legend>Delivery Info</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>You're order details will be sent to:</p>
+                            <a href="" class="btn btn-sm">change</a>
+                        </div>
+                        <div class="col-12">
+                            <p>We will ship your goodies to:</p>
+                            <a href="" class="btn btn-sm">change</a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <label>Select Delivery Method</label>
+                            {{ order_form.delivery_type | as_crispy_field }}
+                        </div>
+                    </div>
+                </fieldset>
+                <hr>
+                <!-- Payment Detiald -->
+                <fieldset class="mb-5">
+                    <legend>Payment Info</legend>
+                    <!-- Stripe card element -->
+                    <div id="card-element"></div>
+                    <!-- Display errors -->
+                    <div id="card-errors" role="alert"></div>
+                </fieldset>
+                <div class="row">
+                    <!-- Button to bring user back to the cart -->
+                    <div class="col-6">
+                        <a href="{% url 'cart' %}" class="btn text-secondary text-start text-uppercase">
+                            <i class="fas fa-angle-left"></i>
+                            Back to Cart
+                        </a>
+                    </div>
+                    <!-- Submit payment button -->
+                    <div class="col-6 text-end">
+                        <button href="" id="submit-button" class="btn btn-outline-secondary rounded-0 text-uppercase" type="submit">
+                            Make Payment
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- Delivery Form -->
-    <div class="col-12 col-md-6 p-2 p-lg-5">
-        <form action="{% url 'checkout' %}" method="POST" id="order-info-form" class="px-lg-5">
-            {% csrf_token %}
-            <!-- Contact Details -->
-            <fieldset class="mb-5">
-                <legend>Contact Info</legend>
-                {{ order_form.email | as_crispy_field }}
-                {{ order_form.phone_number | as_crispy_field }}
-            </fieldset>
-            <hr>
-            <!-- Shipping Details -->
-            <fieldset class="mb-2">
-                <legend>Shipping Info</legend>
-                <div class="row">
-                    <div class="col-6">
-                        {{ order_form.first_name | as_crispy_field }}
-                    </div>
-                    <div class="col-6">
-                        {{ order_form.last_name | as_crispy_field }}
-                    </div>
-                    <div class="col-12">
-                        {{ order_form.address_line_1 | as_crispy_field }}
-                        {{ order_form.address_line_2 | as_crispy_field }}
-                        {{ order_form.city | as_crispy_field }}
-                        {{ order_form.region | as_crispy_field }}
-                        {{ order_form.country | as_crispy_field }}
-                        {{ order_form.postcode | as_crispy_field }}
-
-                    </div>
-                </div>
-            </fieldset>
-            <p class="form-check-label mb-5" for="id-save-info">
-                <a class="text-secondary" href="{% url 'account_signup' %}">Create an account</a> or 
-                <a class="text-secondary" href="{% url 'account_login' %}">login</a>
-            </p>
-            <hr>
-            <!-- Deliverydetails -->
-            <fieldset class="mb-5">
-                <legend>Delivery Info</legend>
-                <div class="row">
-                    <div class="col-12">
-                        <p>You're order details will be sent to:</p>
-                        <a href="" class="btn btn-sm">change</a>
-                    </div>
-                    <div class="col-12">
-                        <p>We will ship your goodies to:</p>
-                        <a href="" class="btn btn-sm">change</a>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <label>Select Delivery Method</label>
-                        {{ order_form.delivery_type | as_crispy_field }}
-                    </div>
-                </div>
-            </fieldset>
-            <hr>
-            <!-- Payment Detiald -->
-            <fieldset class="mb-5">
-                <legend>Payment Info</legend>
-                <!-- Stripe card element -->
-                <div id="card-element"></div>
-                <!-- Display errors -->
-                <div id="card-errors" role="alert"></div>
-            </fieldset>
-            <div class="row">
-                <!-- Button to bring user back to the cart -->
-                <div class="col-6">
-                    <a href="{% url 'cart' %}" class="btn text-secondary text-start text-uppercase">
-                        <i class="fas fa-angle-left"></i>
-                        Back to Cart
-                    </a>
-                </div>
-                <!-- Submit payment button -->
-                <div class="col-6 text-end">
-                    <button href="" id="submit-button" class="btn btn-outline-secondary rounded-0 text-uppercase" type="submit">
-                        Make Payment
-                    </button>
-                </div>
+    <!-- loading graphic -->
+    <div id="loading-container">
+        <div class="loading-graphic p-2 p-sm-5">
+            <div class="text-center">
+                <img class="loading-image" src="https://i.imgflip.com/4ug82s.jpg" alt="an image with cactus saying hold on let me process this"/>
             </div>
-        </form>
+            <div class="text-center mt-5">
+                <img src="../../media/126.gif" alt="GIF loading spinner">
+            </div>
+        </div>
     </div>
-</div>
-
 {% endblock %}
 
 {% block add_postloadjs %}

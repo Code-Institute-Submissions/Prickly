@@ -46,6 +46,8 @@ form.addEventListener('submit', function(e) {
     e.preventDefault();
     card.update({ 'disabled': true});
     submitButton.setAttribute('disabled', true);
+    $('#order-info-form').fadeToggle(100);
+    $('#loading-container').fadeToggle(100);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -60,6 +62,8 @@ form.addEventListener('submit', function(e) {
                 </span>
                 <span>${result.error.message}</span>`;
             errorDiv.innerHTML = html;
+            $('#order-info-form').fadeToggle(100);
+            $('#loading-container').fadeToggle(100);
             // re-enable the submit button so the user can fix the erron and re-submit
             card.update({ 'disabled': false});
             submitButton.setAttribute('disabled', false);
