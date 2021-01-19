@@ -3,42 +3,86 @@
 
 {% block content%}
 <div class="container">
-    <h1>Your order has been successfully proccessed.</h1>
-    <p>Your order number is {{ order.order_number }}</p>
-    <p>We sent confirmation to your e-mail: {{ order.email }} </p>
-    <p>Order Summary:</p>
-    <div class="container border pt-5" style="max-width: 720px;">
-        <!-- Loop through the items in the cart and display each in a row -->
+    <div class="text-center mb-5">
+        <h1 class="my-5 text-uppercase">You're Awesome</h1>
+        <p>
+            For your order <span class="fs-5">{{ order.order_number }}</span> you pricked out some amazing items.
+        </p>
+        <p>
+            Check your email ({{ order.email }}) for confirmation and don't be a stranger -
+            write a review, we would love to hear from you.
+        </p>
+    </div>
+    <!-- Order Item Information -->
+    <div class="row mx-auto border px-0 py-3 p-sm-3 mb-5" style="max-width: 720px;">
+        <h4 class="text-uppercase">Items</h4>
         {% for item in order.order_line.all %}
             <div class="row text-center">
                 <!-- Item image -->
-                <div class="col-12 col-sm-6 col-md-3 row">
-                    <div class="col text-sm-end">
+                <div class="col-12 col-sm-4 col-md-3">
+                    <div class="text-sm-end">
                         <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
                     </div>
                 </div>
                 <!-- Item details -->
-                <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
-                    <div class="col-12 col-md-8">
-                        <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
-                        <p>€ {{ item.product.price }}</p>
+                <div class="col-9 col-sm-5 px-0 m-auto row">
+                    <div class="col-12">
+                        <p class="fw-bold text-uppercase mb-2">{{ item.product.name }}</p>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <p class="fs-5">€ {{ item.line_total }}</p>
+                    <div class="col-5">
+                        <p class="text-end"><small>€ {{ item.product.price }}</small></p>
+                    </div>
+                    <div class="col-4 text-start">
+                        <small>X{{ item.quantity }}</small>
                     </div>
                 </div>
+                <div class="col-3 px-0 m-auto">
+                    <p class="fs-5">€ {{ item.line_total }}</p>
+                </div>
             </div>
-            <hr>
         {% endfor %}
-        <div class="row">
-            <div class="col text-center">
-                    <p>Subtotal: € {{ order.subtotal }}</p>
-                    <p>Delivery: € {{ order.delivery_cost }}</p>
-                <p class="fs-5">Total: € {{ order.total }}</p>
-                
+        <hr>
+        <div class="col-12 text-center mb-3">
+            <p>Subtotal: € {{ order.subtotal }}</p>
+            <p>Delivery: € {{ order.delivery_cost }}</p>
+            <p class="fs-5">Total: € {{ order.total }}</p>
+        </div>
+    </div>
+
+    <!-- Personal and Shipping Information -->
+    <div class="row mx-auto border px-0 py-3 p-sm-3 mb-5" style="max-width: 720px;">
+        <!-- Shipping Address -->
+        <div class="col-12 col-sm-6">
+            <h4 class="text-uppercase">
+                Shipping Address
+            </h4>
+            <div class="mb-3">
+                <p class="mb-0">{{ order.address_line_1 }}</p>
+                <p class="mb-0">{{ order.address_line_2 }}</p>
+                <p class="mb-0">{{ order.city }}</p>
+                <p class="mb-0">{{ order.region }}</p>
+                <p class="mb-0">{{ order.country }}</p>
+                <p class="mb-0">{{ order.postcode }}</p>
             </div>
         </div>
-    </div> 
+        <!-- Customer Details -->
+        <div class="col-12 col-sm-6">
+            <h4 class="text-uppercase">
+                Customer
+            </h4>
+            <div class="mb-3">
+                <p class="mb-0">{{ order.full_name }}</p>
+                <p class="mb-0">{{ order.email }}</p>
+                <p class="mb-0">{{ order.phone_number }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- Payment Information -->
+    <div class="row mx-auto border px-0 py-3 p-sm-3 mb-5" style="max-width: 720px;">
+        <h4 class="text-uppercase">
+            Payment Details
+        </h4>
+    </div>
 </div>
 
 {% endblock %}
