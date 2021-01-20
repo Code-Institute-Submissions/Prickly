@@ -66,7 +66,7 @@ form.addEventListener('submit', function(e) {
             $('#loading-container').fadeToggle(100);
             // re-enable the submit button so the user can fix the erron and re-submit
             card.update({ 'disabled': false});
-            submitButton.setAttribute('disabled', false);
+            submitButton.removeAttribute('disabled');
         } else {
             // otherwise, submit the form with successful status
             if (result.paymentIntent.status === 'succeeded') {
