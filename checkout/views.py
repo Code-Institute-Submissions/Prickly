@@ -7,7 +7,7 @@ from django.conf import settings
 from shopping_cart.contexts import cart_contents
 from .forms import OrderForm
 from products.models import Product
-from .models import OrderLine, Order
+from .models import OrderLine, Order, DeliveryType
 
 import stripe
 import json
@@ -17,7 +17,6 @@ import json
 def cache_checkout(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
-        print(pid, request.POST)
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'cart': json.dumps(request.session.get('cart', {})),
@@ -41,6 +40,11 @@ def checkout(request):
     if request.method == 'POST':
         # Get data out of the submitted form
         cart = request.session.get('cart', {})
+
+        # Get Delivery Type Instance
+        delivery_type_value = request.POST['delivery_type']
+        delivery_type = DeliveryType.objects.get(id=delivery_type_value)
+
         order_info = {
             'first_name': request.POST['first_name'],
             'last_name': request.POST['last_name'],
@@ -52,7 +56,7 @@ def checkout(request):
             'region': request.POST['region'],
             'country': request.POST['country'],
             'postcode': request.POST['postcode'],
-            'delivery_type': request.POST['delivery_type']
+            'delivery_type': delivery_type
         }
         # Save the data in Order Form if valid
         order_form = OrderForm(order_info)

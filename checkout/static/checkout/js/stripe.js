@@ -86,7 +86,8 @@ form.addEventListener('submit', function(e) {
                     country: $.trim(form.country.value),
                     postal_code: $.trim(form.postcode.value),
                     state: $.trim(form.region.value),
-                }
+                },
+                carrier: $.trim(form.delivery_type.value),
             },
         }).then(function(result) {
             // If an error occurs, print out the error message 
