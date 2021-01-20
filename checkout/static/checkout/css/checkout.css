@@ -76,11 +76,12 @@ select option[value=""] {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(255, 255, 255, 0.8);
+    background: #fff;
     z-index: 9999;
 }
 
 .loading-graphic .loading-image {
-    height: 300px;
+    max-height: 300px;
+    max-width: 100%;
     margin: 0;
 }
