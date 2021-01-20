@@ -48,30 +48,68 @@ form.addEventListener('submit', function(e) {
     submitButton.setAttribute('disabled', true);
     $('#order-info-form').fadeToggle(100);
     $('#loading-container').fadeToggle(100);
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-        }
-    }).then(function(result) {
-        // If an error occurs, print out the error message 
-        if (result.error) {
-            const errorDiv = document.querySelector('#card-errors');
-            const html = `
-                <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-                </span>
-                <span>${result.error.message}</span>`;
-            errorDiv.innerHTML = html;
-            $('#order-info-form').fadeToggle(100);
-            $('#loading-container').fadeToggle(100);
-            // re-enable the submit button so the user can fix the erron and re-submit
-            card.update({ 'disabled': false});
-            submitButton.removeAttribute('disabled');
-        } else {
-            // otherwise, submit the form with successful status
-            if (result.paymentIntent.status === 'succeeded') {
-                form.submit();
+
+    const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    const postData = {
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+    };
+
+    var url = '/checkout/cache_checkout/';
+
+    $.post(url, postData).done(function () {
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: `${$.trim(form.first_name.value)} ${$.trim(form.last_name.value)}`,
+                    phone: $.trim(form.phone_number.value),
+                    email: $.trim(form.email.value),
+                    address:{
+                        line1: $.trim(form.address_line_1.value),
+                        line2: $.trim(form.address_line_2.value),
+                        city: $.trim(form.city.value),
+                        country: $.trim(form.country.value),
+                        state: $.trim(form.region.value),
+                    }
+                }
+            },
+            shipping: {
+                name: `${$.trim(form.first_name.value)} ${$.trim(form.last_name.value)}`,
+                phone: $.trim(form.phone_number.value),
+                address: {
+                    line1: $.trim(form.address_line_1.value),
+                    line2: $.trim(form.address_line_2.value),
+                    city: $.trim(form.city.value),
+                    country: $.trim(form.country.value),
+                    postal_code: $.trim(form.postcode.value),
+                    state: $.trim(form.region.value),
+                }
+            },
+        }).then(function(result) {
+            // If an error occurs, print out the error message 
+            if (result.error) {
+                const errorDiv = document.querySelector('#card-errors');
+                const html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                errorDiv.innerHTML = html;
+                $('#order-info-form').fadeToggle(100);
+                $('#loading-container').fadeToggle(100);
+                // re-enable the submit button so the user can fix the erron and re-submit
+                card.update({ 'disabled': false});
+                submitButton.removeAttribute('disabled');
+            } else {
+                // otherwise, submit the form with successful status
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
             }
-        }
+        });
+    }).fail(function () {
+        // Fail function in case status code=400
+        location.reload();
     });
 });
