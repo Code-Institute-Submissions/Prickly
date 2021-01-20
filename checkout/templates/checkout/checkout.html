@@ -116,10 +116,19 @@
                         </div>
                     </div>
                 </fieldset>
-                <p class="form-check-label mb-5" for="id-save-info">
-                    <a class="text-secondary" href="{% url 'account_signup' %}">Create an account</a> or 
-                    <a class="text-secondary" href="{% url 'account_login' %}">login</a>
-                </p>
+                {% if user.is_authenticated %}
+                    <div class="mb-5 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" value="" id="saveDetails" name="save-details">
+                        <label class="form-check-label" for="saveDetails">Save my details for the next time</label>
+                    </div>
+                {% else %}
+                    <div class="mb-5">
+                        <label class="form-check-label" for="saveDetails">
+                            <a class="text-secondary" href="{% url 'account_signup' %}">Create an account</a> or 
+                            <a class="text-secondary" href="{% url 'account_login' %}">login</a>
+                        </label>
+                    </div>
+                {% endif %}
                 <hr>
                 <!-- Deliverydetails -->
                 <fieldset class="mb-5">

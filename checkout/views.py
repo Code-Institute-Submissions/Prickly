@@ -21,9 +21,8 @@ def cache_checkout(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'cart': json.dumps(request.session.get('cart', {})),
+            'save_details': request.POST.get('save_details'),
             'username': request.user,
-            # 'delivery_type': delivery_type,
-
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -81,6 +80,8 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('cart'))
 
+            # Add save-details value to session
+            request.session['save_details'] = 'save-details' in request.POST
             # Navigate user to the success checkout page
             return redirect(reverse('checkout_success',
                                     args=[order.order_number]))
