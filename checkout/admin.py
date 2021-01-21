@@ -26,6 +26,8 @@ class OrderAdmin(admin.ModelAdmin):
         'delivery_cost',
         'subtotal',
         'total',
+        'original_cart',
+        'stripe_pid',
     )
 
     fieldsets = [
@@ -40,9 +42,11 @@ class OrderAdmin(admin.ModelAdmin):
                         'city',
                         'region',
                         'country',
-                        'postcode'
-                        ]}),
-        ('Order Detail', {'fields': ['delivery_type']})
+                        'postcode']}),
+        ('Order Detail', {'fields': ['delivery_type',
+                                     'original_cart',
+                                     'stripe_pid',
+                                     'total']})
     ]
 
     list_display = (

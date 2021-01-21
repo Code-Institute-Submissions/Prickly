@@ -61,8 +61,16 @@ def checkout(request):
         # Save the data in Order Form if valid
         order_form = OrderForm(order_info)
         if order_form.is_valid():
-            order = order_form.save()
-            order_form.save()
+            # prevent repetition in saving form
+            order = order_form.save(commit=False)
+
+            # get pid from HTML hidden input
+            pid = request.POST.get('client_secret').split('_secret')[0]
+
+            # Set stripe_pid and original_cart values for the order instance
+            order.stripe_pid = pid
+            order.original_cart = json.dumps(cart)
+            order.save()
             for product_id, qty in cart.items():
                 # Loop through items in the cart and add an instance of each
                 # to the OrderLine model

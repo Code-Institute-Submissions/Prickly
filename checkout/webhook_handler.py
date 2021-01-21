@@ -44,7 +44,7 @@ class StripeWH_Handler:
         delivery_type = DeliveryType.objects.get(id=delivery_type_value)
 
         # convert total amount from an integer to a decimal number
-        total = round(intent.charges.data[0].amount / 100, 2)
+        subtotal = round(intent.charges.data[0].amount / 100, 2)
 
         # Make sure data passed into shipping is not empty string and
         # is stored as Null instead
@@ -59,7 +59,7 @@ class StripeWH_Handler:
         """
         order_exists = False
         attempt = 1
-        while attempt <=5:
+        while attempt <= 10:
             try:
                 order = Order.objects.get(
                     first_name__iexact=first_name,
@@ -73,13 +73,17 @@ class StripeWH_Handler:
                     country__iexact=shipping.address.country,
                     postcode__iexact=shipping.address.postal_code,
                     delivery_type=delivery_type,
-                    total=total,
+                    subtotal=subtotal,
+                    original_cart=cart,
+                    stripe_pid=pid,
                 )
+                print(order)
                 order_exists = True
                 break
             except Order.DoesNotExist:
+                print('add')
                 attempt += 1
-                time.sleep()
+                time.sleep(1)
         if order_exists:
             # Return 200 response in case order exists
             return HttpResponse(
@@ -102,6 +106,8 @@ class StripeWH_Handler:
                     country=shipping.address.country,
                     postcode=shipping.address.postal_code,
                     delivery_type=delivery_type,
+                    original_cart=cart,
+                    stripe_pid=pid,
                 )
                 # loop through cart items data gotten from intent
                 for product_id, qty in json.loads(cart).items():

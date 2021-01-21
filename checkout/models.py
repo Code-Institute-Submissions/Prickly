@@ -48,7 +48,7 @@ class Order(models.Model):
                                  message="Enter phone number in a format: "
                                          "'+111111111' and no longer that "
                                          "15 digits.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=18,
+    phone_number = models.CharField(validators=[phone_regex], max_length=16,
                                     blank=True)
     email = models.EmailField(max_length=254)
     address_line_1 = models.CharField(max_length=100,)
@@ -74,6 +74,8 @@ class Order(models.Model):
                                         default=0)
     subtotal = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    original_cart = models.TextField(default='')
+    stripe_pid = models.CharField(max_length=254, default='')
 
     def total_amount(self):
         """
