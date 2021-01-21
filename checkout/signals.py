@@ -6,12 +6,10 @@ from .models import OrderLine
 
 @receiver(post_save, sender=OrderLine)
 def update_on_save(sender, instance, created, **kwargs):
-    # """
-    # Crate full name value as the order details are being saved
-    # Calculates the estimated order and dispatch dates
-    # Calculates total amount as items are being added to the
-    # order
-    # """
+    """
+    Calculates total amount as items are being added to the
+    order
+    """
     instance.order.total_amount()
 
 

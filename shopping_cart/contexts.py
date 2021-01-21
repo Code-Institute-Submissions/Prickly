@@ -14,7 +14,7 @@ def cart_contents(request):
     item_count = 0
     delivery_type = None
     delivery_cost = 0
-    discount = 20
+    discount = 0
 
     # retrieve cart session dictionary or initialize
     cart = request.session.get('cart', {})
