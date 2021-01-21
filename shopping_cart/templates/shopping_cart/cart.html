@@ -39,6 +39,7 @@
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             </form>
                             <a class="btn btn-sm text-danger rounded-0 text-uppercase remove-item" id="remove_{{ item.product_id }}">
                                 <small>Don't want this</small>

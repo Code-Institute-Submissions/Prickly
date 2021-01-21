@@ -51,6 +51,8 @@ def change_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     qty = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
+    redirect_url = request.POST.get('redirect_url')
+
 
     # If quantity is bigger than 0, change it, otherwise remove item
     if qty > 0:
@@ -62,7 +64,8 @@ def change_cart(request, product_id):
         messages.success(request, f'Removed "{product.name}" from the cart.')
     # assign values to cart
     request.session['cart'] = cart
-    return redirect(reverse('cart'))
+    # return redirect(reverse('cart'))
+    return redirect(redirect_url)
 
 
 def remove_item_from_cart(request, product_id):
