@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'shopping_cart.apps.ShoppingCartConfig',
     'checkout.apps.CheckoutConfig',
+    'memberships.apps.MembershipsConfig',
 
     # Default apps installed
     'django.contrib.admin',
