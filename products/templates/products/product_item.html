@@ -4,9 +4,9 @@
 {% block content %}
     <div class="container mt-1 mt-md-5">
         <!-- Back button -->
-        <button class="btn btn-small btn-outline-secondary rounded-0 text-uppercase" onclick="history.go(-1)">
+        <a class="btn btn-small btn-outline-secondary rounded-0 text-uppercase" id="back-btn">
             Back
-        </button>
+        </a>
 
         <!-- Main Product Detail view -->
         <div class="row text-center">
@@ -60,6 +60,22 @@
 {% block add_postloadjs %}
   {{ block.super }}
     <script type="text/javascript">
+    // go back 1 url when back button is clicked, 
+        backBtn = document.querySelector('#back-btn')
+        backBtn.addEventListener('click', (e) => {
+            let thisUrl = window.location.href
+            let lastUrl = document.referrer
+            backBtn.setAttribute('onclick', 'history.go(-1)')
+            if (thisUrl == lastUrl) {
+                history.go(-2)
+                console.log(`last url: ${document.referrer}, this url: ${window.location.href}`)
+            }
+            else {
+                history.go(-1)
+            }
+        });
+    </script>
+    <script type="text/javascript">
         // Set decrement value to 'inactive' by default
         document.querySelector(".decr-btn").style.color = 'gray';
 
@@ -108,7 +124,7 @@
             }
         });
 
-
     </script>
+
 
 {% endblock %}
