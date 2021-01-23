@@ -2,6 +2,10 @@ from django.db import models
 
 from checkout.models import DeliveryType
 
+# Add for clean method to add custom validation
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
 
 class Membership(models.Model):
     """
@@ -32,3 +36,17 @@ class Membership(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        """
+        Raise a validation error if user entered first order discount,
+        overall discount or price below 0
+        """
+        if self.price and self.price < 0:
+            raise ValidationError(_("Price can't be negative"))
+        elif self.first_order_disc and self.first_order_disc < 0:
+            raise ValidationError(_("First Order Discount"
+                                    " Value can't be negative"))
+        elif self.overall_discount and self.overall_discount < 0:
+            raise ValidationError(_("Overall Discount"
+                                    " Value can't be negative"))
