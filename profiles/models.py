@@ -14,7 +14,8 @@ class Profile(models.Model):
     delivery details, order history and membership type
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    membership = models.ForeignKey(Membership, on_delete=models.CASCADE)
+    membership = models.ForeignKey(Membership, on_delete=models.CASCADE,
+                                   null=True, blank=True)
     user_phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                       message="Enter phone number in a format:"
                                       "'+111111111' and no longer that "
@@ -41,12 +42,12 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def update_or_create_profile(sender, instance, created, **kwargs):
+def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
-    If user doesn't have a profile yet, create it,
-    otherwise update it
+    If user doesn't have a profile, create one,
+    otherwise save it
     """
     if created:
         Profile.objects.create(user=instance)
-    # Existing users: just save the profile
-    instance.userprofile.save()
+    # Save the profile for existing users
+    instance.profile.save()
