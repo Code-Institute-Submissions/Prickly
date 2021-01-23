@@ -23,8 +23,8 @@
                 <!-- If membership offers free delivery, display Nope if None -->
                 <div>
                     <p class="mb-0">Free Delivery</p>
-                        {% if membership.free_delivery %}
-                            <p class="text-danger">{{ membership.free_delivery }}</p>
+                        {% if membership.free_delivery == 'Y' %}
+                            <p class="text-danger">Yes</p>
                         {% else %}
                            <p class="text-secondary"> Nope</p>
                         {% endif %}
