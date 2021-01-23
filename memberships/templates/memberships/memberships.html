@@ -5,100 +5,73 @@
     active
 {% endblock %}
 
-{% block content%}
+{% block content %}
+
+<!-- Membership Container -->
 <div class="container">
     <h3 class="text-center my-5">Treat yo self! Prick the plan that suits you the best.</h3>
-    <div class="row text-center mb-5">
-        <div class="col-12 col-sm-6 col-md-4 mb-5 mb-md-0">
-            <h5 class="text-uppercase">The basic Prickly</h5>
-            <div style="height: 15rem;">
-                <img src="../../../media/basic.png" alt="Image of Basic Prickly" style="height: 12rem;">
+    <div class="row text-center mb-5 pt-5">
+        <!-- Loop through membership model and display all memebrships and their benefits -->
+        {% for membership in memberships %}
+            <div class="col-12 col-sm-6 col-md-4 mb-5 mb-md-0">
+                <!-- Membership Name -->
+                <h5 class="text-uppercase">The {% if membership.name == 'Supreme' %}Prickly {{ membership.name }}{% else %}{{membership.name}} Prickly{% endif %}</h5>
+                <!-- Memberhsip image -->
+                <div style="height: 15rem;">
+                    <img src="{{ membership.pic.url }}" alt="Cactus logo for {{ membership.name}} Prickly memebrship" style="height: 12rem;">
+                </div>
+                <!-- If membership offers free delivery, display Nope if None -->
+                <div>
+                    <p class="mb-0">Free Delivery</p>
+                        {% if membership.free_delivery %}
+                            <p class="text-danger">{{ membership.free_delivery }}</p>
+                        {% else %}
+                           <p class="text-secondary"> Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- First Order Discount in % -->
+                <div>
+                    <p class="mb-0">First Order Discount</p>
+                    <p class="text-danger">{{ membership.first_order_disc }}%</p>
+                </div>
+                <!-- Overall discount store wide in %, display Nope if None -->
+                <div>
+                    <p class="mb-0">Overall Discount</p>
+                        {% if membership.overall_discount %}
+                            <p class="text-danger">{{ membership.overall_discount }}%</p>
+                        {% else %}
+                            <p class="text-secondary">Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- Quarterly gift package -->
+                <div>
+                    <p class="mb-0">Quarterly Gift package</p>
+                    <p class="text-danger">{{ membership.q_gift }}</p>
+                </div>
+                <!-- Priority of accessing new collections -->
+                <div>
+                    <p class="mb-0">Access to new colections</p>
+                        {% if membership.priority == 'High' %}
+                            <p class="text-danger">A week before release date</p>
+                        {% else %}
+                            <p class="text-secondary">On release date</p>
+                        {% endif %}
+                </div>
+                <!-- Price, display free if None -->
+                <div>
+                    <p class="fs-4 text-warning">
+                        {% if membership.price %}
+                            € {{ membership.price }}
+                        {% else %}
+                            free
+                        {% endif %}
+                    </p>
+                </div>
+                <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
             </div>
-            <div>
-                <p class="mb-0">Free Delivery</p>
-                <p class="text-secondary">Nope</p>
-            </div>
-            <div>
-                <p class="mb-0">First Order Discount</p>
-                <p class="text-danger">20%</p>
-            </div>
-            <div>
-                <p class="mb-0">Overall Discount</p>
-                <p class="text-secondary">Nope</p>
-            </div>
-            <div>
-                <p class="mb-0">Quarterly Gift package</p>
-                <p class="text-danger">E-Thanks</p>
-            </div>
-            <div>
-                <p class="mb-0">Access to new colections</p>
-                <p class="text-secondary">On release date</p>
-            </div>
-            <div>
-                <p class="fs-4 text-warning">free</p>
-            </div>
-            <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 mb-md-0">
-            <h5 class="text-uppercase">The Ultimate Prickly</h5>
-            <div style="height: 15rem;">
-                <img src="../../../media/ultimate.png" alt="Image of Ultimate Prickly" style="height: 13rem;">
-            </div>
-            <div>
-                <p class="mb-0">Free Delivery</p>
-                <p class="text-danger">Standard</p>
-            </div>
-            <div>
-                <p class="mb-0">First Order Discount</p>
-                <p class="text-danger">30%</p>
-            </div>
-            <div>
-                <p class="mb-0">Overall Discount</p>
-                <p class="text-danger">10%</p>
-            </div>
-            <div>
-                <p class="mb-0">Quarterly Gift package</p>
-                <p class="text-danger">Limited edition Pot</p>
-            </div>
-            <div>
-                <p class="mb-0">Access to new colections</p>
-                <p class="text-secondary">On release date</p>
-            </div>
-            <div>
-                <p class="fs-4 text-warning">€19.99</p>
-            </div>
-            <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
-        </div>
-        <div class="col-12 col-md-4 mb-md-0">
-            <h5 class="text-uppercase">The Prickly Supreme</h5>
-            <div style="height: 15rem;">
-                <img src="../../../media/supreme.png" alt="Image of Supreme Prickly" style="height: 13rem;">
-            </div>
-            <div>
-                <p class="mb-0">Free Delivery</p>
-                <p class="text-danger">Express</p>
-            </div>
-            <div>
-                <p class="mb-0">First Order Discount</p>
-                <p class="text-danger">50%</p>
-            </div>
-            <div>
-                <p class="mb-0">Overall Discount</p>
-                <p class="text-danger">30%</p>
-            </div>
-            <div>
-                <p class="mb-0">Quarterly Gift package</p>
-                <p class="text-danger">Limited edition Cactus</p>
-            </div>
-            <div>
-                <p class="mb-0">Access to new colections</p>
-                <p class="text-danger">A week before the release date</p>
-            </div>
-            <div>
-                <p class="fs-4 text-warning">€29.99</p>
-            </div>
-            <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
