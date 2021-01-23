@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static%}
+
+{% block main_nav_memberships %}
+    active
+{% endblock %}
+
+{% block content %}
+
+<!-- Membership Container -->
+<div class="container">
+    <h3 class="text-center my-5">Treat yo self! Prick the plan that suits you the best.</h3>
+    <div class="row text-center mb-5 pt-5">
+        <!-- Loop through membership model and display all memebrships and their benefits -->
+        {% for membership in memberships %}
+            <div class="col-12 col-sm-6 col-md-4 mb-5 mb-md-0">
+                <!-- Membership Name -->
+                <h5 class="text-uppercase">The {% if membership.name == 'Supreme' %}Prickly {{ membership.name }}{% else %}{{membership.name}} Prickly{% endif %}</h5>
+                <!-- Memberhsip image -->
+                <div style="height: 15rem;">
+                    <img src="{{ membership.pic.url }}" alt="Cactus logo for {{ membership.name}} Prickly memebrship" style="height: 12rem;">
+                </div>
+                <!-- If membership offers free delivery, display Nope if None -->
+                <div>
+                    <p class="mb-0">Free Delivery</p>
+                        {% if membership.free_delivery %}
+                            <p class="text-danger">{{ membership.free_delivery }}</p>
+                        {% else %}
+                           <p class="text-secondary"> Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- First Order Discount in % -->
+                <div>
+                    <p class="mb-0">First Order Discount</p>
+                    <p class="text-danger">{{ membership.first_order_disc }}%</p>
+                </div>
+                <!-- Overall discount store wide in %, display Nope if None -->
+                <div>
+                    <p class="mb-0">Overall Discount</p>
+                        {% if membership.overall_discount %}
+                            <p class="text-danger">{{ membership.overall_discount }}%</p>
+                        {% else %}
+                            <p class="text-secondary">Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- Quarterly gift package -->
+                <div>
+                    <p class="mb-0">Quarterly Gift package</p>
+                    <p class="text-danger">{{ membership.q_gift }}</p>
+                </div>
+                <!-- Priority of accessing new collections -->
+                <div>
+                    <p class="mb-0">Access to new colections</p>
+                        {% if membership.priority == 'High' %}
+                            <p class="text-danger">A week before release date</p>
+                        {% else %}
+                            <p class="text-secondary">On release date</p>
+                        {% endif %}
+                </div>
+                <!-- Price, display free if None -->
+                <div>
+                    <p class="fs-4 text-warning">
+                        {% if membership.price %}
+                            € {{ membership.price }}
+                        {% else %}
+                            free
+                        {% endif %}
+                    </p>
+                </div>
+                <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
