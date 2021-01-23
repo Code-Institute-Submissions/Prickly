@@ -23,7 +23,6 @@ class Profile(models.Model):
     user_phone_number = models.CharField(validators=[user_phone_regex],
                                          max_length=16, null=True,
                                          blank=True)
-    user_email = models.EmailField(max_length=254, null=True, blank=True)
     user_address_line_1 = models.CharField(max_length=100, null=True,
                                            blank=True)
     user_address_line_2 = models.CharField(max_length=100, null=True,
@@ -32,7 +31,7 @@ class Profile(models.Model):
                                  blank=True)
     user_region = models.CharField('region or county', max_length=85,
                                    null=True, blank=True)
-    user_country = CountryField(blank_label='Country *',
+    user_country = CountryField(blank_label='Country',
                                 null=True, blank=True)
     user_postcode = models.CharField('post/zip code', max_length=10,
                                      null=True, blank=True)
