@@ -26,3 +26,25 @@ def membership_type(request):
     request.session['membership'] = membership_type
 
     return redirect(reverse('account_signup'))
+
+
+def membership_checkout(request):
+    """
+    Retrieve user selected membership, display it and
+    benefits, and allow user to change the membership
+    type
+    """
+    # Retrieve user selected membership
+    membership_type = request.session['membership']
+    # Retrieve data for selected membership type
+    membership = get_object_or_404(Membership, name=membership_type)
+    # Retrieve data for all memberships
+    all_memberships = Membership.objects.all()
+
+    template = 'memberships/membership_checkout.html'
+    context = {
+        'membership': membership,
+        'all_memberships': all_memberships,
+    }
+
+    return render(request, template, context)
