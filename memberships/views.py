@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Membership
+from profiles.models import Profile
+from django.contrib import messages
 
 
 def memberships(request):
@@ -34,6 +36,26 @@ def membership_checkout(request):
     benefits, and allow user to change the membership
     type
     """
+    # Save chosen membership in user profile
+    if request.method == 'POST':
+        try:
+            user_membership = request.POST.get('user-membership')
+            membership = get_object_or_404(Membership, name=user_membership)
+            profile = get_object_or_404(Profile, user=request.user)
+            profile.membership = membership
+            profile.save()
+            # Display confirmation
+            messages.success(request, 'Congrats!! You successfully subscribed '
+                                      f'to the {user_membership} membership!')
+            # Redirect the user to profiles page
+            return redirect(reverse('profile'))
+        # If there was an issue with attaching membership to the profile
+        except (KeyError, NameError):
+            # Display an error message
+            messages.error(request, 'Something went wrong')
+            # Redirect back to the membership_checkout page
+            return redirect(reverse('membership_checkout'))
+
     # Retrieve data for all memberships
     all_memberships = Membership.objects.all()
 
