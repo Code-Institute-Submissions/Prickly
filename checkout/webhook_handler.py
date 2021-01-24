@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 
 from .models import Order, OrderLine, DeliveryType
 from products.models import Product
+from profiles.models import Profile
 
 import json
 import time
@@ -52,6 +53,22 @@ class StripeWH_Handler:
             if value == "":
                 shipping.address[field] = None
 
+        # Add user details to user profile if user ticked 'save_details'
+        # however, checkout view failed
+        profile = None
+
+        if request.user.is_authenticated:
+            profile = Profile.objects.get(user=request.user)
+            if save_details:
+                profile.user_phone_number = shipping.phone
+                profile.user_address_line_1 = shipping.address.line1
+                profile.user_address_line_2 = shipping.address.line2
+                profile.user_city = shipping.address.city
+                profile.user_region = shipping.address.state
+                profile.user_country = shipping.address.country
+                profile.user_postcode = shipping.address.postal_code
+                profile.save()
+
         """
         Set order_exist to False, then look for an order matching
         the fields from the checkout form. If order exists, we return
@@ -95,6 +112,7 @@ class StripeWH_Handler:
             try:
                 # Create and populate order model
                 order = Order.objects.create(
+                    user_profile=profile,
                     first_name=first_name,
                     last_name=last_name,
                     email=billing.email,
