@@ -12,6 +12,7 @@ from django.utils import timezone
 from django_countries.fields import CountryField
 
 from products.models import Product
+from profiles.models import Profile
 
 
 class DeliveryType(models.Model):
@@ -40,6 +41,9 @@ class Order(models.Model):
     """
     order_number = models.CharField(max_length=36, default=uuid.uuid4,
                                     editable=False)
+    user_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL,
+                                     null=True, blank=True,
+                                     related_name='user_orders')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     full_name = models.CharField(max_length=70, editable=False,

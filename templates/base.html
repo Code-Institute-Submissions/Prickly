@@ -69,8 +69,8 @@
 						<ul class="dropdown-menu" aria-labelledby="accountDropdown">
 							{% if request.user.is_authenticated %}
 							<li><a class="dropdown-item" href="#">Order History</a></li>
-							<li><a class="dropdown-item" href="{% url 'memberships' %}">My Membership</a></li>
-							<li><a class="dropdown-item" href="#">My Details</a></li>
+							<li><a class="dropdown-item" href="#">My Membership</a></li>
+							<li><a class="dropdown-item" href="{% url 'profile' %}">My Details</a></li>
 							<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
 							{% else %}
 							<li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
@@ -137,7 +137,7 @@
 								{% if request.user.is_authenticated %}
 									<li><a class="dropdown-item" href="#">Order History</a></li>
 									<li><a class="dropdown-item" href="#">My Membership</a></li>
-									<li><a class="dropdown-item" href="#">My Details</a></li>
+									<li><a class="dropdown-item" href="{% url 'profile' %}">My Details</a></li>
 									<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
 								{% else %}
 									<li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>

@@ -1,6 +1,5 @@
 from django.db import models
 
-from checkout.models import DeliveryType
 
 # Add for clean method to add custom validation
 from django.core.exceptions import ValidationError
@@ -21,10 +20,18 @@ class Membership(models.Model):
         (LOW, 'Low'),
     ]
 
+    YES = 'Y'
+    NO = 'N'
+    FREE_DELIVERY = [
+        (YES, 'Yes'),
+        (NO, 'No'),
+    ]
+
     name = models.CharField(max_length=50)
     pic = models.ImageField('Membership Picture', null=True, blank=True)
-    free_delivery = models.ForeignKey(DeliveryType, on_delete=models.CASCADE,
-                                      null=True, blank=True)
+    free_delivery = models.CharField(max_length=1,
+                                     choices=FREE_DELIVERY,
+                                     default='N')
     first_order_disc = models.IntegerField('First Order Discount', default=0)
     overall_discount = models.IntegerField(default=0)
     priority = models.CharField(max_length=10,

@@ -1,5 +1,5 @@
 
-{% if grand_total and not on_cart_page %}
+{% if grand_total and not on_cart_page and not on_profile %}
     <div class="toast" role="alert" aria-live=assertive data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto text-uppercase">My cart items</strong>
@@ -144,8 +144,6 @@
         })
     </script>
 {% else %}
-    {% if not grand_total %}
         <script>notyf.success("{{ msg }}");</script>
-    {% endif %}
 {% endif %}
 
