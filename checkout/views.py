@@ -6,7 +6,9 @@ from django.conf import settings
 
 from shopping_cart.contexts import cart_contents
 from .forms import OrderForm
+from profiles.forms import ProfileForm
 from products.models import Product
+from profiles.models import Profile
 from .models import OrderLine, Order, DeliveryType
 
 import stripe
@@ -139,6 +141,28 @@ def checkout_success(request, order_number):
     """
     # Display a success message
     order = get_object_or_404(Order, order_number=order_number)
+    save_details = request.session.get('save_details')
+
+    if request.user.is_authenticated:
+        #  If user has logged in, attach their profile to the order
+        profile = Profile.objects.get(user=request.user)
+        order.user_profile = profile
+        order.save()
+
+        # If the user has ticked 'save_details', save them in the profile
+        if save_details:
+            user_details = {
+                'user_phone_number': order.phone_number,
+                'user_address_line_1': order.address_line_1,
+                'user_address_line_2': order.address_line_2,
+                'user_city': order.city,
+                'user_region': order.region,
+                'user_country': order.country,
+                'user_postcode': order.postcode,
+            }
+            profile_form = ProfileForm(user_details, instance=profile)
+            if profile_form.is_valid():
+                profile_form.save()
 
     # delete cart contents
     if 'cart' in request.session:

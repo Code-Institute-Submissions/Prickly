@@ -33,7 +33,8 @@ class OrderAdmin(admin.ModelAdmin):
     fieldsets = [
         ('', {'fields': ['order_number']}),
         ('Personal Details',
-            {'fields': ['first_name',
+            {'fields': ['user_profile',
+                        'first_name',
                         'last_name',
                         'phone_number',
                         'email',
