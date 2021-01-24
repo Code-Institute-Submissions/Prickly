@@ -1,4 +1,9 @@
+from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse
+
 from .models import Membership
 from profiles.models import Profile
 from django.contrib import messages
@@ -30,6 +35,7 @@ def membership_type(request):
     return redirect(reverse('account_signup'))
 
 
+@login_required
 def membership_checkout(request):
     """
     Retrieve user selected membership, display it and
@@ -86,3 +92,23 @@ def membership_checkout(request):
     }
 
     return render(request, template, context)
+
+
+"""
+The following code was taken from
+https://testdriven.io/blog/django-stripe-subscriptions/
+and
+https://stripe.com/docs/billing/subscriptions/checkout
+It is used to set up Stripe external checkout form
+to handle subscriptions
+"""
+
+
+@csrf_exempt
+def stripe_config(request):
+    """
+    Handles AJAX requests coming from stripe_sub.js
+    """
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLIC_KEY}
+        return JsonResponse(stripe_config, safe=False)
