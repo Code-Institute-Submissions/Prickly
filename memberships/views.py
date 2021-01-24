@@ -34,12 +34,21 @@ def membership_checkout(request):
     benefits, and allow user to change the membership
     type
     """
-    # Retrieve user selected membership
-    membership_type = request.session['membership']
-    # Retrieve data for selected membership type
-    membership = get_object_or_404(Membership, name=membership_type)
     # Retrieve data for all memberships
     all_memberships = Membership.objects.all()
+
+    # If user is updating selected membership, the
+    # memberhip_type to the new vlue
+    if request.GET.get('membership-new'):
+        membership_type = request.GET.get('membership-new')
+
+    # Otherwise get membership_type from session
+    else:
+        # Retrieve user selected membership
+        membership_type = request.session['membership']
+
+    # Retrieve data for selected membership type
+    membership = get_object_or_404(Membership, name=membership_type)
 
     template = 'memberships/membership_checkout.html'
     context = {

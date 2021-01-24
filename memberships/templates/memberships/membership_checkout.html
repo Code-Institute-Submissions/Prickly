@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block add_css %}
+    <!-- Page specific css to hide header/footer and style content -->
     <link rel="stylesheet" href="{% static 'memberships/css/membership_checkout.css' %}">
 {% endblock %}
 
@@ -10,15 +11,24 @@
 <div class="container">
     <h2>You've selected 
         <span class="text-uppercase">
+            <!-- Display name based on user selected membership -->
             {% if membership.name == 'Supreme' %}
-                'The Prickly {{ memebrship.name }}'
+                'The Prickly {{ membership.name }}'
             {% else %}
                 'The {{ membership.name }} Prickly'
             {% endif %}
             membership
         </span>
     </h2>
-    <h3 class="text-warning mb-5">€ {{ membership.price }} /month</h3>
+    <h3 class="text-warning mb-5">
+        <!-- Display free for Basic membership and price for others -->
+        {% if membership.price > 0 %}
+            € {{ membership.price }} /month
+        {% else %}
+            free
+        {% endif %}
+    </h3>
+    <!-- Meembership Benefits -->
     <div class="row">
         <div class="col-6 border m-auto p-3">
             <h4 class="text-uppercase">Benefits</h4>
@@ -55,26 +65,32 @@
             <!-- Priority of accessing new collections -->
             <div>
                 <p class="mb-0">Access to new colections</p>
-                    {% if membership.priority == 'High' %}
-                        <p class="text-danger">A week before release date</p>
-                    {% else %}
-                        <p class="text-secondary">On release date</p>
-                    {% endif %}
+                {% if membership.priority == 'High' %}
+                    <p class="text-danger">A week before release date</p>
+                {% else %}
+                    <p class="text-secondary">On release date</p>
+                {% endif %}
             </div>
         </div>
     </div>
+    <!-- Allow user to change the selected membership before payment  -->
     <div class="row mt-5">
         <div class="col-6 m-auto border p-3">
             <h4 class="text-uppercase">Change</h4>
-            <select class="form-select" aria-label="Default select example">
-                {% for m in all_memberships %}
-                    {% if m.name == membership.name %}
-                        <option selected value="{{ m.name }}">{{ m.name }}</option>
-                    {% else %}
-                        <option value="{{ m.name }}">{{ m.name }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
+            <!-- Form contains membership types -->
+            <form action="{% url 'membership_checkout' %}" method="GET" class="text-center">
+                <select class="form-select" aria-label="Default select example" name="membership-new">
+                    <!-- Loop through membership types, display selected membership -->
+                    {% for m in all_memberships %}
+                        {% if m.name == membership.name %}
+                            <option selected value="{{ m.name }}">{{ m.name }}</option>
+                        {% else %}
+                            <option value="{{ m.name }}">{{ m.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <button class="text-upppercase btn btn-sm btn-outline-secondary rounded-0 mt-3">Update</button>
+            </form>
         </div>
     </div>
     <div class="row mt-5">
