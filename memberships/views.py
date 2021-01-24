@@ -43,7 +43,7 @@ def membership_checkout(request):
             user_membership = get_object_or_404(
                 Membership, name=user_membership_value)
             profile = get_object_or_404(Profile, user=request.user)
-            profile.membership = membership
+            profile.membership = user_membership
             profile.save()
             # Display confirmation
             messages.success(request, 'Congrats!! You successfully subscribed '
