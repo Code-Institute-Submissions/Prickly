@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Add for clean method to add custom validation
@@ -57,3 +58,26 @@ class Membership(models.Model):
         elif self.overall_discount and self.overall_discount < 0:
             raise ValidationError(_("Overall Discount"
                                     " Value can't be negative"))
+
+
+"""
+The following code was taken from
+https://testdriven.io/blog/django-stripe-subscriptions/
+and
+https://stripe.com/docs/billing/subscriptions/checkout
+It is used to set up Stripe external checkout form
+to handle subscriptions
+"""
+
+
+class StripeCustomer(models.Model):
+    """
+    Create a model to store customer information needed
+    for Stripe Subscription payments
+    """
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    stripeCustomerId = models.CharField(max_length=255)
+    stripeSubscriptionId = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.user.username

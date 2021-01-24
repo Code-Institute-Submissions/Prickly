@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{% static 'memberships/css/membership_checkout.css' %}">
 {% endblock %}
 
+
+{% block add_js %}
+    <script type="text/javascript" src="{% static 'memberships/js/stripe_sub.js' %}"></script>
+{% endblock add_js %}
+
 {% block content %}
 
 <div class="container">
