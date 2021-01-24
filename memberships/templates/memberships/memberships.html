@@ -69,7 +69,12 @@
                         {% endif %}
                     </p>
                 </div>
-                <a href="#" class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</a>
+                <!-- Form that posts the name of the memebrship that is stored as a session variable and retrieved after signup -->
+                <form action="{% url 'membership_type' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ membership.name }}" name="membership_type">
+                    <button class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</button>
+                </form>
             </div>
         {% endfor %}
     </div>
