@@ -30,7 +30,7 @@
     </h3>
     <!-- Meembership Benefits -->
     <div class="row">
-        <div class="col-6 border m-auto p-3">
+        <div class="col-12 col-md-6 border m-auto p-3">
             <h4 class="text-uppercase">Benefits</h4>
             <!-- If membership offers free delivery, display Nope if None -->
             <div>
@@ -75,7 +75,7 @@
     </div>
     <!-- Allow user to change the selected membership before payment  -->
     <div class="row mt-5">
-        <div class="col-6 m-auto border p-3">
+        <div class="col-12 col-md-6 m-auto border p-3">
             <h4 class="text-uppercase">Change</h4>
             <!-- Form contains membership types -->
             <form action="{% url 'membership_checkout' %}" method="GET" class="text-center">
@@ -94,11 +94,22 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-6 m-auto border p-3">
-            <h4 class="text-uppercase">Payment</h4>
-
-        </div>
+        {% if membership.name == 'Basic' %}
+            <div class="col-auto mx-auto">
+                <a href="#" class="text-uppercase btn btn-outline-warning rounded-0">Confirm</a>
+            </div>
+        {% else %}
+            <div class="col-12 col-md-6 m-auto border p-3">
+                <h4 class="text-uppercase">Payment</h4>
+                <p>Total due now: € {{ membership.price }}<sup>*</sup></p>
+                <div class="text-center my-3">
+                    <a href="#" class="text-uppercase btn btn-outline-warning rounded-0">Confirm</a>
+                </div>
+                <p class="text-end mb-0"><sup>*</sup><small>This amount will be charged on your card monthly</small></p>
+            </div>
+        {% endif %}
     </div>
+
 </div>
 
 {% endblock %}
