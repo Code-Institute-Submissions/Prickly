@@ -72,6 +72,8 @@ def membership_checkout(request):
     # memberhip_type to the new vlue
     if request.GET.get('membership-new'):
         membership_type = request.GET.get('membership-new')
+        # add membership type to session to retrieve for stripe
+        request.session['membership'] = membership_type
 
     # If user logged in after
     # registering, get membership_type from session
@@ -102,7 +104,7 @@ https://testdriven.io/blog/django-stripe-subscriptions/
 and
 https://stripe.com/docs/billing/subscriptions/checkout
 It is used to set up Stripe external checkout form
-to handle subscriptions
+to handle subscriptions and was customized
 """
 
 
@@ -129,6 +131,13 @@ def create_checkout_session(request):
         domain_url = settings.DOMAIN_URL
         # set stripe API from SECRET KEY variable
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        # get user chosen membership from session
+        membership = request.session['membership']
+        # set stripe product price dependant on above
+        if membership == 'Ultimate':
+            price = settings.STRIPE_PRICE_ID_ULTIMATE
+        else:
+            price = settings.STRIPE_PRICE_ID_SUPREME
         try:
             # Create a Checkout Session
             checkout_session = stripe.checkout.Session.create(
@@ -146,13 +155,12 @@ def create_checkout_session(request):
                 # Price and quantity of items
                 line_items=[
                     {
-                        'price': settings.STRIPE_PRICE_ID,
+                        'price': price,
                         'quantity': 1,
                     }
                 ]
             )
             # Return Checkout Session ID
-            messages.success(request, 'Subscription successful!')
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
