@@ -1,3 +1,5 @@
+import stripe
+
 from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -110,5 +112,46 @@ def stripe_config(request):
     Handles AJAX requests coming from stripe_sub.js
     """
     if request.method == 'GET':
+        # add public key in a dict that will be retrieved by JS
         stripe_config = {'publicKey': settings.STRIPE_PUBLIC_KEY}
         return JsonResponse(stripe_config, safe=False)
+
+
+@csrf_exempt
+def create_checkout_session(request):
+    """
+    Creates the Checkout Session with product details
+    and returns Checkout Session ID to be fetched by
+    frontend
+    """
+    if request.method == 'GET':
+        # define domain URL
+        domain_url = settings.DOMAIN_URL
+        # set stripe API from SECRET KEY variable
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            # Create a Checkout Session
+            checkout_session = stripe.checkout.Session.create(
+                client_reference_id=(request.user.id if
+                                     request.user.is_authenticated else None),
+                # link to checkout success page if paymenr successful
+                success_url=(
+                    domain_url + 'success?session_id={CHECKOUT_SESSION_ID}'),
+                #  Link to a page if user cancels the payment in checkout
+                cancel_url=domain_url + 'memberships/membership_checkout/',
+                # Define payment method to be a card
+                payment_method_types=['card'],
+                # Subscription model
+                mode='subscription',
+                # Price and quantity of items
+                line_items=[
+                    {
+                        'price': settings.STRIPE_PRICE_ID,
+                        'quantity': 1,
+                    }
+                ]
+            )
+            # Return Checkout Session ID
+            return JsonResponse({'sessionId': checkout_session['id']})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})

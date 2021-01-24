@@ -99,24 +99,24 @@
         </div>
     </div>
     <div class="row mt-5">
-        <form action="{% url 'membership_checkout' %}" method="POST" class="text-center">
-            {% csrf_token %}
-            <input type="hidden" value="{{ membership.name }}" name="user-membership">
-            {% if membership.name == 'Basic' %}
+        {% if membership.name == 'Basic' %}
+            <form action="{% url 'membership_checkout' %}" method="POST" class="text-center">
+                {% csrf_token %}
+                <input type="hidden" value="{{ membership.name }}" name="user-membership">
                 <div class="col-auto">
                     <button class="text-uppercase btn btn-outline-warning rounded-0">Confirm</button>
                 </div>
-            {% else %}
-                <div class="col-12 col-md-6 m-auto border p-3">
-                    <h4 class="text-uppercase">Payment</h4>
-                    <p>Total due now: € {{ membership.price }}<sup>*</sup></p>
-                    <div class="text-center my-3">
-                        <button href="#" class="text-uppercase btn btn-outline-warning rounded-0">Confirm</button>
-                    </div>
-                    <p class="text-end mb-0"><sup>*</sup><small>This amount will be charged on your card monthly</small></p>
+            </form>
+        {% else %}
+            <div class="col-12 col-md-6 m-auto border p-3">
+                <h4 class="text-uppercase">Payment</h4>
+                <p>Total due now: € {{ membership.price }}<sup>*</sup></p>
+                <div class="text-center my-3">
+                    <button type="submit" class="text-uppercase btn btn-outline-warning rounded-0" id="submitBtn">Confirm</button>
                 </div>
-            {% endif %}
-        </form>
+                <p class="text-end mb-0"><sup>*</sup><small>This amount will be charged on your card monthly</small></p>
+            </div>
+        {% endif %}
     </div>
 
 </div>
