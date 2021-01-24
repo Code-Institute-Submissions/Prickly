@@ -39,8 +39,9 @@ def membership_checkout(request):
     # Save chosen membership in user profile
     if request.method == 'POST':
         try:
-            user_membership = request.POST.get('user-membership')
-            membership = get_object_or_404(Membership, name=user_membership)
+            user_membership_value = request.POST.get('user-membership')
+            user_membership = get_object_or_404(
+                Membership, name=user_membership_value)
             profile = get_object_or_404(Profile, user=request.user)
             profile.membership = membership
             profile.save()
@@ -64,10 +65,16 @@ def membership_checkout(request):
     if request.GET.get('membership-new'):
         membership_type = request.GET.get('membership-new')
 
-    # Otherwise get membership_type from session
+    # If user logged in after
+    # registering, get membership_type from session
     else:
-        # Retrieve user selected membership
-        membership_type = request.session['membership']
+        try:
+            # Retrieve user selected membership
+            membership_type = request.session['membership']
+        except KeyError:
+            # If user logged in normally, redirect them
+            # to the profile page
+            return redirect(reverse('products'))
 
     # Retrieve data for selected membership type
     membership = get_object_or_404(Membership, name=membership_type)
