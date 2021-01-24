@@ -138,7 +138,7 @@ def create_checkout_session(request):
                 success_url=(
                     domain_url + 'success?session_id={CHECKOUT_SESSION_ID}'),
                 #  Link to a page if user cancels the payment in checkout
-                cancel_url=domain_url + 'memberships/membership_checkout/',
+                cancel_url=domain_url + 'membership_checkout/',
                 # Define payment method to be a card
                 payment_method_types=['card'],
                 # Subscription model
@@ -152,6 +152,12 @@ def create_checkout_session(request):
                 ]
             )
             # Return Checkout Session ID
+            messages.success(request, 'Subscription successful!')
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
+
+
+@login_required
+def success(request):
+    return render(request, 'memberships/sub_success.html')
