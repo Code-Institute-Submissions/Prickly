@@ -59,6 +59,16 @@
                     <p class="text-secondary">On release date</p>
                 {% endif %}
             </div>
+            <div class="text-warning fs-2">
+                {% if membership.price > 0 %}
+                    € {{ membership.price }} /month
+                {% else %}
+                    free
+                {% endif %}
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <a href='{% url 'memberships' %}' class="btn btn-outline-secondary text-uppercase rounded-0">Change</a>
         </div>
     </div>
 </div>

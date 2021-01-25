@@ -20,9 +20,18 @@ def memberships(request):
     # Get all membership model entries
     memberships = Membership.objects.all()
     template = 'memberships/memberships.html'
-    context = {
-        'memberships': memberships,
-    }
+    if request.user.is_anonymous:
+        context = {
+            'memberships': memberships,
+        }
+    else:
+        profile = Profile.objects.get(user=request.user)
+        user_membership = profile.membership.name
+        context = {
+            'user_membership': user_membership,
+            'memberships': memberships,
+        }
+
     return render(request, template, context)
 
 
@@ -99,6 +108,7 @@ def membership_checkout(request):
     return render(request, template, context)
 
 
+@login_required
 def user_membership_view(request):
     profile = get_object_or_404(Profile, user=request.user)
     membership = get_object_or_404(Membership, name=profile.membership)
@@ -107,6 +117,21 @@ def user_membership_view(request):
     }
     template = 'memberships/user_membership.html'
 
+    return render(request, template, context)
+
+
+@login_required
+def membership_change(request):
+    all_memberships = Membership.objects.all()
+    membership_type = request.POST.get('membership_type')
+    membership = get_object_or_404(Membership, name=membership_type)
+    template = 'memberships/membership_checkout.html'
+
+    context = {
+        'change_membership': True,
+        'membership': membership,
+        'all_memberships': all_memberships,
+    }
     return render(request, template, context)
 
 

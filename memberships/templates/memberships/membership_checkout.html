@@ -35,8 +35,56 @@
     </h3>
     <!-- Meembership Benefits -->
     <div class="row">
-        <div class="col-12 col-md-6 border m-auto p-3">
+        {% if change_membership %}
+            <div class="col-12 col-md-6 m-auto p-3 text-center">
+                <h4 class="text-uppercase">Current</h4>
+                <!-- If membership offers free delivery, display Nope if None -->
+                <div>
+                    <p class="mb-0">Free Delivery</p>
+                        {% if membership.free_delivery == 'Y' %}
+                            <p class="text-danger">Yes</p>
+                        {% else %}
+                            <p class="text-secondary"> Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- First Order Discount in % -->
+                <div>
+                    <p class="mb-0">First Order Discount</p>
+                    <p class="text-danger">{{ membership.first_order_disc }}%</p>
+                </div>
+                <!-- Overall discount store wide in %, display Nope if None -->
+                <div>
+                    <p class="mb-0">Overall Discount</p>
+                        {% if membership.overall_discount %}
+                            <p class="text-danger">{{ membership.overall_discount }}%</p>
+                        {% else %}
+                            <p class="text-secondary">Nope</p>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- Quarterly gift package -->
+                <div>
+                    <p class="mb-0">Quarterly Gift package</p>
+                    <p class="text-danger">{{ membership.q_gift }}</p>
+                </div>
+                <!-- Priority of accessing new collections -->
+                <div>
+                    <p class="mb-0">Access to new colections</p>
+                    {% if membership.priority == 'High' %}
+                        <p class="text-danger">A week before release date</p>
+                    {% else %}
+                        <p class="text-secondary">On release date</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-12 col-md-6 border m-auto p-3 text-center">
+            {% if change_membership %}
+            <h4 class="text-uppercase">Selected</h4>
+            {% else %}
             <h4 class="text-uppercase">Benefits</h4>
+            {% endif %}
             <!-- If membership offers free delivery, display Nope if None -->
             <div>
                 <p class="mb-0">Free Delivery</p>
@@ -78,6 +126,7 @@
             </div>
         </div>
     </div>
+    {% if not change_membership %}
     <!-- Allow user to change the selected membership before payment  -->
     <div class="row mt-5">
         <div class="col-12 col-md-6 m-auto border p-3">
@@ -98,6 +147,7 @@
             </form>
         </div>
     </div>
+    {% endif %}
     <div class="row mt-5">
         {% if membership.name == 'Basic' %}
             <form action="{% url 'membership_checkout' %}" method="POST" class="text-center">
@@ -108,9 +158,13 @@
                 </div>
             </form>
         {% else %}
-            <div class="col-12 col-md-6 m-auto border p-3">
+            <div class="col-12 col-md-6 m-auto border p-3 text-center">
                 <h4 class="text-uppercase">Payment</h4>
-                <p>Total due now: € {{ membership.price }}<sup>*</sup></p>
+                <p>Total due now: <span class="fs-5">€ {{ membership.price }}<sup>*</sup></span></p>
+                {% if change_membership %}
+                    <p class="text-danger">This will cancel your current membership and subscribe you to the {{ membership.name }} plan.</p>
+                {% endif %}
+                <p></p>
                 <div class="text-center my-3">
                     <button type="submit" class="text-uppercase btn btn-outline-warning rounded-0" id="submitBtn">Confirm</button>
                 </div>
