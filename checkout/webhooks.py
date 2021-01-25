@@ -15,7 +15,7 @@ def webhook(request):
     StripeWH_Handler class
     """
     # Setup secret key and API key
-    wh_secret = settings.STRIPE_WH_SECRET
+    wh_secret = settings.STRIPE_WH_SECRET_CH
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # Get the webhook data and verify its signature
