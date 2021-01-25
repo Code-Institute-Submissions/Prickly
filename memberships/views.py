@@ -99,6 +99,17 @@ def membership_checkout(request):
     return render(request, template, context)
 
 
+def user_membership_view(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    membership = get_object_or_404(Membership, name=profile.membership)
+    context = {
+        'membership': membership,
+    }
+    template = 'memberships/user_membership.html'
+
+    return render(request, template, context)
+
+
 """
 The following code was taken from
 https://testdriven.io/blog/django-stripe-subscriptions/

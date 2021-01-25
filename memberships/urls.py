@@ -8,6 +8,8 @@ urlpatterns = [
           name='membership_type'),
      path('membership_checkout/', views.membership_checkout,
           name="membership_checkout"),
+     path('user_membership/', views.user_membership_view,
+          name="user_membership"),
      path('config/', views.stripe_config),
      path('create-checkout-session/', views.create_checkout_session),
      path('success/', views.success),
