@@ -124,6 +124,7 @@ def user_membership_view(request):
 def membership_change(request):
     all_memberships = Membership.objects.all()
     membership_type = request.POST.get('membership_type')
+    request.session['membership'] = membership_type
     membership = get_object_or_404(Membership, name=membership_type)
     template = 'memberships/membership_checkout.html'
 
@@ -241,7 +242,11 @@ def stripe_webhook(request):
         client_reference_id = session.get('client_reference_id')
         stripe_customer_id = session.get('customer')
         stripe_subscription_id = session.get('subscription')
-
+        # get total of the product subscribtion
+        total = session.get('amount_total')
+        total_num = round(total / 100, 2)
+        # get membership type based on the price
+        membership_type = get_object_or_404(Membership, price=total_num)
         # Get the user and create a new StripeCustomer
         user = User.objects.get(id=client_reference_id)
         StripeCustomer.objects.create(
@@ -249,6 +254,9 @@ def stripe_webhook(request):
             stripeCustomerId=stripe_customer_id,
             stripeSubscriptionId=stripe_subscription_id,
         )
-        print(user.username + ' just subscribed.')
+        # Update user profile with the membership details
+        profile = get_object_or_404(Profile, user=user)
+        profile.membership = membership_type
+        profile.save()
 
     return HttpResponse(status=200)
