@@ -4,11 +4,12 @@ from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 
-from .models import Membership
+from .models import Membership, StripeCustomer
 from profiles.models import Profile
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 def memberships(request):
@@ -169,3 +170,49 @@ def create_checkout_session(request):
 @login_required
 def success(request):
     return render(request, 'memberships/sub_success.html')
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    """
+    Create a new StripeCustomer every time someone subscribes
+    to the membership by using Stripe Webhook
+    """
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_WH_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Return status 400 if payload is invalid
+        messages.error(request, f'error: {e}')
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Return status 400 if signature is invalid
+        messages.error(request, f'error: {e}')
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        # Fetch all the required data from session
+        client_reference_id = session.get('client_reference_id')
+        stripe_customer_id = session.get('customer')
+        stripe_subscription_id = session.get('subscription')
+
+        # Get the user and create a new StripeCustomer
+        user = User.objects.get(id=client_reference_id)
+        StripeCustomer.objects.create(
+            user=user,
+            stripeCustomerId=stripe_customer_id,
+            stripeSubscriptionId=stripe_subscription_id,
+        )
+        print(user.username + ' just subscribed.')
+
+    return HttpResponse(status=200)
