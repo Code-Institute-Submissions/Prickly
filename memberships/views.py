@@ -54,37 +54,15 @@ def membership_checkout(request):
     benefits, and allow user to change the membership
     type
     """
-    # Save chosen membership in user profile
-    if request.method == 'POST':
-        try:
-            user_membership_value = request.POST.get('user-membership')
-            user_membership = get_object_or_404(
-                Membership, name=user_membership_value)
-            profile = get_object_or_404(Profile, user=request.user)
-            profile.membership = user_membership
-            profile.save()
-            # Display confirmation
-            messages.success(request, 'Congrats!! You successfully subscribed '
-                                      f'to the {user_membership} membership!')
-            # Redirect the user to profiles page
-            return redirect(reverse('profile'))
-        # If there was an issue with attaching membership to the profile
-        except (KeyError, NameError):
-            # Display an error message
-            messages.error(request, 'Something went wrong')
-            # Redirect back to the membership_checkout page
-            return redirect(reverse('membership_checkout'))
-
     # Retrieve data for all memberships
     all_memberships = Membership.objects.all()
 
     # If user is updating selected membership, the
-    # memberhip_type to the new vlue
+    # memberhip_type to the new value
     if request.GET.get('membership-new'):
         membership_type = request.GET.get('membership-new')
         # add membership type to session to retrieve for stripe
         request.session['membership'] = membership_type
-
     # If user logged in after
     # registering, get membership_type from session
     else:
@@ -110,6 +88,9 @@ def membership_checkout(request):
 
 @login_required
 def user_membership_view(request):
+    """
+    Displays user's membership view with details
+    """
     profile = get_object_or_404(Profile, user=request.user)
     membership = get_object_or_404(Membership, name=profile.membership)
     context = {
@@ -122,6 +103,10 @@ def user_membership_view(request):
 
 @login_required
 def membership_change(request):
+    """
+    Handles membership change and adding selected memebrship
+    to the session
+    """
     all_memberships = Membership.objects.all()
     membership_type = request.POST.get('membership_type')
     request.session['membership'] = membership_type
@@ -134,6 +119,58 @@ def membership_change(request):
         'all_memberships': all_memberships,
     }
     return render(request, template, context)
+
+
+@login_required
+def membership_update(request):
+    """
+    Update user's membership in the stripe system
+    and our database too
+    """
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    # user's chosen membership
+    membership = request.session['membership']
+
+    # Asign correct price keys to the paid memberships
+    if membership == 'Ultimate':
+        price = settings.STRIPE_PRICE_ID_ULTIMATE
+    elif membership == 'Supreme':
+        price = settings.STRIPE_PRICE_ID_SUPREME
+    else:
+        price = settings.STRIPE_PRICE_ID_BASIC
+
+    # Check if the user already exists in stripe system and
+    # our database
+    try:
+        stripe_customer = StripeCustomer.objects.get(user=request.user)
+        subscription = stripe.Subscription.retrieve(
+            stripe_customer.stripeSubscriptionId)
+        # Update existing membership with a new one
+        stripe.Subscription.modify(
+            subscription.id,
+            cancel_at_period_end=False,
+            proration_behavior='create_prorations',
+            items=[{
+                'id': subscription['items']['data'][0].id,
+                'price': price,
+            }]
+        )
+
+        # Attach new membership to the user's profile
+        membership_type = get_object_or_404(Membership, name=membership)
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.membership = membership_type
+        profile.save()
+
+        messages.success(request, 'Congrats!! You successfully changed'
+                                  ' your membership to the '
+                                  f'{membership} membership!')
+        # Redirect the user to profiles page
+        return redirect(reverse('profile'))
+
+    # If user doesn't exist, return error
+    except StripeCustomer.DoesNotExist:
+        return messages.error(request, 'User does not exist')
 
 
 """
@@ -174,8 +211,13 @@ def create_checkout_session(request):
         # set stripe product price dependant on above
         if membership == 'Ultimate':
             price = settings.STRIPE_PRICE_ID_ULTIMATE
-        else:
+        elif membership == 'Supreme':
             price = settings.STRIPE_PRICE_ID_SUPREME
+        else:
+            price = settings.STRIPE_PRICE_ID_BASIC
+        
+        # Create session that will be passed to stripe
+        # with new membership details
         try:
             # Create a Checkout Session
             checkout_session = stripe.checkout.Session.create(
@@ -206,7 +248,17 @@ def create_checkout_session(request):
 
 @login_required
 def success(request):
-    return render(request, 'memberships/sub_success.html')
+    """
+    Display profile page and the membership details
+    when a user has succesfully subscribed
+    """
+    membership = get_object_or_404(Profile, user=request.user).membership.name
+    # Add a success message
+    messages.success(request, 'Congrats!! You successfully'
+                              ' subscribed to the '
+                              f'{membership} membership!')
+    # Redirect the user to profiles page
+    return redirect(reverse('profile'))
 
 
 @csrf_exempt
