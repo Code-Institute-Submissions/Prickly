@@ -168,9 +168,9 @@
                 </div>
             {% endif %}
             <!-- If user4 has selected Basic memebrship, let them know that the card won't be charged at all -->
-            {% if membership.name == 'Basic' %}
+            {% if membership.name == 'Basic' and not change_membership %}
                 <p class="text-end mb-0"><sup>*</sup><small>We need your card details but your card won't be charged</small></p>
-            {% else %}
+            {% elif membership.price > 0 %}
                 <p class="text-end mb-0"><sup>*</sup><small>This amount will be charged on your card monthly</small></p>
             {% endif %}
         </div>
