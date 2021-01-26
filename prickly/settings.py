@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # DEBUG = 'DEVELOPMENT' in os.environ
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -128,7 +128,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/memberships/membership_checkout/'
 
 # Social providers
 SOCIALACCOUNT_PROVIDERS = {
@@ -248,4 +248,9 @@ FREE_DELIVERY_LIMIT = 70
 STRIPE_CURRENCY = 'eur'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+STRIPE_WH_SECRET_CH = os.getenv('STRIPE_WH_SECRET_CH', '')
+STRIPE_WH_SECRET_SUB = os.getenv('STRIPE_WH_SECRET_SUB', '')
+STRIPE_PRICE_ID_BASIC = os.getenv('STRIPE_PRICE_ID_BASIC', '')
+STRIPE_PRICE_ID_SUPREME = os.getenv('STRIPE_PRICE_ID_SUPREME', '')
+STRIPE_PRICE_ID_ULTIMATE = os.getenv('STRIPE_PRICE_ID_ULTIMATE', '')
+DOMAIN_URL = os.getenv('DOMAIN_URL', '')
