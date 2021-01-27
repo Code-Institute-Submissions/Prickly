@@ -51,4 +51,20 @@ def add_review(request, product_id):
 
 
 def edit_review(request, review_id):
-    pass
+    """
+    Saves review form edited by user
+    """
+    # get the review and review form
+    review = get_object_or_404(Review, pk=review_id)
+    review_form = ReviewForm(request.POST, instance=review)
+    # If form is valid, save it
+    if review_form.is_valid():
+        review.save()
+        # Success message if added
+        messages.success(request, 'Thanks! Your review was edited :)')
+    else:
+        # Error message if form was invalid
+        messages.error(request, 'Uh oh, something went wrong. '
+                                'Make sure the form is valid.')
+
+    return redirect(reverse('product_item', args=(review.product.id,)))

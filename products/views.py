@@ -4,6 +4,7 @@ from django.db.models import Q
 from .models import Product, Category, Color
 from reviews.models import Review
 from reviews.forms import ReviewForm
+from profiles.models import Profile
 
 
 def all_products(request):
@@ -57,8 +58,17 @@ def all_products(request):
 def product_item(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     colors = Color.objects.filter(product=product.pk)
+    user = Profile.objects.get(user=request.user)
+    product = get_object_or_404(Product, pk=product_id)
+
     # get all reviews for given product
     reviews = Review.objects.filter(product=product)
+    # retrieve review for selected item by user
+    item_review = Review.objects.get(user=user, product=product)
+
+    # get a prefilled form with specific review
+    edit_review_form = ReviewForm(instance=item_review)
+
     review_form = ReviewForm()
     template = 'products/product_item.html'
     context = {
@@ -66,5 +76,7 @@ def product_item(request, product_id):
         'colors': colors,
         'reviews': reviews,
         'review_form': review_form,
+        'edit_review_form': edit_review_form,
+
     }
     return render(request, template, context)
