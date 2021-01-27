@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category, Color
+from reviews.models import Review
 
 
 def all_products(request):
@@ -55,9 +56,12 @@ def all_products(request):
 def product_item(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     colors = Color.objects.filter(product=product.pk)
+    # get all reviews for given product
+    reviews = Review.objects.filter(product=product)
     template = 'products/product_item.html'
     context = {
         'product': product,
         'colors': colors,
+        'reviews': reviews,
     }
     return render(request, template, context)

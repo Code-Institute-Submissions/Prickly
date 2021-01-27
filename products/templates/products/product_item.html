@@ -46,7 +46,7 @@
                     <!-- Price, this changes as the quantity updates -->
                     <p class="fs-4 mt-2" id="item-price-{{ product.price }}">€ {{ product.price }}</p>
                     <!-- Button to add item in the cart -->
-                    <button type="submit" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase p-2">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase p-2 mb-5">
                         Put in the cart <i class="fas fa-cart-arrow-down"></i>
                     </button>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -54,6 +54,9 @@
             </div>
         </div>
     </div>
+    <hr>
+
+    {% include 'reviews/includes/reviews.html' %}
 
 {% endblock content %}
 

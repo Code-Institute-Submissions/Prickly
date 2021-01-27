@@ -1,11 +1,3 @@
-{% extends "base.html" %}
-{% load static%}
-
-{% block main_nav_home %}
-    active
-{% endblock %}
-
-{% block content%}
 
 <div class="container">
     <h3 class="text-uppercase text-center mt-5 mb-3">Reviews</h3>
@@ -40,18 +32,16 @@
     </div>
     <div class="row mt-5">
         {% for review in reviews %}
-            <div class="col-12 col-md-5 row p-3 m-3 border">
-                <div class="col-12 col-lg-4 text-center px-0">
-                    <p class="mb-0 fw-bold text-uppercase">{{ review.title }}</p>
-                    <p><small class="text-secondary">rating: </small>{{ review.rating }}</p>
+                <div class="col-12 col-md-5 row p-3 m-3 border">
+                    <div class="col-12 col-lg-4 text-center px-0">
+                        <p class="mb-0 fw-bold text-uppercase">{{ review.title }}</p>
+                        <p><small class="text-secondary">rating: </small>{{ review.rating }}</p>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <p>"{{ review.description }}"</p>
+                        <p class="text-end fst-italic text-secondary">-{{ review.user }}</p>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-8">
-                    <p>"{{ review.description }}"</p>
-                    <p class="text-end fst-italic text-secondary">-{{ review.user }}</p>
-                </div>
-            </div>
         {% endfor %}
     </div>
 </div>
-
-{% endblock %}
