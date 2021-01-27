@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category, Color
 from reviews.models import Review
+from reviews.forms import ReviewForm
 
 
 def all_products(request):
@@ -58,10 +59,12 @@ def product_item(request, product_id):
     colors = Color.objects.filter(product=product.pk)
     # get all reviews for given product
     reviews = Review.objects.filter(product=product)
+    review_form = ReviewForm()
     template = 'products/product_item.html'
     context = {
         'product': product,
         'colors': colors,
         'reviews': reviews,
+        'review_form': review_form,
     }
     return render(request, template, context)
