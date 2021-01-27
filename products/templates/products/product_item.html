@@ -16,12 +16,7 @@
             <div class="col-12 col-md-6 px-3 px-md-3 px-lg-5">
                 <h3 class="mb-3">{{product.name}}</h3>
                 <div class="mb-2">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>      
-                    {{ product.avg_rating }}
+                    <span class="rating-stars" data-value="{{ product.avg_rating }}"></span><span>({{ reviews.count }})</span>
                 </div>
                 <p>{{ product.description }}</p>
                 <form method="POST" action="{% url 'add_item_to_cart' product.pk %}">
@@ -126,8 +121,27 @@
                 decrBtn.style.color = 'gray';
             }
         });
-
     </script>
 
+    <script type="text/javascript">
+        const starRating = document.querySelectorAll('.rating-stars')
 
+
+        starRating.forEach(rating => {
+            const ratingValue = parseInt(rating.getAttribute('data-value'))
+            const fullStar = ratingValue;
+            const emptyStar = 5 - fullStar;
+            let stars = '';
+
+            for (let i = 1; i < 6; i++) {
+                if (i <= fullStar) {
+                    stars += `<i class="fas fa-star"></i>`;
+                }
+                else {
+                    stars += `<i class="far fa-star"></i>`;
+                }
+            }    
+            rating.innerHTML = stars
+        })
+    </script>
 {% endblock %}

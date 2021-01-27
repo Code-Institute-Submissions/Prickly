@@ -1,12 +1,8 @@
  <!-- Reviews container -->
 <div class="container">
     <h3 class="text-uppercase text-center mt-5 mb-3">Reviews</h3>
-    <div class="text-center">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
-        <i class="far fa-star"></i>      
+    <div class="mb-2 text-center">
+        <span class="rating-stars" data-value="{{ product.avg_rating }}"></span> <span>({{ reviews.count }})</span>
     </div>
     <div class="text-center mt-3">
         <!-- A button that triggers a review modal where a user can add a review of given product -->
@@ -46,7 +42,7 @@
                     <!-- Title and rating -->
                     <div class="col-12 col-lg-4 text-center px-0">
                         <p class="mb-0 fw-bold text-uppercase">{{ review.title }}</p>
-                        <p><small class="text-secondary">rating: </small>{{ review.rating }}</p>
+                        <small><p class="rating-stars" data-value="{{ review.rating }}"></p></small>
                     </div>
                     <!-- Description, user and added date -->
                     <div class="col-12 col-lg-8">
@@ -89,10 +85,10 @@
                                     </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
                             {% else %}
-                                <div class="col-12">
+                                
                             {% endif %}
+                            <div class="col-6">
                                 <p class="text-end fst-italic text-secondary mb-0">-{{ review.user }}</p>
                                 <p class="text-secondary text-end mb-0"><small>{{ review.date_posted|date:"M d, Y" }}</small></p>
                             </div>
