@@ -2,6 +2,7 @@ import uuid
 
 from decimal import Decimal
 
+
 from django.db import models
 from django.db.models import Sum
 from django.core.validators import RegexValidator
@@ -89,7 +90,6 @@ class Order(models.Model):
         """
         self.subtotal = self.order_line.aggregate(
             Sum('line_total'))['line_total__sum'] or 0
-
         if self.subtotal < self.delivery_type.limit:
             self.delivery_cost = self.delivery_type.const
         else:
@@ -108,6 +108,10 @@ class Order(models.Model):
         self.est_deliery_dte = date_now + delivery_days
         self.order_number = str(self.order_number).upper()
         self.full_name = f'{self.first_name} {self.last_name}'
+
+        if self.user_profile and self.user_profile.membership.name != 'Basic':
+            self.delivery_cost = 0
+
         super().save(*args, **kwargs)
 
     def __str__(self):
