@@ -1,7 +1,8 @@
 from decimal import Decimal
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Product
+from checkout.models import DeliveryType
+from profiles.models import Profile
 
 
 def cart_contents(request):
@@ -35,22 +36,35 @@ def cart_contents(request):
             'product_total': product_total,
         })
 
-    # Check the type of delivery and calculate delivery cost accordingly
-    if delivery_type == 'standard':
-        # Standard delivery is set under certain limit
-        if total < settings.STANDARD_DELIVERY_LIMIT:
-            delivery_cost = settings.STANDARD_DELIVERY_CONST
+    delivery_type = request.session.get('delivery', '')
 
-        # Delivery charge is a % on orders over the limit
-        delivery_cost = total * Decimal(settings.STANDARD_DELIVERY_RATE / 100)
-
-    elif delivery_type == 'express':
-        # Express delivery is set under certain limit
-        if total < settings.EXPRESS_DELIVERY_LIMIT:
-            delivery_cost = settings.EXPRESS_DELIVERY_CONST
-
-        # Delivery charge is a % on orders over the limit
-        delivery_cost = total * Decimal(settings.EXPRESS_DELIVERY_RATE / 100)
+    # If there is a session variable with delivery type
+    # meaning that a person is checkin out
+    if delivery_type:
+        delivery = DeliveryType.objects.get(name=delivery_type)
+        # Check membership type for logged in user and
+        if request.user.is_authenticated:
+            user = get_object_or_404(Profile, user=request.user)
+            # If user has paid memebrship, set delivery cost to 0
+            if user.membership.name != 'Basic':
+                delivery_cost = 0
+                print('Hi')
+            # Otherwise calculate delivery cost
+            else:
+                if total < delivery.limit:
+                    delivery_cost = delivery.const
+                else:
+                    delivery_cost = round(
+                        total * Decimal(delivery.rate / 100), 2)
+        # If user has not logged in, calculate tehir delivery costs
+        else:
+            if total < delivery.limit:
+                delivery_cost = delivery.const
+            else:
+                delivery_cost = round(total * Decimal(delivery.rate / 100), 2)
+    # If session var does not exist, xset delivery cost to 0
+    else:
+        delivery_cost = 0
 
     # If user is eligble for a discount, calculate it here
     discount_price = total * Decimal(discount / 100)

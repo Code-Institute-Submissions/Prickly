@@ -60,7 +60,7 @@
                         <p class="text-decoration-line-through text-muted">Item Total: € {{ total}}</p>
                         <p class="text-success">{{ discount }}% off </p>
                     {% endif %}
-                    <p class="fs-5">Total: € {{ grand_total }}<sup>*</sub></p>
+                    <p class="fs-5">Total: € {{ total }}<sup>*</sub></p>
                 </div>
             </div>
             <!-- Buttons  -->
@@ -71,7 +71,13 @@
                 </div>
                 <!-- Button to bring user to the checkout -->
                 <div class="col-12 col-sm text-center text-sm-start py-2">
-                    <a href="{% url 'delivery' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                    <!-- If delivery type has been selected and added to session, use checkout view -->
+                    {% if request.session.delivery %}
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                    <!-- If delivery session var does not exist, bring the user to delivery view and add it to the session var -->
+                    {% else %}
+                        <a href="{% url 'delivery' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                    {% endif %}
                 </div>
             </div>
             <!-- Disclaimer at the bottom -->

@@ -59,9 +59,13 @@
                         </a>
                     </div>
                     <div class="col text-start">
-                        <a href="{% url 'delivery' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">
-                            Checkout
-                        </a>
+                        <!-- Bring the user to checkout if session delivery variable 
+                            exist, otherwise bring the user to delivery view and add it to the session -->
+                        {% if request.session.delivery %}
+                            <a href="{% url 'checkout' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                        {% else %}
+                            <a href="{% url 'delivery' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

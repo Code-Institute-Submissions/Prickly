@@ -144,10 +144,9 @@ def checkout(request):
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
-            delivery_type = request.session['delivery']
-            delivery = get_object_or_404(DeliveryType, name=delivery_type)
-            print(delivery)
 
+    delivery_type = request.session['delivery']
+    delivery = get_object_or_404(DeliveryType, name=delivery_type)
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
@@ -213,6 +212,9 @@ def checkout_success(request, order_number):
     # delete cart contents
     if 'cart' in request.session:
         del request.session['cart']
+
+    if 'delivery' in request.session:
+        del request.session['delivery']
 
     template = 'checkout/checkout_success.html'
     context = {
