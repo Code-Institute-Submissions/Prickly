@@ -1,8 +1,6 @@
 from django.shortcuts import (
-    render, redirect, reverse, HttpResponse, get_object_or_404)
+    render, redirect, HttpResponse)
 from django.contrib import messages
-
-from products.models import Product
 
 
 def cart(request):
@@ -22,7 +20,6 @@ def add_item_to_cart(request, product_id):
     Redirect user back to the url they were at
     """
     # get cart session if avaialble, initiate otherwise
-    product = get_object_or_404(Product, pk=product_id)
     qty = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     cart = request.session.get('cart', {})
@@ -31,11 +28,11 @@ def add_item_to_cart(request, product_id):
     if product_id in list(cart.keys()):
         # If in the cart, increase quantity
         cart[product_id] += qty
-        messages.success(request, f'Added more of "{product.name}".')
+        messages.info(request, ' ')
     else:
         # Add to the cart if not in it already
         cart[product_id] = qty
-        messages.success(request, f'Added "{product.name}" to the cart.')
+        messages.info(request, ' ')
 
     # assign values to cart
     request.session['cart'] = cart
@@ -48,23 +45,19 @@ def change_cart(request, product_id):
     Update the quantity if changed
     If quantity is 0, remove the item
     """
-    product = get_object_or_404(Product, pk=product_id)
     qty = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
     redirect_url = request.POST.get('redirect_url')
 
-
     # If quantity is bigger than 0, change it, otherwise remove item
     if qty > 0:
         cart[product_id] = qty
-        messages.success(request, f'Changed quantity of "{product.name}" '
-                                  'in the cart.')
+        messages.info(request, ' ')
     else:
         cart.pop(product_id)
-        messages.success(request, f'Removed "{product.name}" from the cart.')
+        messages.info(request, ' ')
     # assign values to cart
     request.session['cart'] = cart
-    # return redirect(reverse('cart'))
     return redirect(redirect_url)
 
 
@@ -78,11 +71,13 @@ def remove_item_from_cart(request, product_id):
     """
 
     try:
-        product = get_object_or_404(Product, pk=product_id)
         cart = request.session.get('cart', {})
         # Remove item from the session cart
         cart.pop(product_id)
-        messages.success(request, f'Removed "{product.name}" from the cart.')
+        if not bool(cart):
+            messages.success(request, 'Your cart is empty.')
+        else:
+            messages.info(request, ' ')
 
         # re-assign values to cart
         request.session['cart'] = cart
