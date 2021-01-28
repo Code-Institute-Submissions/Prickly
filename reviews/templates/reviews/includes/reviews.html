@@ -4,6 +4,7 @@
     <div class="mb-2 text-center">
         <span class="rating-stars" data-value="{{ product.avg_rating }}"></span> <span>({{ reviews.count }})</span>
     </div>
+    {% if user.is_authenticated %}
     <div class="text-center mt-3">
         <!-- A button that triggers a review modal where a user can add a review of given product -->
         <button type="button" class="btn btn-outline-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#reviewModal">
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     <!-- Render existing reviews associated with particular product -->
     <div class="row mt-5 d-flex justify-content-around">
         {% for review in reviews %}

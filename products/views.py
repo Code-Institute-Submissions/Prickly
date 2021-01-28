@@ -58,8 +58,11 @@ def all_products(request):
 def product_item(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     colors = Color.objects.filter(product=product.pk)
-    user = Profile.objects.get(user=request.user)
     product = get_object_or_404(Product, pk=product_id)
+    if request.user.is_authenticated:
+        user = Profile.objects.get(user=request.user)
+    else:
+        user = None
 
     # get all reviews for given product
     reviews = Review.objects.filter(product=product)
