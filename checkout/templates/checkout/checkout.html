@@ -86,17 +86,50 @@
 
         <!-- Delivery Form -->
         <div class="col-12 col-md-6 p-2 p-lg-5">
+            {% if not delivery_selected %}
+                <form action="{% url 'delivery' %}" method="POST" class="px-lg-5">
+                    {% csrf_token %}
+                    <!-- Delivery details -->
+                    <fieldset class="mb-3">
+                        <legend>Delivery Info</legend>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label>Select Delivery Method</label>
+                                {{ order_form.delivery_type | as_crispy_field }}
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="text-center mb-5">
+                        <button class="btn btn-outline-secondary rounded-0 text-uppercase">Apply</button>
+                    </div>
+                    <hr>
+                </form>
+            {% else %}
+                <div class="px-lg-5">
+                    <fieldset class="mb-5">
+                        <legend>Delivery Info</legend>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label>Selected Delivery Method</label>
+                                <input type="text" value={{ delivery.name }} name="delivery" disabled class="stripe-style textinput textInput form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </div>
+            {% endif %}
             <form action="{% url 'checkout' %}" method="POST" id="order-info-form" class="px-lg-5">
                 {% csrf_token %}
+                <input type="hidden" value={{ delivery.name }} name="delivery">
                 <!-- Contact Details -->
-                <fieldset class="mb-5">
+                <fieldset class="mb-5" {% if not delivery_selected %}disabled{% endif %}>
                     <legend>Contact Info</legend>
                     {{ order_form.email | as_crispy_field }}
                     {{ order_form.phone_number | as_crispy_field }}
                 </fieldset>
                 <hr>
                 <!-- Shipping Details -->
-                <fieldset class="mb-2">
+                <fieldset class="mb-2" {% if not delivery_selected %}disabled{% endif %}>
                     <legend>Shipping Info</legend>
                     <div class="row">
                         <div class="col-6">
@@ -130,26 +163,8 @@
                     </div>
                 {% endif %}
                 <hr>
-                <!-- Deliverydetails -->
-                <fieldset class="mb-5">
-                    <legend>Delivery Info</legend>
-                    <div class="row">
-                        <div class="col-12">
-                            <p>You're order details will be sent to:</p>
-                            <a href="" class="btn btn-sm">change</a>
-                        </div>
-                        <div class="col-12">
-                            <p>We will ship your goodies to:</p>
-                            <a href="" class="btn btn-sm">change</a>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <label>Select Delivery Method</label>
-                            {{ order_form.delivery_type | as_crispy_field }}
-                        </div>
-                    </div>
-                </fieldset>
-                <hr>
-                <!-- Payment Detiald -->
+                {% if delivery_selected%}
+                <!-- Payment Detials -->
                 <fieldset class="mb-5">
                     <legend>Payment Info</legend>
                     <!-- Stripe card element -->
@@ -174,6 +189,7 @@
                         </button>
                     </div>
                 </div>
+                {% endif %}
             </form>
         </div>
     </div>

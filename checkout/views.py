@@ -44,8 +44,9 @@ def checkout(request):
         cart = request.session.get('cart', {})
 
         # Get Delivery Type Instance
-        delivery_type_value = request.POST['delivery_type']
-        delivery_type = DeliveryType.objects.get(id=delivery_type_value)
+        # delivery_type_value = request.POST['delivery_type']
+        delivery_type_value = request.session['delivery']
+        delivery_type = DeliveryType.objects.get(name=delivery_type_value)
 
         order_info = {
             'first_name': request.POST['first_name'],
@@ -143,14 +144,38 @@ def checkout(request):
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
+            delivery_type = request.session['delivery']
+            delivery = get_object_or_404(DeliveryType, name=delivery_type)
+            print(delivery)
 
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'delivery_selected': True,
+        'delivery': delivery,
     }
 
+    return render(request, template, context)
+
+
+def delivery(request):
+    """
+    Update delivery type and pass it on to checkout
+    """
+    if request.method == 'POST':
+        delivery_num = request.POST.get('delivery_type')
+        delivery = get_object_or_404(DeliveryType, pk=delivery_num).name
+        request.session['delivery'] = delivery
+
+        return redirect(reverse('checkout'))
+
+    order_form = OrderForm()
+    template = 'checkout/checkout.html'
+    context = {
+        'order_form': order_form,
+    }
     return render(request, template, context)
 
 
