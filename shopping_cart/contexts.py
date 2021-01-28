@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from products.models import Product
 from checkout.models import DeliveryType
 from profiles.models import Profile
+from memberships.models import Membership
+from checkout.models import Order
 
 
 def cart_contents(request):
@@ -11,7 +13,7 @@ def cart_contents(request):
     to be used accross all apps
     """
     cart_items = []
-    total = 0
+    subtotal = 0
     item_count = 0
     delivery_type = None
     delivery_cost = 0
@@ -27,7 +29,7 @@ def cart_contents(request):
         product_total = qty * product.price
         item_count += qty
         # Calculate total price of each type of items
-        total += qty * product.price
+        subtotal += qty * product.price
         # Add these values to cart_items to be used globally
         cart_items.append({
             'product_id': product_id,
@@ -46,32 +48,45 @@ def cart_contents(request):
         if request.user.is_authenticated:
             user = get_object_or_404(Profile, user=request.user)
             # If user has paid memebrship, set delivery cost to 0
-            if user.membership.name != 'Basic':
+            if user.membership and user.membership.name != 'Basic':
                 delivery_cost = 0
-                print('Hi')
             # Otherwise calculate delivery cost
             else:
-                if total < delivery.limit:
+                if subtotal < delivery.limit:
                     delivery_cost = delivery.const
                 else:
                     delivery_cost = round(
-                        total * Decimal(delivery.rate / 100), 2)
+                        subtotal * Decimal(delivery.rate / 100), 2)
         # If user has not logged in, calculate tehir delivery costs
         else:
-            if total < delivery.limit:
+            if subtotal < delivery.limit:
                 delivery_cost = delivery.const
             else:
-                delivery_cost = round(total * Decimal(delivery.rate / 100), 2)
+                delivery_cost = round(
+                    subtotal * Decimal(delivery.rate / 100), 2)
     # If session var does not exist, xset delivery cost to 0
     else:
         delivery_cost = 0
 
+    # Get discount amount based on memebrship and if
+    # this is users first order
+    if request.user.is_authenticated:
+        user = get_object_or_404(Profile, user=request.user)
+        if user.membership:
+            membership = Membership.objects.get(name=user.membership.name)
+            user_orders_count = Order.objects.filter(user_profile=user).count()
+            if user_orders_count == 0:
+                discount = membership.first_order_disc
+            else:
+                discount = membership.overall_discount
     # If user is eligble for a discount, calculate it here
-    discount_price = total * Decimal(discount / 100)
-    grand_total = round((total + delivery_cost - discount_price), 2)
+    discount_price = round(subtotal * Decimal(discount / 100), 2)
+    total = subtotal - discount_price
+    grand_total = round((total + delivery_cost), 2)
 
     context = {
         'cart_items': cart_items,
+        'subtotal': subtotal,
         'total': total,
         'item_count': item_count,
         'delivery_type': delivery_type,

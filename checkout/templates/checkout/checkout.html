@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col text-center">
                         {% if discount > 0 %}
-                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ total }}</p>
+                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ subtotal }}</p>
                             <p class="text-success">{{ discount }}% off </p>
                         {% endif %}
                             <p>Delivery: € {{ delivery_cost }}{{ delivery_type_value }}</p>
@@ -76,7 +76,10 @@
                 {% endfor %}
                 <div class="row">
                     <div class="col text-center">
-                            <p>Subtotal: € {{ total }}</p>
+                        {% if discount > 0 %}
+                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ subtotal }}</p>
+                            <p class="text-success">{{ discount }}% off </p>
+                        {% endif %}
                             <p>Delivery: € {{ delivery_cost }}{{ delivery_type_value }}</p>
                         <p class="fs-5">Total: € {{ grand_total }}</p>
                     </div>

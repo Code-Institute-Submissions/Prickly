@@ -57,7 +57,7 @@
                 <div class="col text-center">
                     <!-- If discount is to be applied, display old total and the discount -->
                     {% if discount > 0 %}
-                        <p class="text-decoration-line-through text-muted">Item Total: € {{ total}}</p>
+                        <p class="text-decoration-line-through text-muted">Item Total: € {{ subtotal}}</p>
                         <p class="text-success">{{ discount }}% off </p>
                     {% endif %}
                     <p class="fs-5">Total: € {{ total }}<sup>*</sub></p>

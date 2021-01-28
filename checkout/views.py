@@ -209,6 +209,10 @@ def checkout_success(request, order_number):
             if profile_form.is_valid():
                 profile_form.save()
 
+    # Calculate discount applied if any
+    discount = round((order.subtotal - (order.total - order.delivery_cost))
+                     / order.subtotal * 100, 0)
+
     # delete cart contents
     if 'cart' in request.session:
         del request.session['cart']
@@ -219,6 +223,7 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'discount': discount,
     }
 
     return render(request, template, context)
