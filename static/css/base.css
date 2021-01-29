@@ -56,6 +56,13 @@ body {
                                 transparent 0);
 }
 
+.heading-pink {
+    background-color: var(--color-light-green);
+    background: linear-gradient(transparent, transparent 50%,
+                                var(--color-light-pink) 50%, var(--color-light-pink) 90%,
+                                transparent 0);
+}
+
 .font-accent {
     font-family: var(--font-accent);
 }
@@ -87,6 +94,22 @@ body {
 
 .button-green:hover {
     background-color: var(--color-light-green);
+}
+
+.button-steel {
+    border-color: var(--color-light-steel)
+}
+
+.button-steel:hover {
+    background-color: var(--color-light-steel);
+}
+
+.button-pink {
+    border-color: var(--color-light-pink)
+}
+
+.button-pink:hover {
+    background-color: var(--color-light-pink);
 }
 
 
