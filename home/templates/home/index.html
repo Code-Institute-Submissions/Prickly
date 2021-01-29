@@ -1,10 +1,28 @@
 {% extends "base.html" %}
-{% load static%}
+{% load static %}
+
+{% block add_css %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+
+
 
 {% block main_nav_home %}
     active
 {% endblock %}
 
+
 {% block content%}
-    <h1>Hi</h1>
+<div class="home-page container-flex">
+    <div class="home-page-content d-flex align-items-end">
+        <div class="mx-auto text-center">
+            <h1 class="txt-steel mb-3"><span class="font-heading">Do <span class="txt-steel cacti-heading">cacti</span></span> <span class="font-accent">cactuses</span><span class="font-heading"> <span class="txt-green">prickle</span> your fancy?</span></h1>
+            <p class="w-75 mx-auto">Become a member and get discounts to Prickly goodies and become a top notch cactus parent.</p>
+            <div class="my-3 mt-md-3 mb-md-5">
+                <a href="{% url 'memberships' %}" class="button button-green text-uppercase">Join</a>
+            </div>
+        </div>
+    </div>
+    <div class="colored-lines"></div>
+</div>
 {% endblock %}

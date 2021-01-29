@@ -1,0 +1,47 @@
+.home-page {
+    height: 100vh;
+    background: url('../../../../media/home-cactus.jpeg') no-repeat center top;
+    position: relative;
+    top: -3rem;
+    background-size: cover;
+}
+
+.home-page-content {
+    height: 95%;
+}
+
+.cacti-heading:after {
+    background-color: var(--color-light-pink);
+    content: "";
+    display: inline-block;
+    height: 3px;
+    position: relative;
+    vertical-align: middle;
+    width: 4rem;
+    margin-left: -4rem;
+  }
+
+  .colored-lines {
+      height: 1rem;
+    background-color: var(--color-light-steel);
+    background: linear-gradient(var(--color-light-pink),
+                var(--color-light-pink) 20%,
+                var(--color-light-steel) 20%,
+                var(--color-light-steel) 40%,
+                var(--color-steel) 40%,
+                var(--color-steel) 60%,
+                var(--color-green) 60%,
+                var(--color-green) 80%,
+                var(--color-light-green) 0);
+  }
+
+@media (min-width: 768px) {
+    /* .home-page {
+        top: 0;
+    } */
+    .cacti-heading:after {
+        height: 5px;
+        width: 6rem;
+        margin-left: -6rem;
+    }
+}

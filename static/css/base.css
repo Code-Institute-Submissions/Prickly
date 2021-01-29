@@ -8,6 +8,9 @@
     --color-main: #152c35;
     --color-light-steel: #b3bcc9;
     --color-light-pink: #e5dbdc;
+    --color-light-green: #a9c6c4;
+    --color-steel: #75869b;
+    --color-green: #5e7a8a;
     --font-headings: 'Bodoni Moda', serif;
     --font-accent: 'Caveat', cursive;
 }
@@ -24,6 +27,14 @@ body {
     color: var(--color-main);
 }
 
+.txt-steel {
+    color: var(--color-steel);
+}
+
+.txt-green {
+    color: var(--color-light-green);
+}
+
 .clr-steel {
     background-color: var(--color-light-steel);
 }
@@ -35,6 +46,35 @@ body {
 
 .font-accent {
     font-family: var(--font-accent);
+}
+
+.button {
+    display: inline-block;
+    line-height: 1.5;
+    color: var(--color-main);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 3px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+}
+
+.button:hover {
+    color: var(--color-main);
+}
+
+.button-green {
+    border-color: var(--color-light-green)
+}
+
+.button-green:hover {
+    background-color: var(--color-light-green);
 }
 
 /* ---------- HEADER ---------- */
@@ -243,6 +283,7 @@ footer .list-inline-item a:hover,
 footer .list-inline-item:hover {
     background-color: var(--color-light-pink);
 }
+
 
 
 /* ---------- SHOP ---------- */
