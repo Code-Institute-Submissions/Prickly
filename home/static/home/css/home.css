@@ -1,7 +1,7 @@
 /* Hero image */
 .home-page {
     height: 100vh;
-    background: url('../../../../media/home-cactus.jpeg') no-repeat center top;
+    background: url('/media/home-cactus.jpeg') no-repeat center top;
     position: relative;
     top: -3rem;
     background-size: cover;
@@ -54,8 +54,43 @@
     max-height: 150px;
 }
 
+.new-this-month {
+    text-align: center;
+}
 
-@media (min-width: 768px) {
+.new-this-month-img1 {
+    width: 100%;
+    max-width: 200px;
+    padding: 1rem;
+    border: 1px solid var(--color-light-pink);
+}
+
+.new-this-month-img2 {
+    width: 100%;
+    max-width: 100px;
+    position: relative;
+    right: 4rem;
+    top: 4rem;
+}
+
+@media (max-width: 350px){
+    .new-this-month-img2{
+        display: none;
+    }
+}
+
+@media (min-width: 576px) {
+    .new-this-month-img1 {
+        max-width: 300px;
+        padding: 2rem;
+    }
+
+    .new-this-month-img2 {
+        max-width: 150px;
+    }
+}
+
+@media (min-width: 992px) {
     .cacti-heading:after {
         height: 5px;
         width: 6rem;
@@ -67,5 +102,17 @@
     }
     .steps-container.txt-pink {
         margin-top: 14rem;
+    }
+
+    .new-this-month {
+        text-align: right;
+    }
+    
+    .new-this-month-img1 {
+        max-width: 400px;
+    }
+    
+    .new-this-month-img2 {
+        max-width: 200px;
     }
 }
