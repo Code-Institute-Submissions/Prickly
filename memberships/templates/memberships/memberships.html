@@ -70,7 +70,7 @@
                     </p>
                 </div>
                 <!-- Form that posts the name of the memebrship that is stored as a session variable and retrieved after signup -->
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and user_membership %}
                     <form action="{% url 'membership_change' %}" method="POST" class="pb-5">
                         {% csrf_token %}
                         <input type="hidden" value="{{ membership.name }}" name="membership_type">

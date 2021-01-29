@@ -26,11 +26,16 @@ def memberships(request):
         }
     else:
         profile = Profile.objects.get(user=request.user)
-        user_membership = profile.membership.name
-        context = {
-            'user_membership': user_membership,
-            'memberships': memberships,
-        }
+        if profile.membership:
+            user_membership = profile.membership.name
+            context = {
+                'user_membership': user_membership,
+                'memberships': memberships,
+            }
+        else:
+            context = {
+                'memberships': memberships,
+            }
 
     return render(request, template, context)
 
@@ -107,6 +112,10 @@ def membership_change(request):
     Handles membership change and adding selected memebrship
     to the session
     """
+
+    if not request.user.membership:
+        return redirect(reverse('memberships'))
+
     all_memberships = Membership.objects.all()
     membership_type = request.POST.get('membership_type')
     request.session['membership'] = membership_type
@@ -127,6 +136,10 @@ def membership_update(request):
     Update user's membership in the stripe system
     and our database too
     """
+
+    if not Profile.object.get(user=request.user).membership:
+        return redirect(reverse('memberships'))
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
     # user's chosen membership
     membership = request.session['membership']
