@@ -2,6 +2,7 @@ import uuid
 
 from decimal import Decimal
 
+
 from django.db import models
 from django.db.models import Sum
 from django.core.validators import RegexValidator
@@ -89,7 +90,6 @@ class Order(models.Model):
         """
         self.subtotal = self.order_line.aggregate(
             Sum('line_total'))['line_total__sum'] or 0
-
         if self.subtotal < self.delivery_type.limit:
             self.delivery_cost = self.delivery_type.const
         else:
@@ -99,6 +99,11 @@ class Order(models.Model):
         self.save()
 
     def save(self, *args, **kwargs):
+        """
+        Calculate fields when Order is saved based
+        on membership and delivery type
+        """
+        # Get delivery and dispatch dates
         date_now = timezone.now()
         dispatch_days = timezone.timedelta(
             days=self.delivery_type.dispatch_speed)
@@ -106,8 +111,37 @@ class Order(models.Model):
             days=self.delivery_type.delivery_speed)
         self.est_dispatch_dte = date_now + dispatch_days
         self.est_deliery_dte = date_now + delivery_days
+        # Order number in uppercase
         self.order_number = str(self.order_number).upper()
+        # Full name
         self.full_name = f'{self.first_name} {self.last_name}'
+
+        # If logged in user, calculate delivery amount and discount
+        if self.user_profile:
+            # Get order count for the user
+            user_orders_count = Order.objects.filter(
+                user_profile=self.user_profile).count()
+            # If paid memebrship, apply free delivery
+            if self.user_profile.membership.name != 'Basic':
+                self.delivery_cost = 0
+                # Discount for the first order
+                if user_orders_count == 0:
+                    discount = self.user_profile.membership.first_order_disc
+                # Discount for all other orders
+                else:
+                    discount = self.user_profile.membership.overall_discount
+            # Unpaid memebrship
+            else:
+                # Discount for the first order
+                if user_orders_count == 0:
+                    discount = self.user_profile.membership.first_order_disc
+                # No overall discount
+                else:
+                    discount = 0
+
+            # Calculate total with delivery and discount
+            discount_price = round(self.subtotal * Decimal(discount / 100), 2)
+            self.total = self.subtotal + self.delivery_cost - discount_price
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -41,10 +41,10 @@
                 <div class="row">
                     <div class="col text-center">
                         {% if discount > 0 %}
-                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ total }}</p>
+                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ subtotal }}</p>
                             <p class="text-success">{{ discount }}% off </p>
                         {% endif %}
-                            <p>Delivery: € {{ delivery_cost }}</p>
+                            <p>Delivery: € {{ delivery_cost }}{{ delivery_type_value }}</p>
                         <p class="fs-5">Total: € {{ grand_total }}</p>
                     </div>
                 </div>
@@ -76,8 +76,11 @@
                 {% endfor %}
                 <div class="row">
                     <div class="col text-center">
-                            <p>Subtotal: € {{ total }}</p>
-                            <p>Delivery: € {{ delivery_cost }}</p>
+                        {% if discount > 0 %}
+                            <p class="text-decoration-line-through text-muted">Subtotal: € {{ subtotal }}</p>
+                            <p class="text-success">{{ discount }}% off </p>
+                        {% endif %}
+                            <p>Delivery: € {{ delivery_cost }}{{ delivery_type_value }}</p>
                         <p class="fs-5">Total: € {{ grand_total }}</p>
                     </div>
                 </div>
@@ -86,17 +89,58 @@
 
         <!-- Delivery Form -->
         <div class="col-12 col-md-6 p-2 p-lg-5">
+            <!-- Dispplay a dropdown mennu for delivery type, if not already selected this will add type to session and enable the rest of the form -->
+            {% if not delivery_selected %}
+                <form action="{% url 'delivery' %}" method="POST" class="px-lg-5">
+                    {% csrf_token %} 
+                    <fieldset class="mb-3">
+                        <legend>Delivery Info</legend>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <!-- Display select widget from crispy forms -->
+                                <label>Select Delivery Method</label>
+                                {{ order_form.delivery_type | as_crispy_field }}
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- Apply button submits the form to delivery view -->
+                    <div class="text-center mb-5">
+                        <button class="btn btn-outline-secondary rounded-0 text-uppercase">Apply</button>
+                    </div>
+                    <hr>
+                </form>
+            {% else %}
+            <!-- If delivery type has been selected, disable the input, display the choice and re-enable the rest of the checkout form -->
+                <div class="px-lg-5">
+                    <fieldset class="mb-5">
+                        <legend>Delivery Info</legend>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label>Selected Delivery Method</label>
+                                <input type="text" value={{ delivery.name }} name="delivery" disabled class="stripe-style textinput textInput form-control">
+                            </div>
+                            <!-- Allow user to change the delivery even after submitting it -->
+                            <div class="text-center mb-3">
+                                <a href="{% url 'delivery' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">Change*</a>
+                            </div>
+                            <small class="text-end">*This will reset the form to re-calculate your total</small>
+                        </div>
+                    </fieldset>
+                    <hr>
+                </div>
+            {% endif %}
             <form action="{% url 'checkout' %}" method="POST" id="order-info-form" class="px-lg-5">
                 {% csrf_token %}
+                <input type="hidden" value={{ delivery.name }} name="delivery">
                 <!-- Contact Details -->
-                <fieldset class="mb-5">
+                <fieldset class="mb-5" {% if not delivery_selected %}disabled{% endif %}>
                     <legend>Contact Info</legend>
                     {{ order_form.email | as_crispy_field }}
                     {{ order_form.phone_number | as_crispy_field }}
                 </fieldset>
                 <hr>
                 <!-- Shipping Details -->
-                <fieldset class="mb-2">
+                <fieldset class="mb-2" {% if not delivery_selected %}disabled{% endif %}>
                     <legend>Shipping Info</legend>
                     <div class="row">
                         <div class="col-6">
@@ -130,36 +174,33 @@
                     </div>
                 {% endif %}
                 <hr>
-                <!-- Deliverydetails -->
-                <fieldset class="mb-5">
-                    <legend>Delivery Info</legend>
+                {% if delivery_selected%}
+                    <!-- Payment Detials only displayed if the delivery type has been selected already -->
+                    <fieldset class="mb-5">
+                        <legend>Payment Info</legend>
+                        <!-- Stripe card element -->
+                        <div id="card-element"></div>
+                        <!-- Display errors -->
+                        <div id="card-errors" role="alert"></div>
+                        <!-- This serves as a value that's passed to the checkout view and is used in Order creation model -->
+                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                    </fieldset>
                     <div class="row">
-                        <div class="col-12">
-                            <p>You're order details will be sent to:</p>
-                            <a href="" class="btn btn-sm">change</a>
+                        <!-- Button to bring user back to the cart -->
+                        <div class="col-6">
+                            <a href="{% url 'cart' %}" class="btn text-secondary text-start text-uppercase">
+                                <i class="fas fa-angle-left"></i>
+                                Back to Cart
+                            </a>
                         </div>
-                        <div class="col-12">
-                            <p>We will ship your goodies to:</p>
-                            <a href="" class="btn btn-sm">change</a>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <label>Select Delivery Method</label>
-                            {{ order_form.delivery_type | as_crispy_field }}
+                        <!-- Submit payment button -->
+                        <div class="col-6 text-end">
+                            <button id="submit-button" class="btn btn-outline-secondary rounded-0 text-uppercase">
+                                Make Payment
+                            </button>
                         </div>
                     </div>
-                </fieldset>
-                <hr>
-                <!-- Payment Detiald -->
-                <fieldset class="mb-5">
-                    <legend>Payment Info</legend>
-                    <!-- Stripe card element -->
-                    <div id="card-element"></div>
-                    <!-- Display errors -->
-                    <div id="card-errors" role="alert"></div>
-                    <!-- This serves as a value that's passed to the checkout view and is used in Order creation model -->
-                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                </fieldset>
-                <div class="row">
+                {% else %}
                     <!-- Button to bring user back to the cart -->
                     <div class="col-6">
                         <a href="{% url 'cart' %}" class="btn text-secondary text-start text-uppercase">
@@ -167,13 +208,7 @@
                             Back to Cart
                         </a>
                     </div>
-                    <!-- Submit payment button -->
-                    <div class="col-6 text-end">
-                        <button id="submit-button" class="btn btn-outline-secondary rounded-0 text-uppercase">
-                            Make Payment
-                        </button>
-                    </div>
-                </div>
+                {% endif %}
             </form>
         </div>
     </div>

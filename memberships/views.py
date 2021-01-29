@@ -215,7 +215,7 @@ def create_checkout_session(request):
             price = settings.STRIPE_PRICE_ID_SUPREME
         else:
             price = settings.STRIPE_PRICE_ID_BASIC
-        
+
         # Create session that will be passed to stripe
         # with new membership details
         try:
@@ -252,7 +252,15 @@ def success(request):
     Display profile page and the membership details
     when a user has succesfully subscribed
     """
+    profile = get_object_or_404(Profile, user=request.user)
+    if not profile.membership:
+        membership_type_value = request.session['membership']
+        membership_type = Membership.objects.get(name=membership_type_value)
+        profile.membership = membership_type
+        profile.save()
+
     membership = get_object_or_404(Profile, user=request.user).membership.name
+
     # Add a success message
     messages.success(request, 'Congrats!! You successfully'
                               ' subscribed to the '

@@ -43,7 +43,13 @@
         {% endfor %}
         <hr>
         <div class="col-12 text-center mb-3">
-            <p>Subtotal: € {{ order.subtotal }}</p>
+            <!-- Display discount and subtotal striked out if disscount was applied -->
+            {% if discount > 0 %}
+                <p class="text-decoration-line-through text-muted">Subtotal: € {{ order.subtotal }}</p>
+                <p class="text-success">{{ discount }}% off </p>
+            {% else %}
+                <p>Subtotal: € {{ order.subtotal }}</p>
+            {% endif %}
             <p>Delivery: € {{ order.delivery_cost }}</p>
             <p class="fs-5">Total: € {{ order.total }}</p>
         </div>
@@ -76,12 +82,6 @@
                 <p class="mb-0">{{ order.phone_number }}</p>
             </div>
         </div>
-    </div>
-    <!-- Payment Information -->
-    <div class="row mx-auto border px-0 py-3 p-sm-3 mb-5" style="max-width: 720px;">
-        <h4 class="text-uppercase">
-            Payment Details
-        </h4>
     </div>
 </div>
 
