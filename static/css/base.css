@@ -40,6 +40,17 @@ body {
     color: var(--color-pink);
 }
 
+.txt-link {
+    color: var(--color-main);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-light-pink);
+}
+
+.txt-link:hover {
+    color: var(--color-main);
+    background-color: var(--color-light-pink);
+}
+
 .clr-steel {
     background-color: var(--color-light-steel);
 }
@@ -90,6 +101,10 @@ body {
     border: 3px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
+}
+
+.button:focus {
+    outline: none;
 }
 
 .button:hover {
@@ -338,4 +353,84 @@ footer .list-inline-item:hover {
 
 #sort-trigger {
     cursor: pointer;
+}
+
+/* --------- ALLAUTH ---------- */
+
+.allauth {
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.allauth h1 {
+    margin-bottom: 2rem;
+}
+
+.allauth .button {
+    text-transform: uppercase;
+}
+
+.allauth div.form-group {
+    text-align: left;
+}
+
+.allauth .form-group input {
+    background-color: #fff;
+    border: 1px solid var(--color-light-pink);
+    border-radius: 0;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+}
+
+.allauth .form-group label {
+    display: none;
+}
+
+.allauth .form-control:focus {
+    background-color: #fff;
+    border-color: var(--color-light-pink);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+}
+
+.allauth .form-group input::placeholder {
+    color: #b4bfcb;
+    opacity: 1;
+}
+
+.allauth #div_id_remember, .allauth #div_id_remember label {
+    display: inline-block;
+}
+
+.socialaccount_providers li {
+    list-style: none;
+}
+
+ul.socialaccount_providers {
+    border: 1px solid var(--color-light-pink);
+    padding: 0.4rem;
+}
+
+.socialaccount_providers li a{
+    display: block;
+    text-decoration: none;
+    color: var(--color-main);
+}
+
+.socialaccount_providers li a:hover, ul.socialaccount_providers:hover {
+    background-color: var(--color-light-pink);
+}
+
+.socialaccount_provider.google {
+    background-image: url(/media/google-icon.svg);
+    background-clip: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+.allauth .form-check-input:checked {
+    background-color: #b3bcc9;
+    border-color: #b3bcc9;
 }

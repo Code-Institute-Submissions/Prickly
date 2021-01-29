@@ -64,6 +64,9 @@ class Product(models.Model):
         Raise a validation error if release date is set in past,
         price is set to 0 and below or both
         """
+        print(self.price)
+        if not self.price:
+            raise ValidationError(_("..."))
         if self.price <= 0 and self.release_date.day < timezone.now().day:
             raise ValidationError(_("Price has to be a positive number and "
                                     "Release Date can't be in past."))
