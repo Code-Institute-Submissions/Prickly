@@ -9,6 +9,7 @@
     --color-light-steel: #b3bcc9;
     --color-light-pink: #e5dbdc;
     --color-light-green: #a9c6c4;
+    --color-pink: #cec6cc;
     --color-steel: #75869b;
     --color-green: #5e7a8a;
     --font-headings: 'Bodoni Moda', serif;
@@ -22,7 +23,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     color: var(--color-main);
 }
-
+/* Text color styles */
 .txt-darkblue {
     color: var(--color-main);
 }
@@ -35,19 +36,30 @@ body {
     color: var(--color-light-green);
 }
 
+.txt-pink {
+    color: var(--color-pink);
+}
+
 .clr-steel {
     background-color: var(--color-light-steel);
 }
-
+/* Heading styles */
 .font-heading {
     font-family: var(--font-headings);
     font-weight: 600;
 }
 
+.heading-green {
+    background-color: var(--color-light-green);
+    background: linear-gradient(transparent, transparent 50%,
+                                var(--color-light-green) 50%, var(--color-light-green) 90%,
+                                transparent 0);
+}
+
 .font-accent {
     font-family: var(--font-accent);
 }
-
+/* Buttons */
 .button {
     display: inline-block;
     line-height: 1.5;
@@ -76,6 +88,7 @@ body {
 .button-green:hover {
     background-color: var(--color-light-green);
 }
+
 
 /* ---------- HEADER ---------- */
 

@@ -1,3 +1,4 @@
+/* Hero image */
 .home-page {
     height: 100vh;
     background: url('../../../../media/home-cactus.jpeg') no-repeat center top;
@@ -10,6 +11,7 @@
     height: 95%;
 }
 
+/* strike-through */
 .cacti-heading:after {
     background-color: var(--color-light-pink);
     content: "";
@@ -21,8 +23,9 @@
     margin-left: -4rem;
   }
 
+  /* Colorful line dividers */
   .colored-lines {
-      height: 1rem;
+    height: 1rem;
     background-color: var(--color-light-steel);
     background: linear-gradient(var(--color-light-pink),
                 var(--color-light-pink) 20%,
@@ -33,15 +36,36 @@
                 var(--color-green) 60%,
                 var(--color-green) 80%,
                 var(--color-light-green) 0);
+    margin-top: -3rem;
   }
 
+
+.steps-container {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.steps-container.txt-steel, .steps-container.txt-pink {
+    margin-top: 0;
+}
+
+.steps-container>img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+
 @media (min-width: 768px) {
-    /* .home-page {
-        top: 0;
-    } */
     .cacti-heading:after {
         height: 5px;
         width: 6rem;
         margin-left: -6rem;
+    }
+
+    .steps-container.txt-steel {
+        margin-top: 7rem;
+    }
+    .steps-container.txt-pink {
+        margin-top: 14rem;
     }
 }
