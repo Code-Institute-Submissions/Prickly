@@ -73,6 +73,22 @@
     top: 4rem;
 }
 
+.insta-pic-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+
+}
+
+.insta-pic-container img {
+    max-width: 100%;
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+
+}
+
+
 @media (max-width: 350px){
     .new-this-month-img2{
         display: none;

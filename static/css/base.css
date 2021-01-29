@@ -63,6 +63,14 @@ body {
                                 transparent 0);
 }
 
+.heading-steel {
+    background-color: var(--color-light-steel);
+    background: linear-gradient(transparent, transparent 50%,
+                                var(--color-light-steel) 50%, var(--color-light-steel) 90%,
+                                transparent 0);
+}
+
+
 .font-accent {
     font-family: var(--font-accent);
 }
