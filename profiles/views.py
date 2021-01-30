@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.db.models import Max
 from django.contrib import messages
 from memberships.models import Membership
 from .models import Profile
 from .forms import ProfileForm
+from checkout.models import Order, OrderLine
 
 
 def profile(request):
@@ -31,4 +34,20 @@ def profile(request):
         'on_profile': True,
     }
 
+    return render(request, template, context)
+
+
+@login_required
+def order_history(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    orders = Order.objects.filter(user_profile=profile).order_by('-order_date')
+    order_items = OrderLine.objects.all()
+    last_order_id = orders.aggregate(Max('pk'))
+
+    template = 'profiles/order_history.html'
+    context = {
+        'orders': orders,
+        'last_order_id': last_order_id,
+        'order_items': order_items,
+    }
     return render(request, template, context)
