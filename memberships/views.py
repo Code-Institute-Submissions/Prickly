@@ -48,6 +48,8 @@ def membership_type(request):
 
     membership_type = request.POST.get('membership_type')
     request.session['membership'] = membership_type
+    if request.user.is_authenticated:
+        return redirect(reverse('membership_checkout'))
 
     return redirect(reverse('account_signup'))
 

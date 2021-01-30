@@ -127,7 +127,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/memberships/membership_checkout/'
+LOGIN_REDIRECT_URL = '/profile/'
+# LOGIN_REDIRECT_URL = '/memberships/membership_checkout/'
 
 # Social providers
 SOCIALACCOUNT_PROVIDERS = {
