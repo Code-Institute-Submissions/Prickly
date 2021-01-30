@@ -24,6 +24,15 @@ def add_item_to_cart(request, product_id):
     redirect_url = request.POST.get('redirect_url')
     cart = request.session.get('cart', {})
 
+    if qty > 10:
+        messages.error(request, 'Sorry big spender, only 10 '
+                                'items per person :)')
+        return redirect(redirect_url)
+    elif qty < 1:
+        messages.error(request, 'Please make sure you are '
+                                'not adding 0 or negative amount.')
+        return redirect(redirect_url)
+
     # Check if product is already in the cart
     if product_id in list(cart.keys()):
         # If in the cart, increase quantity
