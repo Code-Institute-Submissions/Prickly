@@ -9,6 +9,8 @@
         <p class="fs-6">Looks like the page you're looking for does not exist.</p>
         <p>Keep calm and buy a cactus.</p>
         <img src="{{ MEDIA_URL }}calm_cactus.jpeg" alt=" An image of a cactus against a pink background" class="not-found-img">
-        <a href="{% url 'products' %}" class="button button-pink">Buy something</a>
+        <div class="my-5">
+            <a href="{% url 'products' %}" class="button button-pink">Buy something</a>
+        </div>
     </div>
 {% endblock %}
