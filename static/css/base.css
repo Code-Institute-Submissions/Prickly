@@ -439,3 +439,9 @@ ul.socialaccount_providers {
     background-color: #b3bcc9;
     border-color: #b3bcc9;
 }
+
+/* ---------- 404 page --------- */
+
+.not-found-img {
+    max-width: 300px;
+}
