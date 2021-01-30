@@ -3,6 +3,38 @@
 
 {% block content%}
 <div class="container">
+    {% if order_details %}
+    <a class="button button-steel mt-3" onclick="history.back(-1)">
+        Back
+    </a>
+    <div class="text-center mb-5">
+        <h2 class="mb-5 mt-3 text-uppercase">Order #: {{ order.order_number }}</h2>
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <p class="mb-1 text-uppercase">Ordered</p>
+                <p><span class="clr-pink px-1">{{ order.order_date|date:"M d, Y" }}</span></p>
+            </div>
+            <div class="col-12 col-sm-4">
+                {% if order.dispatch_date %}
+                    <p class="mb-1 text-uppercase">Dispatched</p>
+                    <p><span class="clr-pink px-1">{{ order.dispatch_date|date:"M d, Y" }}</span></p>
+                {% else %}
+                    <p class="mb-1 text-uppercase">Estimated Dispatch</p>
+                    <p><span class="clr-pink px-1">{{ order.est_dispatch_dte|date:"M d, Y" }}</span></p>
+                {% endif %}
+            </div>
+            <div class="col-12 col-sm-4">
+                {% if order.delivery_date %}
+                    <p class="mb-1 text-uppercase">Delivered</p>
+                    <p><span class="clr-pink px-1">{{ order.delivery_date|date:"M d, Y" }}</span></p>
+                {% else %}
+                    <p class="mb-1 text-uppercase">Estimated Delivery</p>
+                    <p><span class="clr-pink px-1">{{ order.est_deliery_dte|date:"M d, Y" }}</span></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% else %}
     <div class="text-center mb-5">
         <h1 class="my-5 text-uppercase">You're Awesome</h1>
         <p>
@@ -13,6 +45,7 @@
             write a review, we would love to hear from you.
         </p>
     </div>
+    {% endif %}
     <!-- Order Item Information -->
     <div class="row mx-auto border px-0 py-3 p-sm-3 mb-5" style="max-width: 720px;">
         <h4 class="text-uppercase">Items</h4>

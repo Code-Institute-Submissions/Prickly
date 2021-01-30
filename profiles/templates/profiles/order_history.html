@@ -29,7 +29,7 @@
       <div id="collapse-{{ order.pk }}" class="accordion-collapse collapse {% if order.pk == last_order_id.pk__max %}show{% endif %}" aria-labelledby="heading-{{ order.pk }}" data-bs-parent="#orderHistoryCollapse">
         <div class="accordion-body">
             <div class="text-center mb-3">
-                <a href="£" class="button button-green">Order Details</a>
+                <a href="{% url 'order_details' order.pk %}" class="button button-green">Order Details</a>
             </div>
             <div class="container row order_items m-auto">
                 {% for item in order_items %}

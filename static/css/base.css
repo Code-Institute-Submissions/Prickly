@@ -54,6 +54,10 @@ body {
 .clr-steel {
     background-color: var(--color-light-steel);
 }
+
+.clr-pink {
+    background-color: var(--color-light-pink);
+}
 /* Heading styles */
 .font-heading {
     font-family: var(--font-headings);
