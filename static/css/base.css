@@ -108,12 +108,24 @@ body {
     text-transform: uppercase;
 }
 
+
 .button:focus {
     outline: none;
 }
 
 .button:hover {
     color: var(--color-main);
+}
+
+.button-disabled {
+    cursor: not-allowed;
+    color: var(--color-steel);
+    border-color: var(--color-light-steel);
+}
+
+.button-disabled:hover {
+    background-color: transparent;
+    color: var(--color-steel);
 }
 
 .button-green {

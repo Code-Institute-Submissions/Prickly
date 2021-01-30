@@ -35,7 +35,10 @@
         </div>
     </div>
     {% else %}
-    <div class="text-center mb-5">
+    <a href="{% url 'products' %}" class="button button-steel mt-3"">
+        Back to the Shop
+    </a>
+    <div class="text-center mb-5 mt-3">
         <h1 class="my-5 text-uppercase">You're Awesome</h1>
         <p>
             For your order <span class="fs-5">{{ order.order_number }}</span> you pricked out some amazing items.

@@ -73,16 +73,16 @@
             <div class="row pb-5">
                 <!-- Button to bring user back to shopping -->
                 <div class="col-12 col-sm text-center text-sm-end py-2">
-                    <a href="{% url 'products' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">More Shopping</a>
+                    <a href="{% url 'products' %}" class="button button-steel">More Shopping</a>
                 </div>
                 <!-- Button to bring user to the checkout -->
                 <div class="col-12 col-sm text-center text-sm-start py-2">
                     <!-- If delivery type has been selected and added to session, use checkout view -->
                     {% if request.session.delivery %}
-                        <a href="{% url 'checkout' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                        <a href="{% url 'checkout' %}" class="button button-green">Checkout</a>
                     <!-- If delivery session var does not exist, bring the user to delivery view and add it to the session var -->
                     {% else %}
-                        <a href="{% url 'delivery' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                        <a href="{% url 'delivery' %}" class="button button-green">Checkout</a>
                     {% endif %}
                 </div>
             </div>
@@ -92,7 +92,9 @@
     {% else %}
         <!-- If the cart is empty, provide user with a button to the shop -->
         <div class="col text-center mt-5">
-            <a href="{% url 'products' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">Buy something</a>
+            <p><i class="fas fa-shopping-cart fs-1"></i></p>
+            <h3 class="my-4">It looks like your cart is empty :(</h3>
+            <a href="{% url 'products' %}" class="button button-pink">Buy something</a>
         </div>
     {% endif %}
 {% endblock %}

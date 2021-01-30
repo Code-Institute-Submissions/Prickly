@@ -75,16 +75,16 @@
                         {% csrf_token %}
                         <input type="hidden" value="{{ membership.name }}" name="membership_type">
                         {% if membership.name == user_membership %}
-                            <button class="btn btn-outline-secondary text-uppercase rounded-0" disabled>Subscribed</button>
+                            <button class="button button-disabled" disabled>Subscribed</button>
                         {% else %}
-                            <button class="btn btn-outline-secondary text-uppercase rounded-0">Change</button>
+                            <button class="button button-green">Change</button>
                         {% endif %}
                     </form>
                 {% else %}
                     <form action="{% url 'membership_type' %}" method="POST" class="pb-5">
                         {% csrf_token %}
                         <input type="hidden" value="{{ membership.name }}" name="membership_type">
-                        <button class="btn btn-outline-secondary text-uppercase rounded-0">Prick Me</button>
+                        <button class="button button-green">Prick Me</button>
                     </form>
                 {% endif %}
             </div>

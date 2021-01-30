@@ -121,6 +121,9 @@ def membership_change(request):
     if not profile.membership:
         return redirect(reverse('memberships'))
 
+    if not request.POST.get('membership_type'):
+        return redirect(reverse('memberships'))
+
     all_memberships = Membership.objects.all()
     membership_type = request.POST.get('membership_type')
     request.session['membership'] = membership_type

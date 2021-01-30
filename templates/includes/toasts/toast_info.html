@@ -60,7 +60,7 @@
                 </p>
                 <div class="row">
                     <div class="col text-end">
-                        <a href="{% url 'cart' %}" class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase">
+                        <a href="{% url 'cart' %}" class="button button-steel">
                             View cart
                         </a>
                     </div>
@@ -68,9 +68,9 @@
                         <!-- Bring the user to checkout if session delivery variable 
                             exist, otherwise bring the user to delivery view and add it to the session -->
                         {% if request.session.delivery %}
-                            <a href="{% url 'checkout' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                            <a href="{% url 'checkout' %}" class="button button-green">Checkout</a>
                         {% else %}
-                            <a href="{% url 'delivery' %}" class="btn btn-outline-secondary rounded-0 text-uppercase">Checkout</a>
+                            <a href="{% url 'delivery' %}" class="button button-green">Checkout</a>
                         {% endif %}
                     </div>
                 </div>

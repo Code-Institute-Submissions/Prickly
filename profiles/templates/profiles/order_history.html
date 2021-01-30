@@ -36,9 +36,9 @@
                     {% if item.order.order_number == order.order_number %}
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-auto text-center">
                               {% if item.product.main_pic %}
-                                <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}">
+                                <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" class="img-fluid">
                               {% else %}
-                                <img src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus">
+                                <img src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus" class="img-fluid">
                               {% endif %}
                                 <p class="text-uppercase mb-1">{{ item.product.name }}</p>
                                 <p><strong>€ {{ item.product.price }}</strong> x {{ item.quantity }}</p>
