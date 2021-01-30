@@ -1,13 +1,13 @@
  <!-- Reviews container -->
-<div class="container" id="reviews">
-    <h3 class="text-uppercase text-center mt-5 mb-3">Reviews</h3>
+<div class="container text-center" id="reviews">
+    <h2 class="font-heading heading-pink d-inline-block p-1 mt-5 mb-3">Reviews</h2>
     <div class="mb-2 text-center">
         <span class="rating-stars" data-value="{{ product.avg_rating }}"></span> <span>({{ reviews.count }})</span>
     </div>
     {% if user.is_authenticated %}
     <div class="text-center mt-3">
         <!-- A button that triggers a review modal where a user can add a review of given product -->
-        <button type="button" class="btn btn-outline-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#reviewModal">
+        <button type="button" class="button button-pink" data-bs-toggle="modal" data-bs-target="#reviewModal">
             Review
         </button>
         <!-- Modal containing reviews that appears when a button is clicked -->

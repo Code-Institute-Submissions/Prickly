@@ -3,20 +3,21 @@
 
 
 {% block content %}
-<div class="container">
-    <h2 class="my-5 text-center">
-        <span class="text-uppercase">
-            <!-- Display name based on user selected membership -->
-            {% if membership.name == 'Supreme' %}
-                'The Prickly {{ membership.name }}'
-            {% else %}
-                'The {{ membership.name }} Prickly'
-            {% endif %}
-            membership
-        </span>
-    </h2>
+<div class="container text-center">
+    <h2 class="font-heading heading-steel d-inline-block p-1 my-5">Your Membership</h2>
     <div class="row">
         <div class="col-12 col-md-6 border m-auto p-3 text-center">
+                <h4 class="my-3 text-center">
+                    <span class="text-uppercase">
+                        <!-- Display name based on user selected membership -->
+                        {% if membership.name == 'Supreme' %}
+                            'The Prickly {{ membership.name }}'
+                        {% else %}
+                            'The {{ membership.name }} Prickly'
+                        {% endif %}
+                        membership
+                    </span>
+                </h4>
             <div style="height: 15rem;" class="text-center">
                 <img src="{{ membership.pic.url }}" alt="Cactus logo for {{ membership.name}} Prickly memebrship" style="height: 12rem;">
             </div>
