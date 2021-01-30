@@ -4,9 +4,9 @@
 {% block content%}
 <div class="container">
     {% if order_details %}
-    <a class="button button-steel mt-3" onclick="history.back(-1)">
+    <button class="button button-steel mt-3" onclick="history.back(-1)">
         Back
-    </a>
+    </button>
     <div class="text-center mb-5">
         <h2 class="mb-5 mt-3 text-uppercase">Order #: {{ order.order_number }}</h2>
         <div class="row">

@@ -159,7 +159,8 @@
             {% if change_membership %}
                 <p class="text-danger">This will cancel your current membership and subscribe you to the {{ membership.name }} plan.</p>
                 <div>
-                    <a href="{% url 'membership_update' %}" class="text-uppercase btn btn-outline-warning rounded-0">Confirm</a>
+                    <a class="button button-steel" href="{% url 'products' %}">Cancel</a>
+                    <a href="{% url 'membership_update' %}" class="button button-green">Confirm</a>
                 </div>
             <!-- If user has selected other memberships as his first paid memebrship, re-direct to the checkout page -->
             {% else %}
