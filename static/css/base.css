@@ -9,9 +9,9 @@
     --color-light-steel: #b3bcc9;
     --color-light-pink: #e5dbdc;
     --color-light-green: #a9c6c4;
-    --color-pink: #cec6cc;
+    --color-pink: #9e919a;
     --color-steel: #75869b;
-    --color-green: #5e7a8a;
+    --color-green: #698b89;
     --font-headings: 'Bodoni Moda', serif;
     --font-accent: 'Caveat', cursive;
 }
@@ -33,7 +33,7 @@ body {
 }
 
 .txt-green {
-    color: var(--color-light-green);
+    color: var(--color-green);
 }
 
 .txt-pink {
