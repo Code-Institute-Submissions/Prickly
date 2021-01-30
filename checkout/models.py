@@ -54,7 +54,7 @@ class Order(models.Model):
                                          "'+111111111' and no longer that "
                                          "15 digits.")
     phone_number = models.CharField(validators=[phone_regex], max_length=16,
-                                    blank=True)
+                                    default=0)
     email = models.EmailField(max_length=254)
     address_line_1 = models.CharField(max_length=100,)
     address_line_2 = models.CharField(max_length=100, null=True, blank=True)
@@ -117,7 +117,7 @@ class Order(models.Model):
         self.full_name = f'{self.first_name} {self.last_name}'
 
         # If logged in user, calculate delivery amount and discount
-        if self.user_profile:
+        if self.user_profile and self.user_profile.membership:
             # Get order count for the user
             user_orders_count = Order.objects.filter(
                 user_profile=self.user_profile).count()

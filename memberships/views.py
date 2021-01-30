@@ -101,7 +101,13 @@ def user_membership_view(request):
     """
     Displays user's membership view with details
     """
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = Profile.objects.get(user=request.user)
+
+    if not profile.membership:
+        messages.error(request, "You haven't subscribed to a membership yet. "
+                                " Choose one and join the Prickly fam")
+        return redirect(reverse('memberships'))
+
     membership = get_object_or_404(Membership, name=profile.membership)
     context = {
         'membership': membership,
