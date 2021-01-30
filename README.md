@@ -2,7 +2,7 @@
 <h1 align="center">PRICKLY</h1>
 <h1 align="center"><img src="" /></h1>
 
- <a href=""><img src="" width="25px" /></a> :point_left: Live website
+ <a href="https://prickly-app.herokuapp.com/"><img src="./media/logo-plain.pnd" width="25px" /></a> :point_left: Live website
 
   <a href="https://github.com/LigaMoon/Prickly"><img src="./readme_docs/githublogo.png" width="25px" /></a> :point_left: GitHub Repository
  
