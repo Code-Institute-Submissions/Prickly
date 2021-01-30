@@ -45,23 +45,13 @@
                     <div class="col-12 col-lg-4 text-center px-0">
                         <p class="mb-0 fw-bold text-uppercase">{{ review.title }}</p>
                         <small><p class="rating-stars" data-value="{{ review.rating }}"></p></small>
-                    </div>
-                    <!-- Description, user and added date -->
-                    <div class="col-12 col-lg-8">
-                        <p>"{{ review.description }}"</p>
-                        <div class="row">
                             <!-- For reviews written by the logged in user show edit and delete bittons -->
                             {% if user.is_authenticated and user.get_username == review.user.user.username %}
-                                <div class="col-6 d-flex align-items-end">
-                                    <!-- Edit button, triggers modal with reviews details to be edited -->
-                                    <a href="" class="p-1 text-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="fas fa-pen"></i>
-                                    </a>
-                                    <!-- Delete button -->
-                                    <a href="{% url 'delete_review' review.pk %}" class="p-1 text-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                            <div class="col m-auto text-center mb-2">
+                                <!-- Edit button, triggers modal with reviews details to be edited -->
+                                <a href="" class="p-1 text-secondary button text-decoration-none" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    <i class="fas fa-pen"></i>
+                                </a>
                                 <!-- Modal containing specific review, allows user to edit it -->
                                 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -87,10 +77,40 @@
                                     </div>
                                     </div>
                                 </div>
-                            {% else %}
+
+                                <!-- Delete button, triggers modal to confirm deletion -->
+                                <button  class="p-1 text-danger text-decoration-none button" type="button" data-bs-toggle="modal" data-bs-target="#deleteReview">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                                 
-                            {% endif %}
-                            <div class="col-6">
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteReview" tabindex="-1" aria-labelledby="deleteUserReview" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content rounded-0">
+                                        <div class="modal-header text-uppercase">
+                                            <h5 class="modal-title" id="deleteUserReview">Are you sure?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            This will delete your (hopefully nice) review forever.
+                                            No takesie-backsies!
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="button button-steel" data-bs-dismiss="modal">Cancel</button>
+                                        <a href="{% url 'delete_review' review.pk %}" type="button" class="button button-pink">Delete</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+                    </div>
+                    <!-- Description, user and added date -->
+                    <div class="col-12 col-lg-8">
+                        <p>"{{ review.description }}"</p>
+                        <div class="row">
+                            <div class="col">
                                 <p class="text-end fst-italic text-secondary mb-0">-{{ review.user }}</p>
                                 <p class="text-secondary text-end mb-0"><small>{{ review.date_posted|date:"M d, Y" }}</small></p>
                             </div>
