@@ -10,9 +10,15 @@
         <div class="bag-notification-wrapper">
             {% for item in cart_items %}
                 <div class="row px-0">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100" src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}">
-                    </div>
+                    {% if item.product.main_pic %}
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100" src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}">
+                        </div>
+                    {% else %}
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100" src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus">
+                        </div>
+                    {% endif %}
                     <div class="col-8 col-sm-9 row px-0 my-auto text-center">
                         <div class="col-12 col-sm-6">
                             <p class="my-0"><strong>{{ item.product.name }}</strong></p>

@@ -35,10 +35,14 @@
                 {% for item in order_items %}
                     {% if item.order.order_number == order.order_number %}
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-auto text-center">
+                              {% if item.product.main_pic %}
                                 <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}">
+                              {% else %}
+                                <img src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus">
+                              {% endif %}
                                 <p class="text-uppercase mb-1">{{ item.product.name }}</p>
                                 <p><strong>€ {{ item.product.price }}</strong> x {{ item.quantity }}</p>
-                                <div class="order-review-buttons">
+                                <div class="order-review-buttons mb-5 mb-sm-2">
                                     <a href="{% url 'product_item' item.product.pk %}#reviews" class="button button-steel">Review</a>
                                     <a href="{% url 'product_item' item.product.pk %}" class="button button-steel">Buy Again</a>
                                 </div>

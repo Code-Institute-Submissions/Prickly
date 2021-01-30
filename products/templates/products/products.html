@@ -67,9 +67,13 @@
             <!-- For each Product display a card with image, title, rating, price and button to buy the item -->
             {% for product in products %}
                 <div class="col-sm-6 col-md-4 col-xl-3">
-                    <div class="card my-3 mx-auto rounded-0" style="max-width: 300px;">
+                    <div class="card my-3 mx-auto rounded-0 text-center" style="max-width: 300px;">
                         <a href="{% url 'product_item' product.pk %}">
-                            <img class="img-fluid" src="{{ product.main_pic.url }}" alt="An image of a {{ product.name }}">
+                            {% if product.main_pic %}
+                                <img class="img-fluid" src="{{ product.main_pic.url }}" alt="An image of a {{ product.name }}">
+                            {% else %}
+                                <img class="img-fluid" src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus">
+                            {% endif %}
                         </a>
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ product.name }}</h5>
@@ -87,11 +91,7 @@
                                 <!-- Get path to redirect user back -->
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                 <!-- Display Pick a Color button if multiple coors available, otherwise display Buy Now -->
-                                {% if product.many_colors == 'N' %}
-                                    <button href="" type="submit" class="btn btn-outline-secondary btn-sm rounded-0">Buy Now</button>
-                                {% else %}
-                                    <a href="{% url 'product_item' product.pk %}" class="btn btn-outline-secondary btn-sm rounded-0">Pick a Color</a>
-                                {% endif %}
+                                <button href="" type="submit" class="btn btn-outline-secondary btn-sm rounded-0">Buy Now</button>
                             </form>  
                         </div>
                     </div>

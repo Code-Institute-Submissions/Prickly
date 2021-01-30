@@ -53,9 +53,17 @@
             <div class="row text-center">
                 <!-- Item image -->
                 <div class="col-12 col-sm-4 col-md-3">
-                    <div class="text-sm-end">
-                        <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
-                    </div>
+                    {% if item.product.main_pic %}
+                        <div class="col text-sm-end">
+                            <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
+                            <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
+                        </div>
+                    {% else %}
+                        <div class="col text-sm-end">
+                            <img src="{{ MEDIA_URL }}step2.png" alt="An icon of a cactus" style="height: 150px;">
+                            <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
+                        </div>
+                    {% endif %}
                 </div>
                 <!-- Item details -->
                 <div class="col-9 col-sm-5 px-0 m-auto row">

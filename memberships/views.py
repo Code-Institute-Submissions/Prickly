@@ -62,6 +62,11 @@ def membership_checkout(request):
     # Retrieve data for all memberships
     all_memberships = Membership.objects.all()
 
+    # Check if user already has a memership and got to this
+    # page by accident, then re-direct to change site
+    profile = Profile.objects.get(user=request.user)
+    if profile.membership:
+        return redirect(reverse('membership_change'))
     # If user is updating selected membership, the
     # memberhip_type to the new value
     if request.GET.get('membership-new'):

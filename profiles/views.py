@@ -8,6 +8,7 @@ from .forms import ProfileForm
 from checkout.models import Order, OrderLine
 
 
+@login_required
 def profile(request):
     """ A view to return the profile page """
     profile = get_object_or_404(Profile, user=request.user)
