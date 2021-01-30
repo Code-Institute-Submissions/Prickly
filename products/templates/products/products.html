@@ -36,31 +36,31 @@
 
     <!-- Product Item container -->
     <div class="container">
-        <div class="text-end d-flex justify-content-end">
+        <div class="text-end d-flex justify-content-end sort-section">
             <!-- Sorting Icon container -->
             <div class="sort-width" id="sort-container">
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=name" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=name" class="mx-1 p-1">
                     <i class="fas fa-sort-alpha-down"></i>
                 </a>
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=-name" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-name" class="mx-1 p-1">
                     <i class="fas fa-sort-alpha-up"></i>
                 </a>
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=added_date" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=added_date" class="mx-1 p-1">
                     <i class="far fa-calendar-alt"></i><i class="fas fa-long-arrow-alt-down"></i>
                 </a>
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=-added_date" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-added_date" class="mx-1 p-1">
                     <i class="far fa-calendar-alt"></i><i class="fas fa-long-arrow-alt-up"></i>
                 </a>
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=price" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=price" class="mx-1 p-1">
                     <i class="far fa-money-bill-alt"></i><i class="fas fa-long-arrow-alt-down"></i>
                 </a>
-                <a href="{% url 'products' %}?category={{ active_category }}&sort=-price" class="mx-2">
+                <a href="{% url 'products' %}?category={{ active_category }}&sort=-price" class="mx-1 p-1">
                     <i class="far fa-money-bill-alt"></i><i class="fas fa-long-arrow-alt-up"></i>
                 </a>
             </div>
             <!-- Trigger element that hides/displays sorting icons -->
             <p id="sort-trigger">
-                <i class="fas fa-filter border rounded-0 p-1"></i>
+                <i class="fas fa-filter rounded-0 p-1"></i>
             </p>
         </div>
         <div class="row">
