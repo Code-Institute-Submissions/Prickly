@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category, Color
@@ -16,6 +17,7 @@ def all_products(request):
     products = Product.objects.all()
     categories = Category.objects.all()
     item_category = 'All'
+    media_url = settings.MEDIA_URL
 
     # Filter objects by the selected category and save selected category
     if request.GET:
@@ -50,6 +52,7 @@ def all_products(request):
         'products': products,
         'categories': categories,
         'active_category': item_category,
+        'media_url': media_url,
     }
 
     return render(request, 'products/products.html', context)

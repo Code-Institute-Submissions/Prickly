@@ -1,7 +1,9 @@
 const shopButton = document.querySelectorAll('.shop-button');
+const mediaUrl = document.querySelector('#id_media_url').innerHTML.slice(1, -1);
 shopButton.forEach(btn => {
     const categoryName = btn.innerHTML.toLowerCase();
-    btn.style.backgroundImage = `url(/media/${categoryName}-btn.png)`;
+    path = mediaUrl + categoryName;
+    btn.style.backgroundImage = `url(${mediaUrl}${categoryName}-btn.png)`;
 });
 
 
