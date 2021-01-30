@@ -97,21 +97,58 @@ Features worth doing
 ### User Stories
 
 - #### Common user stories
-    1. xxx
+    1. I want to easily navigate the site so that I can find what I'm looking for quickly.
+    1. I want to be able to contact the company if I'm experiencing an issue.
+    1. I want the website to be readable on all screen sizes.
 
-- #### As a frequent site user I want to
+    
+- #### As a first-time visitor I want to
+    1. Easily understand the purpose of the site so that I can decide whether I want to invest my time into it.
+    1. Understand the benefits of becoming a member/registering for the site so that I can decide if I want to.
+    1. View and compare all memberships so that I can decide what membership if any, I want to subscribe to.
+    1. Easily find where I can register for the site so that I don't waste my time looking for it and I'm not discouraged not to sign up.
+    1. Be able to quickly register and start using the site so that I can have my account and receive the benefits.
 
 - #### As a casual shopper I want to
+    1. Navigate to the shop page easily so that I can find what I need quickly.
+    1. Filter all products by category so that I can quickly have oversight of the products that I'm interested in.
+    1. Sort all items by date added, name or price so that I can identify new products, products that fit my budget, and find easier what I'm looking for.
+    1. Search for an item from anywhere on the site so that I can easily find what I'm looking for.
+    1. Be able to see the price of the item without clicking into it so that I can easily decide if I can afford the item.
+    1. Be able to quickly add the item without having to click on the product so that I can save time if I know that I want to purchase the item.
+    1. Be able to see more details about the product so that I can make an educated decision of whether to purchase the item.
+    1. Select the quantity of the product so that I can choose how many products I'm purchasing and not have to add the same item multiple times.
+    1. Be able to see the rating and reviews to allow me to judge if the item is worth the price based on other feedback.
+    1. Leave a review so that I can provide my feedback and experience to the company and other shoppers.
+    1. Edit my review so that I can change it in case I've changed my mind or made a mistake while adding the review.
+    1. Delete my review so that I can remove it in case my review is no longer relevant or I don't want to keep it up.
+    1. See my shopping cart as items are added to know how the total without having to go to another page.
+    1. Edit the quantity of added items so that I don't have to remove and add items again.
+    1. Remove added items easily so that I can purchase only the items that I want.
+    1. See my shopping cart before checkout so that I can make changes before purchase.
+    1. See all charges included before making a payment so that I can decide if I want to proceed with the purchase.
+    1. View my order as I'm checking out to be able to confirm what I'm purchasing.
+    1. easily add my details without too many steps so that I don't get discouraged by the lengthy checkout process.
+    1. Securely add my payment information so that I feel safe giving my card details.
+    1. See Order confirmation and receive confirmation e-mail so that I have proof of purchase and order number.
 
-- #### As a 
 
-- #### As a first time visitor
-    1. xxx
-    
-- #### As a returning user
-    1. xxx
+- #### As a member I want to
+    1. Log in and sign out quickly and easily so that I can access or close my account.
+    1. See my personal account information so that I can manage my details.
+    1. See my membership site so that I can verify my benefits and the price of the membership.
+    1. Change the membership easily so that I can control what benefits and expenses I'm having.
+    1. Cancel paid membership so that I don't have to pay for it.
+    1. See my order history so that I can have the confirmation and details for all of them in one place and manage them easily.
+    1. Can see the estimated date of delivery so that I can arrange to receive the package.
+    1. Recieve benefits as a member so that I get my money's worth.
 
-- #### As an admin
+- #### As an admin I want to
+    1. Be able to add an item so that I can update the products on the site.
+    1. Be able to edit and remove items so that I can customize items on the site and offer new deals to customers depending on the demand and new trends.
+    1. Add and edit new memberships so that I can customize the price and benefits depending on the popularity of the membership.
+    1. Add and edit new delivery types to accommodate shipping to more countries.
+    1. Have oversight of the user data so that if anyone is experiencing an issue I can investigate and resolve the issue.
 
 
 ## Scope Plane
@@ -142,11 +179,6 @@ Features worth doing
     - <details>
         <summary>Memberships</summary>
         <img src="./readme_docs/wireframes/Memberships.png"/>
-    </details>
-
-    - <details>
-        <summary>Why Cacti</summary>
-        <img src="./readme_docs/wireframes/Why_Cacti.png"/>
     </details>
 
     - <details>
@@ -183,22 +215,6 @@ Features worth doing
         <summary>My Details</summary>
         <img src="./readme_docs/wireframes/About_Me.png"/>
     </details>
-
-    - <details>
-        <summary>Contact Us</summary>
-        <img src="./readme_docs/wireframes/Contact_Us.png"/>
-    </details>
-
-    - <details>
-        <summary>Shipping and Returns</summary>
-        <img src="./readme_docs/wireframes/Shipping_Returns.png"/>
-    </details>
-
-    - <details>
-        <summary>FAQ</summary>
-        <img src="./readme_docs/wireframes/FAQ.png"/>
-    </details>
-
 
 
 ## Surface Plane
