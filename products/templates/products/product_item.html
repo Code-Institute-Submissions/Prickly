@@ -12,9 +12,9 @@
         <div class="row text-center">
             <div class="col-12 col-md-6">
                 {% if product.main_pic %}
-                    <img src="{{ product.main_pic.url }}" alt="The main picture of {{ product.name }}">
+                    <img src="{{ product.main_pic.url }}" alt="The main picture of {{ product.name }}" class="img-fluid">
                     {% else %}
-                    <img src="{{ MEDIA_URL }}step2.png" alt="The main picture of An icon of a cactus">
+                    <img src="{{ MEDIA_URL }}step2.png" alt="The main picture of An icon of a cactus" class="img-fluid">
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 px-3 px-md-3 px-lg-5">

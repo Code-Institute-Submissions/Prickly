@@ -35,8 +35,8 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
                             <div class="col-12 col-md-8">
-                                <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
-                                <p>€ {{ item.product.price }}</p>
+                                <p class="fw-bold text-uppercase mb-1">{{ item.product.name }}</p>
+                                <p><small>€ {{ item.product.price }} x {{ item.quantity }}</small> </p>
                             </div>
                             <div class="col-12 col-md-4">
                                 <p class="fs-5">€ {{ item.product_total }}</p>
@@ -62,10 +62,10 @@
                 {% for item in cart_items %}
                     <div class="row text-center">
                         <!-- Item image -->
-                        <div class="col-12 col-sm-6 col-md-3 row">
+                        <div class="col-12 col-sm-6 col-xl-3 row">
                             {% if item.product.main_pic %}
                                 <div class="col text-sm-end">
-                                    <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" style="height: 200px;">
+                                    <img src="{{ item.product.main_pic.url }}" alt="An image of {{ item.product.name }}" class="img-fluid">
                                     <!-- <span class="badge rounded-pill item-qty">{{ item.quantity }}</span> -->
                                 </div>
                             {% else %}
@@ -76,12 +76,12 @@
                             {% endif %}
                         </div>
                         <!-- Item details -->
-                        <div class="col-12 col-sm-6 col-md-9 pt-sm-5 pb-5 row">
-                            <div class="col-12 col-md-8">
-                                <p class="fw-bold text-uppercase">{{ item.product.name }}</p>
-                                <p>€ {{ item.product.price }}</p>
+                        <div class="col-12 col-sm-6 col-xl-9 pt-sm-5 pb-5 row">
+                            <div class="col-12 col-xl-8">
+                                <p class="fw-bold text-uppercase mb-1">{{ item.product.name }}</p>
+                                <p><small>€ {{ item.product.price }} x {{ item.quantity }}</small> </p>
                             </div>
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-xl-4">
                                 <p class="fs-5">€ {{ item.product_total }}</p>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <!-- Dispaly cart items unless user is on cart page -->
-{% if not on_cart_page and gradn_total %}
+{% if not on_cart_page and grand_total > 0 %}
 <div class="toast" role="alert" aria-live=assertive data-autohide="false">
     <div class="toast-header">
         <strong class="mr-auto text-uppercase">My cart items</strong>
