@@ -112,8 +112,8 @@ def membership_change(request):
     Handles membership change and adding selected memebrship
     to the session
     """
-
-    if not request.user.membership:
+    profile = Profile.objects.get(user=request.user)
+    if not profile.membership:
         return redirect(reverse('memberships'))
 
     all_memberships = Membership.objects.all()
@@ -137,7 +137,7 @@ def membership_update(request):
     and our database too
     """
 
-    if not Profile.object.get(user=request.user).membership:
+    if not Profile.objects.get(user=request.user).membership:
         return redirect(reverse('memberships'))
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
