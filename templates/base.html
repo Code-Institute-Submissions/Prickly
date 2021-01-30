@@ -71,7 +71,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="accountDropdown">
 							{% if request.user.is_authenticated %}
-							<li><a class="dropdown-item" href="#">Order History</a></li>
+							<li><a class="dropdown-item" href="{% url 'order_history' %}">Order History</a></li>
 							<li><a class="dropdown-item" href="{% url 'user_membership' %}">My Membership</a></li>
 							<li><a class="dropdown-item" href="{% url 'profile' %}">My Details</a></li>
 							<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
@@ -138,7 +138,7 @@
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="accountDropdown">
 								{% if request.user.is_authenticated %}
-									<li><a class="dropdown-item" href="#">Order History</a></li>
+									<li><a class="dropdown-item" href="{% url 'order_history' %}">Order History</a></li>
 									<li><a class="dropdown-item" href="{% url 'user_membership' %}">My Membership</a></li>
 									<li><a class="dropdown-item" href="{% url 'profile' %}">My Details</a></li>
 									<li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
