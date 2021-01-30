@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block add_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+
+{% block add_title %} Checkout {% endblock %}
 
 {% block content %}
     <div class="row p-2 p-lg-5">

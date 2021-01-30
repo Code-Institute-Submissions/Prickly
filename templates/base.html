@@ -7,6 +7,11 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+		<!-- Metadata for SEO -->
+		<meta name="author" content="Liga Baikova">
+        <meta name="description" content="This is an e-commerce website selling cactuses/cacti.">
+        <!-- Add favicon -->
+        <link rel="icon" href="{{ MEDIA_URL}}logo-plain.png">
 	{% endblock meta %}
 
 	{% block main_css %}
@@ -35,9 +40,9 @@
 	{% block add_js %}
 	{% endblock add_js %}
 
-	{% block title %}
-		<title>Prickly</title>
-	{% endblock title %}
+	<title> Prickly | {% block add_title %}{% endblock %} </title>
+
+	
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -53,7 +58,7 @@
 					</span>
 				</button>
 				<a class="navbar-brand d-md-none txt-darkblue font-heading" href="{% url 'home' %}">
-					Prickly
+					<img src="{{ MEDIA_URL }}logo-full.png" alt="Prickly logo with a cactus and Prickly name in it" class="logo" >
 				</a>
 				<ul class="list-inline list-unstyled me-2 mb-0 d-flex d-md-none navbar-icons">
 					<li class="list-inline-item mx-2">
@@ -84,7 +89,7 @@
 				</ul>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<a class="navbar-brand ms-5 d-none d-md-flex txt-darkblue font-heading" href="{% url 'home' %}">
-						Prickly
+						<img src="{{ MEDIA_URL }}logo-full.png" alt="Prickly logo with a cactus and Prickly name in it" class="logo" >
 					</a>
 					<ul class="navbar-nav mx-auto mb-2 mb-md-0">
 						<div class="card card-body border-0 rounded-0 d-md-none search-nav">
@@ -190,7 +195,7 @@
 
 	<footer class="footer mt-auto py-1 clr-steel">
 		<div class="container-fluid p-1 py-3">
-			<div class="row gx-0 ms-2">
+			<!-- <div class="row gx-0 ms-2">
 				<div class="col-8 col-sm footer-group d-flex justify-content-sm-center">
 					<div>
 						<p class="text-uppercase mb-1">More About Us</p>
@@ -209,7 +214,7 @@
 							<li><a href="">FAQ</a></li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 				<div class="col-auto col-sm d-flex justify-content-center">
 					<div class="mt-3 mt-sm-0">
 						<ul class="list-inline list-unstyled mx-auto mb-2 mb-md-0 fs-4">

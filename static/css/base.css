@@ -456,3 +456,9 @@ ul.socialaccount_providers {
 .not-found-img {
     max-width: 300px;
 }
+
+/* ---------- LOGO --------- */
+
+img.logo {
+    max-height: 3rem;
+}
