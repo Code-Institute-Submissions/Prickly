@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from django.contrib import messages
@@ -11,7 +11,11 @@ from checkout.models import Order, OrderLine
 @login_required
 def profile(request):
     """ A view to return the profile page """
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = Profile.objects.get(user=request.user)
+
+    if not profile.membership:
+        return redirect(reverse('memberships'))
+
     membership = get_object_or_404(Membership, name=profile.membership)
 
     if request.method == 'POST':
