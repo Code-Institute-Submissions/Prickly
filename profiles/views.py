@@ -51,3 +51,24 @@ def order_history(request):
         'order_items': order_items,
     }
     return render(request, template, context)
+
+
+@login_required
+def order_details(request, order_id):
+    """
+    Retrieves specific order details
+    """
+    # Get the order
+    order = get_object_or_404(Order, pk=order_id)
+    # Calculate the discount
+    discount = round((order.subtotal - (order.total - order.delivery_cost))
+                     / order.subtotal * 100, 0)
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+        'discount': discount,
+        'order_details': True,
+    }
+
+    return render(request, template, context)
