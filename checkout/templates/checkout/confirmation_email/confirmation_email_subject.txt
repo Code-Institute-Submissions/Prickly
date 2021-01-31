@@ -1,0 +1,1 @@
+Your Prickly Order is Confirmed : {{ order.order_number }}
