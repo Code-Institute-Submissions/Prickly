@@ -442,6 +442,9 @@ Examples of these are shown in the images below.
 - Google Authorization not creating a profile
     - I had Google authorization set up and it lets the user select their account after which an error occurs `RelatedObjectDoesNotExist Exception Value: User has no profile.`. I didn't get a chance to implement the fix but I found an [article on stock overflow](https://stackoverflow.com/questions/49784358/django-2-0-django-allauth-relatedobjectdoesnotexist-at-account-edit-user-h) that discussed a potential fix by adding a post save signal and creating a profile through that. This will be implemented in future versions.
 
+- Website not loading on iamresponsive and sites similar to it.
+    - The reason why I used a mockup image and not an image from iamresponsive is that I got an x-frame error and the site would not load.
+
 
 
 # Future Testing

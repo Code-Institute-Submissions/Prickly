@@ -1,6 +1,6 @@
 
 <h1 align="center">PRICKLY</h1>
-<h1 align="center"><img src="" /></h1>
+<h1 align="center"><img src="./readme_docs/main-pic.png" /></h1>
 
  <a href="https://prickly-app.herokuapp.com/"><img src="./media/logo-plain.png" width="25px" /></a> :point_left: Live website
 
@@ -8,7 +8,7 @@
  
  # About
 
-
+This website is not your regular cactus e-commerce website. It's punny, it's prickly and it offers amazing discounts to anyone who dares to join the Prickly fam.
 
 # Table of Contents
 
@@ -526,9 +526,43 @@ Features worth doing
 
 # Technologies Used
 
-## Languages
+### Languages Used
 
-## Frameworks, Libraries and Programs
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+- [JavaScript](https://www.javascript.com/)
+- [Python 3.8.5](https://www.python.org/) (Python 3.9 was not compatible with cryptography==3.3.1)
+
+### Frameworks, Libraries and Programs Used
+- Front-End
+    - [Bootstrap 5.0](https://getbootstrap.com/) - Used for the responsive layout as well as the navigation, header, footer, forms, dropdowns, item cards, modals.
+    - [Font Awesome](https://fontawesome.com/) - Font Awesome was used to add social media icons at the bottom of the page and icons throughout the pages.
+    - [Google Fonts](https://fonts.google.com/) - Google Fonts was used to import 'Montserrat' font in the style.css file.
+    - [Notyf](https://github.com/caroso1222/notyf) - Used to display messages
+    - [jQuery 3.5.1](https://jquery.com/) - Used in stripe javascript logic
+- Back-End
+- [Django](https://www.djangoproject.com/) - used as the main framework to build the project.
+- [Stripe](https://stripe.com) - used to facilitate single payments and subscription plans
+- [Psycopg2](https://pypi.org/project/psycopg2/)  - used to allow postgresSQL to be used with python
+- [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) - used to display forms
+- [Gunicorn](https://pypi.org/project/gunicorn/)  - deployment tool
+- [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)  - aid the deployment of AWS S3
+- [Pillow](https://pillow.readthedocs.io/en/stable/) - image proccessing tool in python
+- [Whitenoise](http://whitenoise.evans.io/en/stable/)  - aids static file management and serving
+- [pip3](https://pip.pypa.io/en/stable//)  - used to install all packages in python
+- [SQlite3](https://www.sqlite.org/index.html) - used as a database in development
+- [PostgreSQL](https://www.postgresql.org/) - used as a database in deployment
+- [AWS S3](https://aws.amazon.com/)  - used to store images and static files displayed in the deployed site
+- General
+    - [Git](https://git-scm.com/) - Git was used to allowing for tracking of any changes in the code and version control.
+    - [Github](https://github.com/) - GitHub is used to host the project files.
+    - [Visual Studio Code](https://code.visualstudio.com/) - IDE used to compile the code as well as facilitate a virtual environment.
+    - [TinyJPG](https://tinypng.com/) - Used to minify and compress images.
+    - [Heroku](https://dashboard.heroku.com/apps) - A cloud platform used to deploy the web application.
+    - [Lightroom](https://www.adobe.com/ie/products/photoshop-lightroom.html?gclid=CjwKCAjwwYP2BRBGEiwAkoBpAqomS77OrQwQggC9QPnPACrkLBs-2AcrW9ZUvxbUJnFOgbRGKNeNEhoC95IQAvD_BwE&sdid=88X75SKS&mv=search&ef_id=CjwKCAjwwYP2BRBGEiwAkoBpAqomS77OrQwQggC9QPnPACrkLBs-2AcrW9ZUvxbUJnFOgbRGKNeNEhoC95IQAvD_BwE:G:s&s_kwcid=AL!3085!3!394412108599!e!!g!!lightroom) - Lightroom was used to edit and resize all images.
+    - [Adobe Xd](https://www.adobe.com/ie/products/xd.html) - Adobe Xd was used to create mockups.
+    - [Balsamiq](https://balsamiq.com/wireframes/desktop/#) - Used for wireframes
+
 
 
 # Testing
@@ -596,7 +630,8 @@ Instructions to run the project on your local device using an IDE
         os.environ.setdefault('ALLOWED_HOSTS', '<your-variable-goes-here>')
         os.environ.setdefault('STRIPE_PUBLIC_KEY', '<your-variable-goes-here>')
         os.environ.setdefault('STRIPE_SECRET_KEY', '<your-variable-goes-here>')
-        os.environ.setdefault('STRIPE_WH_SECRET', '<your-variable-goes-here>')
+        os.environ.setdefault('STRIPE_WH_SECRET_CH', '<your-variable-goes-here>')
+        os.environ.setdefault('STRIPE_WH_SECRET_SUB', '<your-variable-goes-here>')
     where 
     -  `SECRET_KEY` value is a key of your choice, to ensure appropriate seccurity measures, this can be generated using [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
     -  `DEVELOPMENT` is set to `1` and is ised in settings.py logic to ensure file is dynamic between local and remote setups
@@ -788,7 +823,8 @@ Instructions to run the project on your local device using an IDE
     SECRET_KEY | `<your_secret_key>`
     STRIPE_PUBLIC_KEY | `<your_stripe_public_key>`
     STRIPE_SECRET_KEY | `<your_stripe_secret_key>`
-    STRIPE_WH_SECRET | `<your_stripe_webhook_key>`
+    STRIPE_WH_SECRET_CH | `<your_stripe_webhook_key>`
+    STRIPE_WH_SECRET_SUB | `<your_stripe_webhook_key>`
     USE_AWS | `True`
     ALLOWED_HOSTS | `<your-heroku-app-url>`
     
@@ -822,11 +858,21 @@ Instructions to run the project on your local device using an IDE
 ### Code :floppy_disk:
 - Collapsible sections in README.md seen on [GitHub Gist](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab) post done by pierrejoubert73
 - CSS Prefixed by [Autoprefixer CSS online](https://autoprefixer.github.io/)
-
+- [django-colorfield](https://pypi.org/project/django-colorfield/) - Used for color picker in Products.Color model
+- [Notyf](https://github.com/caroso1222/notyf) for toasts
+- Cacti info taken from [homestratosphere](www.homestratosphere.com/indoor-cactus-plants/) & [ourhouseplants](www.ourhouseplants.com)
+- Hamburger animation taken from [jonsuh.com](https://jonsuh.com/hamburgers/)
+- stripe subscription model was modified to fit this project but originally taken from these sources:
+    - [testdriven](https://testdriven.io/blog/django-stripe-subscriptions/)
+    - [stripe](https://stripe.com/docs/billing/subscriptions/checkout)
 
 ### Media :clapper:
-- xxx
+-[GIF](https://icons8.com/preloaders/) for loader page
+- all images taken from [unspalsh](https://unsplash.com/) 
+- all cacti icons taken from [flaticon](https://www.flaticon.com/)
 
 
 ### Acknowledgements
-- xxx
+- Thank you to everyone who took their time to provide me constructive feedback on the Slack community page.
+- Thanks to my friends and family for endless testing.
+- Big thanks to my mentor for putting up with my questions and giving me great insights.
