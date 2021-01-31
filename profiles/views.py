@@ -15,7 +15,7 @@ def profile(request):
 
     if not profile.membership:
         messages.error(request, "You haven't subscribed to a membership yet. "
-                        " Choose one and join the Prickly fam")
+                                " Choose one and join the Prickly fam")
         return redirect(reverse('memberships'))
 
     membership = get_object_or_404(Membership, name=profile.membership)
@@ -68,8 +68,8 @@ def order_details(request, order_id):
     # Get the order
     order = get_object_or_404(Order, pk=order_id)
     # Calculate the discount
-    discount = round((order.subtotal - (order.total - order.delivery_cost))
-                     / order.subtotal * 100, 0)
+    discount = round((order.subtotal - (order.total - order.delivery_cost)) /
+                     order.subtotal * 100, 0)
 
     template = 'checkout/checkout_success.html'
     context = {

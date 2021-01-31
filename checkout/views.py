@@ -211,8 +211,8 @@ def checkout_success(request, order_number):
                 profile_form.save()
 
     # Calculate discount applied if any
-    discount = round((order.subtotal - (order.total - order.delivery_cost))
-                     / order.subtotal * 100, 0)
+    discount = round((order.subtotal - (order.total - order.delivery_cost)) /
+                     order.subtotal * 100, 0)
 
     # delete cart contents
     if 'cart' in request.session:
