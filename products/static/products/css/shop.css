@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* --------- MAIN SHOP NAV BUTTONS --------- */
 .shop-button {
     height: 4rem;
@@ -9,20 +16,23 @@
     text-align: center;
     line-height: 4rem;
     font-size: 1rem;
-    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
     border: 3px solid transparent;
 }
 
 .shop-category a {
     text-decoration: none;
-    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
 }
 
 .shop-category div:hover, .shop-button-active {
     border: 3px solid var(--color-light-steel);
     color: var(--color-light-steel);
     text-decoration: underline;
-    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
 }
 
 @media (max-width: 350px) {

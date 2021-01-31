@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* Hero image */
 .home-page {
     height: 100vh;
@@ -27,6 +34,26 @@
   .colored-lines {
     height: 1rem;
     background-color: var(--color-light-steel);
+    background: -webkit-gradient(linear,
+                left top, left bottom,
+                from(var(--color-light-pink)),
+                color-stop(20%, var(--color-light-pink)),
+                color-stop(20%, var(--color-light-steel)),
+                color-stop(40%, var(--color-light-steel)),
+                color-stop(40%, var(--color-steel)),
+                color-stop(60%, var(--color-steel)),
+                color-stop(60%, var(--color-green)),
+                color-stop(80%, var(--color-green)),
+                color-stop(0, var(--color-light-green)));
+    background: -o-linear-gradient(var(--color-light-pink),
+                var(--color-light-pink) 20%,
+                var(--color-light-steel) 20%,
+                var(--color-light-steel) 40%,
+                var(--color-steel) 40%,
+                var(--color-steel) 60%,
+                var(--color-green) 60%,
+                var(--color-green) 80%,
+                var(--color-light-green) 0);
     background: linear-gradient(var(--color-light-pink),
                 var(--color-light-pink) 20%,
                 var(--color-light-steel) 20%,
@@ -87,7 +114,8 @@
 
 .insta-pic-container img {
     max-width: 100%;
-    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
     padding: 0;
     margin: 0;
 

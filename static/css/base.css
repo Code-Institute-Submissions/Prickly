@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* Import fonts from Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&family=Caveat:wght@400;600&family=Quicksand:wght@300;400;500;600&display=swap');
 
@@ -70,23 +77,24 @@ body {
 
 .heading-green {
     background-color: var(--color-light-green);
-    background: linear-gradient(transparent, transparent 50%,
-                                var(--color-light-green) 50%, var(--color-light-green) 90%,
-                                transparent 0);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, var(--color-light-green)), color-stop(90%, var(--color-light-green)), color-stop(0, transparent));
+    background: -o-linear-gradient(transparent 50%, var(--color-light-green) 50%, var(--color-light-green) 90%, transparent 0);
+    background: linear-gradient(transparent 50%, var(--color-light-green) 50%, var(--color-light-green) 90%, transparent 0);
 }
 
+
 .heading-pink {
-    background-color: var(--color-light-green);
-    background: linear-gradient(transparent, transparent 50%,
-                                var(--color-light-pink) 50%, var(--color-light-pink) 90%,
-                                transparent 0);
+    background-color: var(--color-light-pink);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, var(--color-light-pink)), color-stop(90%, var(--color-light-pink)), color-stop(0, transparent));
+    background: -o-linear-gradient(transparent 50%, var(--color-light-pink) 50%, var(--color-light-pink) 90%, transparent 0);
+    background: linear-gradient(transparent 50%, var(--color-light-pink) 50%, var(--color-light-pink) 90%, transparent 0);
 }
 
 .heading-steel {
     background-color: var(--color-light-steel);
-    background: linear-gradient(transparent, transparent 50%,
-                                var(--color-light-steel) 50%, var(--color-light-steel) 90%,
-                                transparent 0);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, var(--color-light-steel)), color-stop(90%, var(--color-light-steel)), color-stop(0, transparent));
+    background: -o-linear-gradient(transparent 50%, var(--color-light-steel) 50%, var(--color-light-steel) 90%, transparent 0);
+    background: linear-gradient(transparent 50%, var(--color-light-steel) 50%, var(--color-light-steel) 90%, transparent 0);
 }
 
 
@@ -104,7 +112,8 @@ body {
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
-    user-select: none;
+    -ms-user-select: none;
+        user-select: none;
     background-color: transparent;
     border: 3px solid transparent;
     padding: .375rem .75rem;
@@ -179,6 +188,8 @@ nav.navbar li>a {
 }
 
 nav a.nav-link {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
 }
 
@@ -203,7 +214,8 @@ ul.dropdown-menu.show {
 }
 
 .navbar-toggler:focus {
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 .navbar-brand:hover {
@@ -215,6 +227,8 @@ ul.dropdown-menu.show {
 /* creating the hover and active effect */
 .navbar-nav a.nav-link.active, .navbar-nav a.nav-link:hover {
     background-color: var(--color-light-pink);
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--color-light-steel)), color-stop(50%, var(--color-light-steel)), color-stop(50%, var(--color-light-pink)), color-stop(80%, var(--color-light-pink)), color-stop(0, var(--color-light-steel)));
+    background: -o-linear-gradient(var(--color-light-steel), var(--color-light-steel) 50%, var(--color-light-pink) 50%, var(--color-light-pink) 80%, var(--color-light-steel) 0);
     background: linear-gradient(var(--color-light-steel), var(--color-light-steel) 50%, var(--color-light-pink) 50%, var(--color-light-pink) 80%, var(--color-light-steel) 0);
 }
 
@@ -241,6 +255,26 @@ ul.dropdown-menu.show {
     background-color: var(--color-light-pink);
 }
 
+.search-nav input::-webkit-input-placeholder {
+    color: var(--color-main);
+    opacity: 1;
+}
+
+.search-nav input::-moz-placeholder {
+    color: var(--color-main);
+    opacity: 1;
+}
+
+.search-nav input:-ms-input-placeholder {
+    color: var(--color-main);
+    opacity: 1;
+}
+
+.search-nav input::-ms-input-placeholder {
+    color: var(--color-main);
+    opacity: 1;
+}
+
 .search-nav input::placeholder {
     color: var(--color-main);
     opacity: 1;
@@ -258,7 +292,8 @@ ul.dropdown-menu.show {
 }
 
 .search-nav .form-control:focus {
-    box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+    -webkit-box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+            box-shadow: 0 0 0 0.25rem var(--color-light-pink);
 }
 
 /* item_count badge styles */
@@ -399,7 +434,8 @@ footer .list-inline-item:hover {
     border: 1px solid var(--color-light-pink);
     border-radius: 0;
     margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-box-shadow: 0 1px 3px 0 #e6ebf1;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
 }
 
 .allauth .form-group label {
@@ -410,7 +446,28 @@ footer .list-inline-item:hover {
     background-color: #fff;
     border-color: var(--color-light-pink);
     outline: 0;
-    box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+    -webkit-box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+            box-shadow: 0 0 0 0.25rem var(--color-light-pink);
+}
+
+.allauth .form-group input::-webkit-input-placeholder {
+    color: #b4bfcb;
+    opacity: 1;
+}
+
+.allauth .form-group input::-moz-placeholder {
+    color: #b4bfcb;
+    opacity: 1;
+}
+
+.allauth .form-group input:-ms-input-placeholder {
+    color: #b4bfcb;
+    opacity: 1;
+}
+
+.allauth .form-group input::-ms-input-placeholder {
+    color: #b4bfcb;
+    opacity: 1;
 }
 
 .allauth .form-group input::placeholder {
