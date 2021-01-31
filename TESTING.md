@@ -201,8 +201,26 @@
 
 # Validators
 
-## HTML5
-- 5 validator
+## [HTML5](https://validator.w3.org/)
+- :white_check_mark: Home - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2F)
+- :white_check_mark: Shop - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fproducts%2F#l644c105)
+    - 1 warning advising for me to remove type attribute from script tag. This is a script tag inserted by AWS and cannot be removed.
+- :white_check_mark: Product Details - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fproducts%2F5)
+- :white_check_mark: Memberships - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fmemberships%2F)
+- :white_check_mark: Membership Checkout - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fmemberships%2Fmembership_checkout%2F)
+- :white_check_mark: Memebrship Change - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fmemberships%2Fmembership_change%2F)
+- :white_check_mark: Cart - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fcart%2F)
+- :white_check_mark: Delivery - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fcheckout%2Fdelivery%2F#l1124c74)
+- :white_check_mark: Checkout - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fcheckout%2F)
+- :white_check_mark: Checkout Success - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fcheckout%2F5C7B1A32-6CB6-4B95-AA16-EBB09BA8C23E%2Fcheckout_success%2F)
+- :white_check_mark: Profile - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2F)
+- :white_check_mark: User Membership Detail - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fmemberships%2Fuser_membership%2F)
+- :white_check_mark: Order History - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F)
+- :white_check_mark: Order Details - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F9)
+- :white_check_mark: Log In - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Faccounts%2Flogin%2F)
+- :white_check_mark: Register - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Faccounts%2Fsignup%2F)
+
+
 
 ## CSS3
 -  validato
