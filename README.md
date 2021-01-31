@@ -265,7 +265,7 @@ Features worth doing
 
     - I used [Bootstrap 5.0]() as the front end framework to help with layout and easy pre-built components such as accordeons
 
-    - [Notyf](https://github.com/caroso1222/notyf) and built in Bootstrap toast were used for notifications and cart toast
+    - [Notyf](https://github.com/caroso1222/notyf) and built-in Bootstrap toast were used for notifications and cart toast
 
     - For hamburger menu animations, jonsuh.com(https://jonsuh.com/hamburgers/) was used
 
@@ -278,140 +278,113 @@ Features worth doing
 - [x] **Header** - facilitates an effortless navigation across all pages
     - The header is positioned to always be visible at the top of the screen (mobile, tablet, and desktop) which allows visitors to find it quickly.
     - The brand logo is positioned at the top of the page in the header and redirects the user back to the home page. This allows the user to easily find the homepage.
-    - The page navigation is located in the header at the top of the page on desktop and laptop sizes and collapsable top navigation for moobiles and tablets. This adheres to the navigation conventions allowing the user to intuitively navigate the page.
-    - Navigation links have a custome background color that seems to be offset downwards when hovered over on larger screen sizes, letting the user know that these are clickable links.
-    - The navigation link, matching the page that the user is visiting, stays 'active'(which matches the hover effect from the previous point) to let the user quickly establish which page she/he is visiting.
+    - The page navigation is located in the header at the top of the page on desktop and laptop sizes and collapsable top navigation for mobiles and tablets. This adheres to the navigation conventions allowing the user to intuitively navigate the page.
+    - Navigation links have a custom background color that seems to be offset downwards when hovered over on larger screen sizes, letting the user know that these are clickable links.
+    - The navigation link, matching the page that the user is visiting, stay 'active'(which matches the hover effect from the previous point) to let the user quickly establish which page she/he is visiting.
     - Navigation links collapse in a personalized hamburger menu when viewed in mobile sizes.
-    - Cart and user icons are always visible in navbar on all screen sizes so that user can easily identify the amount of items they have in the cart and so that they can visit user sites quickly adn easily.
-    - User icon is a dropdown menu displaying 'Register' and 'Log In' for unauthorized user and 'My Details', 'My Memebrship' and 'Order History' for authorized user.
+    - Cart and user icons are always visible in the navbar on all screen sizes so that users can easily identify the number of items they have in the cart and so that they can visit user sites quickly and easily.
+    - User icon is a dropdown menu displaying 'Register' and 'Log In' for the unauthorized user and 'My Details', 'My Membership', and 'Order History' for an authorized user.
 - [x] **Heading**
     - All headings are styled in the same manner to let the user understand the page structure quickly.
 - [x] **Links/buttons**
     - All links have a hover effect and are noticeably different than the rest of the text around them, indicating that they are clickable.
     - All external links open in a new tab to allow the user to easily navigate back to the page.
-    - Buttons are outlined, with transparent background. On hover the background is filled in to match the borderrof the button, indicating that the button is clickable.
+    - Buttons are outlined, with transparent background. On hover the background is filled in to match the border of the button, indicating that the button is clickable.
 - [x] **Footer**
     - Footer is always displayed at the bottom of the page, regardless of the content size.
     - Socials are displayed and grouped. They are displayed in the footer to adhere to the convention and let the user locate them quickly.
 - [x] **Messages and Cart Toast**
-    - A feedback is provided to the user throughout the whole page. The messages shown is colored to match the tone of the message - whether it's a success message or an error message.
-    - Cart Toast, similarly as Messages is displayed as a pop-up and accross the whole page indicated to the user what the total is and what items have been added to the cart.
-    - User can easily change the quantity of items from this cart and remove them alltogether.
+    - A feedback is provided to the user throughout the whole page. The messages shown are colored to match the tone of the message - whether it's a success message or an error message.
+    - Cart Toast, similarly to Messages is displayed as a pop-up and across the whole page indicated to the user what the total is and what items have been added to the cart.
+    - User can easily change the number of items from this cart and remove them altogether.
     - User can dismiss the toast with an 'x' close button. 
 
 ### Features Specific to Pages
 - [x] **Home** Page
-    - Hero image with a short description and a call-to-action to let user join a membership plan.
+    - Hero image with a short description and a call-to-action to let users join a membership plan.
     - A section describing high-level how the site works
     - A section with this month's featured items and a button to redirect the user to the shop.
-    - Instagram picture galery with an instagram handle so that suer cna easily find it and navigate to it.
+    - Instagram picture gallery with an Instagram handle so that users can easily find it and navigate to it.
 
 - [x] **Shop** Page
-    - Items displayed in a responsive grid layout to accomodate for all screen sizes
-    - Only the most important information is dispayed on the card such as title, rating, price and 'Buy Now' button.
-    - Item image can be clicked to bring the user to details page.
-    - Page has categroy buttons at the top so that suier can easily filter all itenms by categories or all
+    - Items displayed in a responsive grid layout to accommodate all screen sizes
+    - Only the most important information is displayed on the card such as title, rating, price, and 'Buy Now' button.
+    - Item image can be clicked to bring the user to the details page.
+    - Page has category buttons at the top so that user can easily filter all items by categories or all
     - Filter icon button that can be toggled to collapse or reveal sort icons
     - Sort icons that can sort items by date added, price and name
-    - Buy Now button that automatically adds item to the cart
+    - Buy Now button that automatically adds an item to the cart
 
 - [x] **Product Detail** Page
-    - Back button that brings user back to previous page.
+    - Back button that brings the user back to the previous page.
     - Average rating displayed.
-    - Description of the product which allows user to gain more information on the product.
+    - Description of the product which allows users to gain more information on the product.
     - Quantity adder that allows user to select 1-10 items and display price as the item quantity os changed.
-    - Add to the cart button that adds item to the cart.
+    - Add to the cart button that adds an item to the cart.
     - Reviews section that displays reviews added by all users.
     - Reviews are implemented as modals that appear as a top layer over all other content.
-    - If the user has added a review, they will see edit and delete buttons that allow the user to edit or delete the review
+    - If the user has added a review, they will see the edit and delete buttons that allow the user to edit or delete the review
 
 - [x] **Memberships** Page
-    - All memebrships are dispalyed side by side to allow the user to compare them all and make an educated decision.
-    - Prick Me button lets user to select a memebrship they want and redirects them to Register page.
-    - If the user has added a review, they will see edit and delete buttons that allow the user to edit or delete the review
+    - All memberships are displayed side by side to allow the user to compare them all and make an educated decision.
+    - Prick Me button lets the user select a membership they want and redirects them to the Register page.
+    - If the user has added a review, they will see the edit and delete buttons that allow the user to edit or delete the review
 
-- [x] **Memberships Checkout adn Change** Page
+- [x] **Memberships Checkout and Change** Page
     - Displays chosen membership it's benefits.
-    - In Memebrship Checkout view, usere has the ability to change the membership before payment.
-    - WUser can press confirm and will be redirected to the Stripe Checkout page.
-    - In membership change user can see theircurrent membership and selected one.
+    - In the Membership Checkout view, the user can change the membership before payment.
+    - user can press confirm and will be redirected to the Stripe Checkout page.
+    - In membership change, user can see their current membership and selected one.
 
-- [x] **Memberships Checkout adn Change** Page
+- [x] **Memberships Checkout and Change** Page
     - Displays chosen membership it's benefits.
-    - In Memebrship Checkout view, usere has the ability to change the membership before payment.
-    - WUser can press confirm and will be redirected to the Stripe Checkout page.
-    - In membership change user can see theircurrent membership and selected one.
+    - In the Membership Checkout view, the user can change the membership before payment.
+    - user can press confirm and will be redirected to the Stripe Checkout page.
+    - In membership change, user can see their current membership and selected one.
 
 - [x] **Cart** Page
     - Displays summary of items with the subtotal excluding the delivery.
-    - Allow user to change quantity or remove the item.
-    - User can navigate bak to the shop page or to the checkout page
+    - Allow users to change the quantity or remove the item.
+    - User can navigate back to the shop page or the checkout page
 
 - [x] **Delivery/Checkout** Page
-    - Order Summary is displayed on the right or on small screens as a collapsed emelent at the top of the page.
-    - User can select their shipping type which will update their delovery cost.
+    - Order Summary is displayed on the right or small screens as a collapsed excellent at the top of the page.
+    - User can select their shipping type which will update their delivery cost.
     - Delivery Details are provided as a form using crispy forms.
-    - User can save their delivery details to their profile if they have one, otheriwse they are offered with sign in and sin up buttons
-    - USer is procvided witha seccure wat to enter their bank details in.
+    - User can save their delivery details to their profile if they have one, otherwise, they are offered sign in and sign up buttons
+    - USer is provided with a secure wat to enter their bank details in.
 
 - [x] **Checkout Success** Page
     - Order Details are provided to the user as a confirmation on top of the e-mail that has been sent to them.
 
 - [x] ***Profile** Page
-    - User's membership summary is show with the name and the price of it.
-    - 'More' button that brings user to the 'My Memberhsip' site.
-    - A crispy forms form that displays to the user any details that the user has saved. They can be edited or added on this poage.
+    - User's membership summary is shown with the name and the price of it.
+    - 'More' button brings the user to the 'My Membership' site.
+    - A crispy forms form that displays to the user any details that the user has saved. They can be edited or added to this page.
 
 - [x] ***My Membership** Page
     - User's membership in detail is displayed
-    - User can click on the 'Change' buttonthat brings the user to the Memebrship view where they can select of which memebrship they want to changre to
+    - User can click on the 'Change' button that brings the user to the Membership view where they can select which membership they want to change to
 
-- [x] ***Order Historyop** Page
-    - UAn acordeon of all order, with only the lastest order not collapsed.
-    - Items are displayed within the collapsed element and user can view them by clicking on it.
-    - Each item has Buy Again and Review buttons to allow user to easily interact with purchased items.
-    - Details button brings user to the Order details view
+- [x] ***Order History** Page
+    - an accordion of all order, with only the lastest order not collapsed.
+    - Items are displayed within the collapsed element and users can view them by clicking on it.
+    - Each item has Buy Again and Review buttons to allow the user to easily interact with purchased items.
+    - Details button brings the user to the Order details view
 
 - [x] ***Order Details** Page
-    - User can view the particular order's detials
-    - Dispatch, delivery and order dates are displayed unless they are not entered yet then estimated dates are shown based on the delivery speed.
-
-
-
-
-
-
-    
-
-
-
-
-- :white_check_mark: Order History - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F)
-- :white_check_mark: Order Details - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F9)
-
+    - User can view the particular order's details
+    - Dispatch, delivery, and order dates are displayed unless they are not entered yet then estimated dates are shown based on the delivery speed.
 
 ## Future Features
-- [ ] xxx
+- [ ] Implement wallet which will be updated with a monthly credit.
+- [ ] Implement multi-colored items, database is already set up for it.
+- [ ] Add a design studio where user can select the pots and font and text from pre-built options.
+- [ ] Add Apple pay to payments and Google sign-in
 
 
 
 
-
-
-
-
-### Future Features
-- [ ] Add the' Events' section at the bottom of the 'Home' page to create real-life swapping events.
-
-    <img src="./static/graphics/readme/mockups/mockup-events.png" height="400px" />
-
-- [ ] Implement additional 'liked items' and 'flagged items' (for admin) sections in 'My Profile' page 
-- [ ] Add password confirmation when the user is registering and let them view their password if they wish so.
-- [ ] Allow users to edit their passwords and delete their accounts.
-- [ ] Implement flash messages as toasters.
-- [ ] Allow user to upload their images and store them on Cloudinary.
-- [ ] Let users visit each other's pages to get 'the socials' details.
-- [ ] Facilitate an in-app communication.
 
 
 # Information Architecture
