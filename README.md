@@ -357,22 +357,22 @@ Features worth doing
 - [x] **Checkout Success** Page
     - Order Details are provided to the user as a confirmation on top of the e-mail that has been sent to them.
 
-- [x] ***Profile** Page
+- [x] **Profile** Page
     - User's membership summary is shown with the name and the price of it.
     - 'More' button brings the user to the 'My Membership' site.
     - A crispy forms form that displays to the user any details that the user has saved. They can be edited or added to this page.
 
-- [x] ***My Membership** Page
+- [x] **My Membership** Page
     - User's membership in detail is displayed
     - User can click on the 'Change' button that brings the user to the Membership view where they can select which membership they want to change to
 
-- [x] ***Order History** Page
+- [x] **Order History** Page
     - an accordion of all order, with only the lastest order not collapsed.
     - Items are displayed within the collapsed element and users can view them by clicking on it.
     - Each item has Buy Again and Review buttons to allow the user to easily interact with purchased items.
     - Details button brings the user to the Order details view
 
-- [x] ***Order Details** Page
+- [x] **Order Details** Page
     - User can view the particular order's details
     - Dispatch, delivery, and order dates are displayed unless they are not entered yet then estimated dates are shown based on the delivery speed.
 
@@ -390,13 +390,138 @@ Features worth doing
 # Information Architecture
 
 ## Database
-- xxx
+- The databse used for this project was **[PostgresSQL](https://www.postgresql.org/)** for deployed project anf **[SQLite]()https://www.sqlite.org/index.html** on the local machin in development
 
 ## Structure
-- xxx
+- The data consists of 10 models accross 7 apps
+    - **Home app** - Displays the home page of the website.
+    - **Checkout app** - Handles the checkout pages and the checkout view for product purchase, including payments.
+
+        - DeliveryType Model - holds different delivery type information such as rate of cost for delivery, dispatch time, delivery_speed, constant deliver charge, limit at which delivery charge changes from constant to a rate
+
+                name = models.CharField('Delivery Type', max_length=20)
+                dispatch_speed = models.IntegerField('days to dispatch order')
+                delivery_speed = models.IntegerField('days to deliver order')
+                limit = models.DecimalField('order amount limit for set delivery cost', max_digits=5, decimal_places=2, default=0)
+                const = models.DecimalField('set delivey cost', max_digits=5, decimal_places=2, default=0)
+                rate = models.DecimalField('delivery rate', max_digits=5, decimal_places=2, default=0)
+
+        - Order Model - Holds information on each order. This is populated when user completes the checkout. The details entered in the checkout will populate this model as well as custom calculations for total amount and discount and delivery charge
+
+                order_number = models.CharField(max_length=36, default=uuid.uuid4, editable=False)
+                user_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name='user_orders')
+                first_name = models.CharField(max_length=30)
+                last_name = models.CharField(max_length=30)
+                full_name = models.CharField(max_length=70, editable=False, default='')
+                phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',message="Enter phone number in a format: '+111111111' and no longer that 15 digits.")
+                phone_number = models.CharField(validators=[phone_regex], max_length=16, default=0)
+                email = models.EmailField(max_length=254)
+                address_line_1 = models.CharField(max_length=100,)
+                address_line_2 = models.CharField(max_length=100, null=True, blank=True)
+                city = models.CharField('city or town', max_length=85)
+                region = models.CharField('region or county', max_length=85, null=True, blank=True)
+                country = CountryField(blank_label='Country *')
+                postcode = models.CharField('post/zip code', max_length=10)
+                order_date = models.DateTimeField(auto_now_add=True)
+                dispatch_date = models.DateTimeField('order dispatched on', null=True, blank=True)
+                est_dispatch_dte = models.DateTimeField('estimated order dispatch date', ditable=False, null=True, blank=True)
+                delivery_date = models.DateTimeField('order delivered on', null=True, blank=True)
+                est_deliery_dte = models.DateTimeField('estimated order delivery date', editable=False, null=True, blank=True)
+                delivery_type = models.ForeignKey(DeliveryType, on_delete=models.CASCADE)
+                delivery_cost = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+                subtotal = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+                total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+                original_cart = models.TextField(default='')
+                stripe_pid = models.CharField(max_length=254, default='')
+
+        - OrderLine Model that captures each item added to the cart and are used for calucations in the Order Model
+
+                order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_line')
+                product = models.ForeignKey(Product, on_delete=models.CASCADE)
+                color = models.CharField(max_length=20, null=True, blank=True)
+                quantity = models.IntegerField(default=0)
+                line_total = models.DecimalField(max_digits=7, decimal_places=2, default=0, editable=False)
+
+    - Memberships app - Displays different kinds of memebrship plans, handles user subscription to membership plans
+
+        - Membership Model - contains memebrship plans
+
+                name = models.CharField(max_length=50)
+                pic = models.ImageField('Membership Picture', null=True, blank=True)
+                free_delivery = models.CharField(max_length=1, hoices=FREE_DELIVERY, default='N')
+                first_order_disc = models.IntegerField('First Order Discount', default=0)
+                overall_discount = models.IntegerField(default=0)
+                priority = models.CharField(max_length=10, choices=PRIORITY, help_text=('Priority of announcements'))
+                q_gift = models.CharField('Quarterly Gift', max_length=50, null=True, blank=True)
+                price = models.DecimalField(max_digits=4, decimal_places=2)
+
+        - StripCustomer Model - stores information used to identify a user in Stripe payment system for subscriptions
+
+                user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+                stripeCustomerId = models.CharField(max_length=255)
+                stripeSubscriptionId = models.CharField(max_length=255)
+
+    - Products app - Handles Product Display and Individual Item Detil view
+        - Category Model - Stores Item categories
+
+                name = models.CharField(max_length=20)
+        
+        - Product Model - stores Individual Item information
+
+                product_code = models.CharField(max_length=36, default=uuid.uuid4, editable=False)
+                category = models.ForeignKey(Category, on_delete=models.CASCADE)
+                name = models.CharField(max_length=50)
+                description = models.TextField()
+                avg_rating = models.DecimalField('average product rating', max_digits=2, decimal_places=1, default=0, null=True, blank=True)
+                price = models.DecimalField(max_digits=5, decimal_places=2)
+                many_colors = models.CharField(max_length=1, choices=MANY_COLORS, help_text=('Will the product come in multiple colors?'))
+                main_pic = models.ImageField('thumbnail picture', null=True, blank=True)
+                pic2 = models.ImageField('additional picture 2', null=True, blank=True)
+                pic3 = models.ImageField('additional picture 3', null=True, blank=True)
+                pic4 = models.ImageField('additional picture 4', null=True, blank=True)
+                added_date = models.DateTimeField(auto_now_add=True)
+                release_date = models.DateTimeField('product release date', help_text=('Select today/now as the input if the product is being published now.'))
+
+        - Color Model - handles they colors of an item if the item hsa mutliple colors
+
+                name = models.CharField(max_length=20)
+                color_hex = ColorField(default='#FFFFFF')
+                product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+
+    - Profiles app - Handles Profile view and creating a profile whenever a user registers. It also handles Order History view.
+        - Profile Model - holds data on each user, this can be used in checkout to prefill the checkout form.
+
+                user = models.OneToOneField(User, on_delete=models.CASCADE)
+                membership = models.ForeignKey(Membership, on_delete=models.CASCADE, null=True, blank=True)
+                user_phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Enter phone number in a format: '+111111111' and no longer that 15 digits.")
+                user_phone_number = models.CharField(validators=[user_phone_regex], max_length=16, null=True, blank=True)
+                user_address_line_1 = models.CharField(max_length=100, null=True, blank=True)
+                user_address_line_2 = models.CharField(max_length=100, null=True,  blank=True)
+                user_city = models.CharField('city or town', max_length=85, null=True, blank=True)
+                user_region = models.CharField('region or county', max_length=85, null=True, blank=True)
+                user_country = CountryField(blank_label='Country',  null=True, blank=True)
+                user_postcode = models.CharField('post/zip code', max_length=10, null=True, blank=True)
+
+
+    - Reviews app  - Handles CRUD operations for Reviews
+        - Review Model
+
+                user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+                product = models.ForeignKey(Product, on_delete=models.CASCADE)
+                title = models.CharField(max_length=50)
+                description = models.TextField()
+                rating = models.IntegerField(choices=RATE)
+                upvotes = models.IntegerField(default=0)
+                downvotes = models.IntegerField(default=0)
+                date_posted = models.DateTimeField(auto_now_add=True)
+
+    - Shpping Cart app - Handles CRUD operations with order items in cart
+        - No models
 
 ## Relationship
-- xxx
+- The relation of the models are displayed in the image below
+
+    <img src="./readme_docs/data-schema.png" height="500px" />
 
 
 # Technologies Used
