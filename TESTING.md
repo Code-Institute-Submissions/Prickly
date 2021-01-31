@@ -222,8 +222,18 @@
 
 
 
-## CSS3
--  validato
+## [CSS3](https://jigsaw.w3.org/css-validator/)
+- :white_check_mark:base.css - Pass
+- :white_check_mark:home.css - Pass
+- :white_check_mark:checkout.css - Pass
+- :white_check_mark:membership_checkout.css - Pass
+- :white_check_mark:shop.css - Pass
+- :white_check_mark:orders.css - Pass
+- **Note** - When validating [base.css](https://github.com/LigaMoon/Prickly/blob/main/static/css/base.css) and [home.css](https://github.com/LigaMoon/Prickly/blob/main/home/static/home/css/home.css), validator returned errors associated with not recognizing variables in linear gradient. If variables were overwritten by regular color names, the validator passes. Additionally validator displays warnings as it does not recognizes imports adn prefixes.
+
+    <img src="./readme_docs/css-error.png" height="200px" />
+    <img src="./readme_docs/css-pass.png" height="200px" />
+
 
 ## JavaScript
 - JSHint
