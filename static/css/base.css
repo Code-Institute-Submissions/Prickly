@@ -40,6 +40,10 @@ body {
     color: var(--color-pink);
 }
 
+.txt-small {
+    font-size: 0.8rem;
+}
+
 .txt-link {
     color: var(--color-main);
     text-decoration: none;
@@ -461,4 +465,10 @@ ul.socialaccount_providers {
 
 img.logo {
     max-height: 3rem;
+}
+
+@media (max-width: 300px) {
+   img.logo {
+        max-height: 2rem;
+    }
 }

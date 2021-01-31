@@ -44,7 +44,7 @@
                     <!-- Title and rating -->
                     <div class="col-12 col-lg-4 text-center px-0">
                         <p class="mb-0 fw-bold text-uppercase">{{ review.title }}</p>
-                        <small><p class="rating-stars" data-value="{{ review.rating }}"></p></small>
+                        <p class="rating-stars txt-small"data-value="{{ review.rating }}"></p>
                             <!-- For reviews written by the logged in user show edit and delete bittons -->
                             {% if user.is_authenticated and user.get_username == review.user.user.username %}
                             <div class="col m-auto text-center mb-2">

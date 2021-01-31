@@ -103,7 +103,8 @@ def checkout(request):
         else:
             # If form is not valid, display an error message
             messages.error(request, 'There was an error with your form. '
-                                    'Please double check your information.')
+                                    'Please double check your information.'
+                                    'Did you enter a valid phone number?')
             return redirect(reverse('checkout'))
     else:
         # If request not POST, get cart contents. if empty, return an error msg

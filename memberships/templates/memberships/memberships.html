@@ -25,12 +25,11 @@
                 <!-- If membership offers free delivery, display Nope if None -->
                 <div>
                     <p class="mb-0">Free Delivery</p>
-                        {% if membership.free_delivery == 'Y' %}
-                            <p class="text-danger">Yes</p>
-                        {% else %}
-                           <p class="text-secondary"> Nope</p>
-                        {% endif %}
-                    </p>
+                    {% if membership.free_delivery == 'Y' %}
+                        <p class="text-danger">Yes</p>
+                    {% else %}
+                        <p class="text-secondary"> Nope</p>
+                    {% endif %}
                 </div>
                 <!-- First Order Discount in % -->
                 <div>
@@ -40,12 +39,11 @@
                 <!-- Overall discount store wide in %, display Nope if None -->
                 <div>
                     <p class="mb-0">Overall Discount</p>
-                        {% if membership.overall_discount %}
-                            <p class="text-danger">{{ membership.overall_discount }}%</p>
-                        {% else %}
-                            <p class="text-secondary">Nope</p>
-                        {% endif %}
-                    </p>
+                    {% if membership.overall_discount %}
+                        <p class="text-danger">{{ membership.overall_discount }}%</p>
+                    {% else %}
+                        <p class="text-secondary">Nope</p>
+                    {% endif %}
                 </div>
                 <!-- Quarterly gift package -->
                 <div>
@@ -55,11 +53,11 @@
                 <!-- Priority of accessing new collections -->
                 <div>
                     <p class="mb-0">Access to new colections</p>
-                        {% if membership.priority == 'High' %}
-                            <p class="text-danger">A week before release date</p>
-                        {% else %}
-                            <p class="text-secondary">On release date</p>
-                        {% endif %}
+                    {% if membership.priority == 'High' %}
+                        <p class="text-danger">A week before release date</p>
+                    {% else %}
+                        <p class="text-secondary">On release date</p>
+                    {% endif %}
                 </div>
                 <!-- Price, display free if None -->
                 <div>
