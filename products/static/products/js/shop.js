@@ -1,3 +1,5 @@
+// Get name of the category from the id and then combine it with MEDIA URL to loop
+// through and add background images
 const shopButton = document.querySelectorAll('.shop-button');
 const mediaUrl = document.querySelector('#id_media_url').innerHTML.slice(1, -1);
 shopButton.forEach(btn => {
@@ -6,6 +8,7 @@ shopButton.forEach(btn => {
 });
 
 
+// Sort trigger button
 const sort = document.getElementById('sort-trigger');
 const container = document.getElementById('sort-container');
 

@@ -3,6 +3,10 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    """
+    Order form to be used in checkout to display
+    and capture user information
+    """
     class Meta:
         model = Order
         # exclude = ['delivery_type']

@@ -125,6 +125,7 @@ class StripeWH_Handler:
                 attempt += 1
                 time.sleep(1)
         if order_exists:
+            # send an email
             self._send_confirmation_email(order)
             # Return 200 response in case order exists
             return HttpResponse(
@@ -168,6 +169,7 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook recieved: {event["type"]} - {e}',
                     status=500)
+        # send an email
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook recieved: {event["type"]}'

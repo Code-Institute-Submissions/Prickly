@@ -67,6 +67,7 @@
   }
 
 
+  /* How it works section styles */
 .steps-container {
     max-width: 250px;
     margin: 0 auto;
@@ -81,6 +82,7 @@
     max-height: 150px;
 }
 
+/* New features section styles */
 .new-this-month {
     text-align: center;
 }
@@ -105,6 +107,7 @@
     margin: 0 auto;
 }
 
+/* Instagram section styles */
 .insta-pic-container {
     max-width: 600px;
     margin: 0 auto;

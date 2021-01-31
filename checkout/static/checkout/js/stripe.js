@@ -1,3 +1,4 @@
+// Get stripe keys from IDs
 const stripePublicKey = document.querySelector('#id_stripe_public_key').text.slice(1, -1);
 const clientSecret = document.querySelector('#id_client_secret').text.slice(1, -1);
 const stripe = Stripe(stripePublicKey);
@@ -17,6 +18,7 @@ const style = {
         iconColor: '#dc3545'
     }
 };
+// Mount the card onto the div on the checkout page
 const card = elements.create('card', {style: style});
 card.mount('#card-element');
 
@@ -56,9 +58,8 @@ form.addEventListener('submit', function(e) {
         'client_secret': clientSecret,
         'save_details': saveDetails,
     };
-
     var url = '/checkout/cache_checkout/';
-
+// Post data to cahce checkout
     $.post(url, postData).done(function () {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
