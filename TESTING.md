@@ -229,17 +229,31 @@
 - :white_check_mark:membership_checkout.css - Pass
 - :white_check_mark:shop.css - Pass
 - :white_check_mark:orders.css - Pass
-- **Note** - When validating [base.css](https://github.com/LigaMoon/Prickly/blob/main/static/css/base.css) and [home.css](https://github.com/LigaMoon/Prickly/blob/main/home/static/home/css/home.css), validator returned errors associated with not recognizing variables in linear gradient. If variables were overwritten by regular color names, the validator passes. Additionally validator displays warnings as it does not recognizes imports adn prefixes.
+- **Note** - When validating [base.css](https://github.com/LigaMoon/Prickly/blob/main/static/css/base.css) and [home.css](https://github.com/LigaMoon/Prickly/blob/main/home/static/home/css/home.css), validator returned errors associated with not recognizing variables in linear gradient. If variables were overwritten by regular color names, the validator passes. This has also been echoed in this [Stack Overflow Post](https://stackoverflow.com/questions/57661659/w3c-css-validation-parse-error-on-variables) Additionally validator displays warnings as it does not recognizes imports adn prefixes. 
 
     <img src="./readme_docs/css-error.png" height="200px" />
     <img src="./readme_docs/css-pass.png" height="200px" />
 
 
-## JavaScript
-- JSHint
+## [JSHint](https://jshint.com/)
+- :white_check_mark:base.js - Pass
+- :white_check_mark:stripe.js - Pass
+- :white_check_mark:stripe_sub.js - Pass
+- :white_check_mark:product_item.js - Pass
+- :white_check_mark:shop.js - Pass
+- :white_check_mark:cart.js - Pass
+- **Note** - All files passed, only feedback was regarding ES6 (let, const, =>, string literals etc), and use of built in variables such as `Stripe` and `$`.
+Examples of these are shown in the images below.
 
-## Python
-- PEP8
+    <img src="./readme_docs/jshint1.png" height="150px" />
+    <img src="./readme_docs/jshint2.png" height="100px" />
+
+
+## [PEP8](http://pep8online.com/)
+- :white_check_mark:all - Pass
+- I used [flake8](https://flake8.pycqa.org/en/latest/) installed on my VSCode IDE as a validator throughout the project.
+- Additionally I also added all python files written by me in the [PEP8](http://pep8online.com/) validator online to ensure all files fit the standard.
+- **Note** - Few files that came built in Django did not meet PEP8 requirements (such as [settings.py](https://github.com/LigaMoon/Prickly/blob/main/prickly/settings.py)). However these were not written by myself and the formatting was left as is.
 
 
 # Usability
