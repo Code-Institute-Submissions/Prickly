@@ -61,7 +61,7 @@
 
 ## Strategy Plane
 The main target audience for Prickly
-- Age 15 - 35 as the product itself is filled with puns that might not be attractive to an older demographic.
+- Age 15 - 45 as the product itself is filled with puns that might not be attractive to an older demographic.
 - Users interested in cacti.
 - Users interested in decorating their space.
 - Users working with computers and interested in health benefits connected to cacti and computers.
@@ -152,13 +152,19 @@ Features worth doing
 
 
 ## Scope Plane
-- MVP - Minimal Viable Product, additionally, what features are planned for this website
+- Minimal Viable Product for this project is an e-commerce site with at least following features:
+    - Authorization
+    - Payment system
+    - Product page
+    - Reviews
+    - Profile page
+
+- Additionally, Features implemented and features planned to be implemented can be found in [Features](#features) section.
 
 ## Structure Plane
-- How the information is logically grouped together
+- The database structure was designed ahead of time and in described more in detail in [Information Architecture](#information-architecture) section.
 
 ## Skeleton Plane
-- Higher and lower priorities in a site, how the user will navihate towards those
 
 - ### Wireframes
     - <details>
@@ -217,28 +223,51 @@ Features worth doing
     </details>
 
 
+
 ## Surface Plane
 
 - #### Color scheme
-    - xxx
+    - The color scheme chosen for this project is muted pastels to go well with the colorful images. It is my view that if I had chosen a more bold color palette, it would be too hectic and too busy looking. Creating a messy look and feel for the website. The main three colors used are Cadet Blue Crayola (#B3BCC9), Gainsboro(#E4DADC), and Opal (#A9C6C4). Secondary colors were Shadow Blue (#75859B) and Lavender Gray(#CEC5CC) and darker variations of those for text contrast.
 
-        <img src="./" height="100px" />
-        <img src="./" height="50px" />
+        <img src="./readme_docs/color-palette.png" height="100px" />
+
 
 - #### Typography
-    - xxx
+    - This project uses 3 different fonts.
+        - Primary font is Sans Serif type of a font called Quicksand. I chose this font to help with readability and to add to the simplistic color scheme. I wanted the site to feel clean and modern and not too overcrowded. This font was used for most of the text and links.
 
-        <img src="./" height="50px" />
+        <img src="./readme_docs/quicksand.png" height="100px" />
+
+        - The secondary font is a Serif type of font Bodoni Moda. This font goes well together with a sans serif font like Quicksand to provide a contrast in style and with that capture reader's attention and make the site a bit more interesting and dynamic. This font was used for most of the headings.
+
+        <img src="./readme_docs/bodoni.png" height="100px" />
+
+
+        - The last font used is Caveat. This font is just used as a decoration as I was looking for something that would resemble handwriting. Even though I want the design of the site to feel sophisticated, I also wanted to give it a fun personality which I think can be partially achieved by imitating handwritten headings or signs.
+
+        <img src="./readme_docs/caveat.png" height="100px" />
+
+        - Additionally, [fontawesome](https://fontawesome.com/) icons were used to emphasize the point, use for buttons, or just to add to the design.
 
 - #### Imagery
     - Images
-        - xxx
+        - The primary reason for using images is for informative purposes. Images are displayed in item cards to allow users to visually engage with items added by other users and decide if they are interested in the item.
+        The secondary purpose of the images is aesthetic. The images displayed on cards are kept quite large and the same size while not being distorted. This attributes to the clean, organized look of the website. An image is also used as a hero image that takes the full screen to separate the page and not distract the user from the message on the landing page.
+        All images have been taken from [unspalsh](https://unsplash.com/) and minified using [tinyJPG](https://tinypng.com/)
 
     - Graphics
-        - xxx
+        - Graphics are mainly used to associate the membership with a cactus size. The smaller cactus graphic is used for BAsic membership and the larger ones are used for paid memberships which should allow the user to make visual association as well. Graphics were also used on the HOme page as decoration to go along with the 'How it works' text.Icons were taken from [flaticon](https://www.flaticon.com/).
 
 - #### Other 
-    - xxx
+    - All headings and navbar links were given half of a background color that looks like is offset from the top. Three primary colors were used interchangeably on all pages but the design remained the same. I believe this adds to my vision of a clean but modern-looking site.
+
+    - All buttons have the same design of having a border in one of the primary colors and have a hover effect with background fill. 
+
+    - I used [Bootstrap 5.0]() as the front end framework to help with layout and easy pre-built components such as accordeons
+
+    - [Notyf](https://github.com/caroso1222/notyf) and built in Bootstrap toast were used for notifications and cart toast
+
+    - For hamburger menu animations, jonsuh.com(https://jonsuh.com/hamburgers/) was used
 
 
 # Features
@@ -247,14 +276,142 @@ Features worth doing
 
 ### Common Features Across Pages
 - [x] **Header** - facilitates an effortless navigation across all pages
-    - xxx
+    - The header is positioned to always be visible at the top of the screen (mobile, tablet, and desktop) which allows visitors to find it quickly.
+    - The brand logo is positioned at the top of the page in the header and redirects the user back to the home page. This allows the user to easily find the homepage.
+    - The page navigation is located in the header at the top of the page on desktop and laptop sizes and collapsable top navigation for moobiles and tablets. This adheres to the navigation conventions allowing the user to intuitively navigate the page.
+    - Navigation links have a custome background color that seems to be offset downwards when hovered over on larger screen sizes, letting the user know that these are clickable links.
+    - The navigation link, matching the page that the user is visiting, stays 'active'(which matches the hover effect from the previous point) to let the user quickly establish which page she/he is visiting.
+    - Navigation links collapse in a personalized hamburger menu when viewed in mobile sizes.
+    - Cart and user icons are always visible in navbar on all screen sizes so that user can easily identify the amount of items they have in the cart and so that they can visit user sites quickly adn easily.
+    - User icon is a dropdown menu displaying 'Register' and 'Log In' for unauthorized user and 'My Details', 'My Memebrship' and 'Order History' for authorized user.
+- [x] **Heading**
+    - All headings are styled in the same manner to let the user understand the page structure quickly.
+- [x] **Links/buttons**
+    - All links have a hover effect and are noticeably different than the rest of the text around them, indicating that they are clickable.
+    - All external links open in a new tab to allow the user to easily navigate back to the page.
+    - Buttons are outlined, with transparent background. On hover the background is filled in to match the borderrof the button, indicating that the button is clickable.
+- [x] **Footer**
+    - Footer is always displayed at the bottom of the page, regardless of the content size.
+    - Socials are displayed and grouped. They are displayed in the footer to adhere to the convention and let the user locate them quickly.
+- [x] **Messages and Cart Toast**
+    - A feedback is provided to the user throughout the whole page. The messages shown is colored to match the tone of the message - whether it's a success message or an error message.
+    - Cart Toast, similarly as Messages is displayed as a pop-up and accross the whole page indicated to the user what the total is and what items have been added to the cart.
+    - User can easily change the quantity of items from this cart and remove them alltogether.
+    - User can dismiss the toast with an 'x' close button. 
 
 ### Features Specific to Pages
 - [x] **Home** Page
-    - xxx
+    - Hero image with a short description and a call-to-action to let user join a membership plan.
+    - A section describing high-level how the site works
+    - A section with this month's featured items and a button to redirect the user to the shop.
+    - Instagram picture galery with an instagram handle so that suer cna easily find it and navigate to it.
+
+- [x] **Shop** Page
+    - Items displayed in a responsive grid layout to accomodate for all screen sizes
+    - Only the most important information is dispayed on the card such as title, rating, price and 'Buy Now' button.
+    - Item image can be clicked to bring the user to details page.
+    - Page has categroy buttons at the top so that suier can easily filter all itenms by categories or all
+    - Filter icon button that can be toggled to collapse or reveal sort icons
+    - Sort icons that can sort items by date added, price and name
+    - Buy Now button that automatically adds item to the cart
+
+- [x] **Product Detail** Page
+    - Back button that brings user back to previous page.
+    - Average rating displayed.
+    - Description of the product which allows user to gain more information on the product.
+    - Quantity adder that allows user to select 1-10 items and display price as the item quantity os changed.
+    - Add to the cart button that adds item to the cart.
+    - Reviews section that displays reviews added by all users.
+    - Reviews are implemented as modals that appear as a top layer over all other content.
+    - If the user has added a review, they will see edit and delete buttons that allow the user to edit or delete the review
+
+- [x] **Memberships** Page
+    - All memebrships are dispalyed side by side to allow the user to compare them all and make an educated decision.
+    - Prick Me button lets user to select a memebrship they want and redirects them to Register page.
+    - If the user has added a review, they will see edit and delete buttons that allow the user to edit or delete the review
+
+- [x] **Memberships Checkout adn Change** Page
+    - Displays chosen membership it's benefits.
+    - In Memebrship Checkout view, usere has the ability to change the membership before payment.
+    - WUser can press confirm and will be redirected to the Stripe Checkout page.
+    - In membership change user can see theircurrent membership and selected one.
+
+- [x] **Memberships Checkout adn Change** Page
+    - Displays chosen membership it's benefits.
+    - In Memebrship Checkout view, usere has the ability to change the membership before payment.
+    - WUser can press confirm and will be redirected to the Stripe Checkout page.
+    - In membership change user can see theircurrent membership and selected one.
+
+- [x] **Cart** Page
+    - Displays summary of items with the subtotal excluding the delivery.
+    - Allow user to change quantity or remove the item.
+    - User can navigate bak to the shop page or to the checkout page
+
+- [x] **Delivery/Checkout** Page
+    - Order Summary is displayed on the right or on small screens as a collapsed emelent at the top of the page.
+    - User can select their shipping type which will update their delovery cost.
+    - Delivery Details are provided as a form using crispy forms.
+    - User can save their delivery details to their profile if they have one, otheriwse they are offered with sign in and sin up buttons
+    - USer is procvided witha seccure wat to enter their bank details in.
+
+- [x] **Checkout Success** Page
+    - Order Details are provided to the user as a confirmation on top of the e-mail that has been sent to them.
+
+- [x] ***Profile** Page
+    - User's membership summary is show with the name and the price of it.
+    - 'More' button that brings user to the 'My Memberhsip' site.
+    - A crispy forms form that displays to the user any details that the user has saved. They can be edited or added on this poage.
+
+- [x] ***My Membership** Page
+    - User's membership in detail is displayed
+    - User can click on the 'Change' buttonthat brings the user to the Memebrship view where they can select of which memebrship they want to changre to
+
+- [x] ***Order Historyop** Page
+    - UAn acordeon of all order, with only the lastest order not collapsed.
+    - Items are displayed within the collapsed element and user can view them by clicking on it.
+    - Each item has Buy Again and Review buttons to allow user to easily interact with purchased items.
+    - Details button brings user to the Order details view
+
+- [x] ***Order Details** Page
+    - User can view the particular order's detials
+    - Dispatch, delivery and order dates are displayed unless they are not entered yet then estimated dates are shown based on the delivery speed.
+
+
+
+
+
+
+    
+
+
+
+
+- :white_check_mark: Order History - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F)
+- :white_check_mark: Order Details - [Pass](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fprickly-app.herokuapp.com%2Fprofile%2Forders%2F9)
+
 
 ## Future Features
 - [ ] xxx
+
+
+
+
+
+
+
+
+### Future Features
+- [ ] Add the' Events' section at the bottom of the 'Home' page to create real-life swapping events.
+
+    <img src="./static/graphics/readme/mockups/mockup-events.png" height="400px" />
+
+- [ ] Implement additional 'liked items' and 'flagged items' (for admin) sections in 'My Profile' page 
+- [ ] Add password confirmation when the user is registering and let them view their password if they wish so.
+- [ ] Allow users to edit their passwords and delete their accounts.
+- [ ] Implement flash messages as toasters.
+- [ ] Allow user to upload their images and store them on Cloudinary.
+- [ ] Let users visit each other's pages to get 'the socials' details.
+- [ ] Facilitate an in-app communication.
 
 
 # Information Architecture
@@ -566,7 +723,7 @@ Instructions to run the project on your local device using an IDE
 
 ### Code :floppy_disk:
 - Collapsible sections in README.md seen on [GitHub Gist](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab) post done by pierrejoubert73
-
+- CSS Prefixed by [Autoprefixer CSS online](https://autoprefixer.github.io/)
 
 
 ### Media :clapper:
