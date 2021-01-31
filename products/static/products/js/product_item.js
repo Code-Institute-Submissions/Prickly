@@ -1,15 +1,15 @@
 // go back 1 url when back button is clicked, 
-backBtn = document.querySelector('#back-btn')
+const backBtn = document.querySelector('#back-btn');
 backBtn.addEventListener('click', (e) => {
-    let thisUrl = window.location.href
-    let lastUrl = document.referrer
-    backBtn.setAttribute('onclick', 'history.go(-1)')
+    let thisUrl = window.location.href;
+    let lastUrl = document.referrer;
+    backBtn.setAttribute('onclick', 'history.go(-1)');
     if (thisUrl == lastUrl) {
-        history.go(-2)
-        console.log(`last url: ${document.referrer}, this url: ${window.location.href}`)
+        history.go(-2);
+        console.log(`last url: ${document.referrer}, this url: ${window.location.href}`);
     }
     else {
-        history.go(-1)
+        history.go(-1);
     }
 });
 
@@ -17,12 +17,12 @@ backBtn.addEventListener('click', (e) => {
 document.querySelector(".decr-btn").style.color = 'gray';
 
 // Change price based on quantity argument
-changePrice = qty => {
+let changePrice = qty => {
     const price = document.querySelector("[id^='item-price-'");
     let value = (price.getAttribute("id").split("-"))[2];
-    newValue = value * qty;
+    let newValue = value * qty;
     price.innerHTML = `€ ${newValue}.00`;
-}
+};
 
 
 // Display the total price of an item as quantity is changed with arrows 
@@ -32,7 +32,7 @@ document.querySelector(".qty-value").addEventListener("change", (event) => {
 });
 
 // Add increment functionality to '+' button
-let incrBtn = document.querySelector(".incr-btn")
+let incrBtn = document.querySelector(".incr-btn");
 incrBtn.addEventListener("click", (e) => {
     let qtySelector = document.querySelector(".qty-value");
     let qty = parseInt(qtySelector.value);
@@ -47,7 +47,7 @@ incrBtn.addEventListener("click", (e) => {
 });
 
 // Add decrement functionality to '-' button
-let decrBtn = document.querySelector(".decr-btn")
+let decrBtn = document.querySelector(".decr-btn");
 decrBtn.addEventListener("click", (e) => {
     let qtySelector = document.querySelector(".qty-value");
     let qty = parseInt(qtySelector.value);
@@ -61,13 +61,12 @@ decrBtn.addEventListener("click", (e) => {
     }
 });
 
-const starRating = document.querySelectorAll('.rating-stars')
+const starRating = document.querySelectorAll('.rating-stars');
 
 
 starRating.forEach(rating => {
-    const ratingValue = parseInt(rating.getAttribute('data-value'))
+    const ratingValue = parseInt(rating.getAttribute('data-value'));
     const fullStar = ratingValue;
-    const emptyStar = 5 - fullStar;
     let stars = '';
 
     for (let i = 1; i < 6; i++) {
@@ -78,5 +77,5 @@ starRating.forEach(rating => {
             stars += `<i class="far fa-star"></i>`;
         }
     }    
-    rating.innerHTML = stars
-})
+    rating.innerHTML = stars;
+});

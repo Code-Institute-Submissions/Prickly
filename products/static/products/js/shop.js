@@ -2,7 +2,6 @@ const shopButton = document.querySelectorAll('.shop-button');
 const mediaUrl = document.querySelector('#id_media_url').innerHTML.slice(1, -1);
 shopButton.forEach(btn => {
     const categoryName = btn.innerHTML.toLowerCase();
-    path = mediaUrl + categoryName;
     btn.style.backgroundImage = `url(${mediaUrl}${categoryName}-btn.png)`;
 });
 
@@ -15,12 +14,11 @@ sort.addEventListener('click', function () {
 });
 
 
-const starRating = document.querySelectorAll('.rating-stars')
+const starRating = document.querySelectorAll('.rating-stars');
 // Loop through all star rating divs and add star icons depending on the rating
 starRating.forEach(rating => {
     const ratingValue = parseInt(rating.getAttribute('data-value'));
     const fullStar = ratingValue;
-    const emptyStar = 5 - fullStar;
     let stars = '';
 
     for (let i = 1; i < 6; i++) {
@@ -31,5 +29,5 @@ starRating.forEach(rating => {
             stars += `<i class="far fa-star"></i>`;
         }
     }    
-    rating.innerHTML = stars
+    rating.innerHTML = stars;
 });
