@@ -63,7 +63,7 @@
 
 {% block add_postloadjs %}
   {{ block.super }}
-    <script type="text/javascript">
+    <script>
     // go back 1 url when back button is clicked, 
         backBtn = document.querySelector('#back-btn')
         backBtn.addEventListener('click', (e) => {
@@ -79,7 +79,7 @@
             }
         });
     </script>
-    <script type="text/javascript">
+    <script>
         // Set decrement value to 'inactive' by default
         document.querySelector(".decr-btn").style.color = 'gray';
 
@@ -129,7 +129,7 @@
         });
     </script>
 
-    <script type="text/javascript">
+    <script>
         const starRating = document.querySelectorAll('.rating-stars')
 
 
