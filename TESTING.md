@@ -252,12 +252,15 @@ Examples of these are shown in the images below.
 ## [PEP8](http://pep8online.com/)
 - :white_check_mark:all - Pass
 - I used [flake8](https://flake8.pycqa.org/en/latest/) installed on my VSCode IDE as a validator throughout the project.
-- Additionally I also added all python files written by me in the [PEP8](http://pep8online.com/) validator online to ensure all files fit the standard.
-- **Note** - Few files that came built in Django did not meet PEP8 requirements (such as [settings.py](https://github.com/LigaMoon/Prickly/blob/main/prickly/settings.py)). However these were not written by myself and the formatting was left as is.
+- Additionally, I also added all python files written by me in the [PEP8](http://pep8online.com/) validator online to ensure all files fit the standard.
+- **Note** - Few files that came built-in Django did not meet PEP8 requirements (such as [settings.py](https://github.com/LigaMoon/Prickly/blob/main/prickly/settings.py)). However, these were not written by myself and the formatting was left as is.
 
 
 # Usability
-- xxx
+- To test the ease of navigation, this website was shared with friends and family of different ages and different levels of computer/smart device knowledge. There were no issues identified regarding the simplicity of navigating the website.
+- The testers also verified that all functionality aspects are working as explained above and as expected.
+- Testers expressed that the design is easy to understand and navigate.
+- To further expand on user testing,  multiple 'dummy' accounts were created to test the registration, log-in, membership subscription, CRUD functionality with reviews and purchasing items. These accounts were created with different memberships to verify that discounts and delivery charges work as well.
 
 # Compatibility
 - Browser Compatibility
@@ -269,22 +272,150 @@ Examples of these are shown in the images below.
     | Laptop              |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
     | Desktop             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| Not Tested        |
 
-- xxx
+- OS Compatibility was tested on iOS 14.3, Android 11.0, macOS Big Sur v11.1, iPadOS 14.4, and Windows 10 'October 2020 update'. It is yet to be tested on Unix, Linux, or Solaris Operating Systems.
+
+- The devices used in this testing include iMac, windows desktop with a 27" screen, Macbook Pro and Air 13", Toshiba laptop, iPad Pro, iPhone Xr, Xiaomi 3, HTC 11, iPhone 8, HUAWEI P40 Pro, and other android mobile phones.
+
+- The website was exhaustively tested for responsiveness on Chrome DevTools and Responsive Web Design Checker all screen sizes provided. Different viewport sizes were simulated ranging from as small as Galaxy Fold (280px) to large desktop sizes (1200px and above).
 
 # Performance Testing
-- xxx.
-    - Home Page - [Results](xxx)
-    - Items Page - [Results](xxx)
-    - Register Page - [Results](xxx)
-    - Log In Page - [Results](xxx)
-    - My Profile
-    - Add Item
 
-        <img src="" height="50px"/>
 
 
 # User Stories
+- #### Common user stories
+    1. I want to easily navigate the site so that I can find what I'm looking for quickly.
+        - Navbar is always located at the top of the page so that the user can easily navigate to the pages they are looking for.
+        - Most popular call-to-action buttons are displayed on the home page so that users can find the membership and shop pages quickly.
+    1. I want to be able to contact the company if I'm experiencing an issue.
+        - Social links are located in the footer allowing the user to contact the company in three different ways
+    1. I want the website to be readable on all screen sizes.
+        - The website is responsive and tested on all screen sizes allowing the user to have an equally good experience on mobile as well as desktop devices.
+        - Navbar collapses on screen sizes medium and down, this prevents overcrowding of links on smaller screen sizes.
+        - rem instead of px was used as much as possible to aid with responsiveness.
 
+    
+- #### As a first-time visitor I want to
+    1. Easily understand the purpose of the site so that I can decide whether I want to invest my time into it.
+        - When the user opens the site, the first thing they see is an image of cactus and a call to action to join the membership.
+        - In the navbar, links are named 'Shop' and 'Memberships' thus indicating to the user that this is an e-commerce site with a membership system.
+    1. Understand the benefits of becoming a member/registering for the site so that I can decide if I want to.
+        - On the landing page, it is clearly stated that discounts will be applied as soon as the user subscribes to a membership.
+        - It is stated that memberships start from free which shows the user that there is no disadvantage to sign up and get the discount.
+    1. View and compare all memberships so that I can decide what membership if any, I want to subscribe to.
+        - Memberships page shows the memberships and the benefits side by side thus allowing the user to compare them
+        - If a registered user wishes to compare and potentially change their membership, they can do so on the Memberships page and have theirs marked.
+    1. Easily find where I can register for the site so that I don't waste my time looking for it and I'm not discouraged not to sign up.
+        - Landing Page has a call-to-action button 'Join' which will navigate the user to the register page
+        - Navbar had Register button accessible from all pages
+        - Membership page lets the user pick their membership and redirects them to the Register page
+        - If the user ends up on the sign-in page, they can access the registration page by clicking on the 'Sign Up' link.
+    1. Be able to quickly register and start using the site so that I can have my account and receive the benefits.
+        - Register page only need the user's e-mail, username, and password
+        - E-mail verification arrives instantaneously.
+        - Once the user has received the e-mail they can confirm it and log in straight away and view their profile.
+
+- #### As a casual shopper I want to
+    1. Navigate to the shop page easily so that I can find what I need quickly.
+        - Shop button is always located in the navbar on top and visible/accessible from all pages
+        - Home page has a Shop button displayed under the 'New Items this week' section
+        - If the user ends up on a 404 page or empty cart page, they will see shop buttons allowing the user to navigate to the shop page.
+    1. Filter all products by category so that I can quickly have oversight of the products that I'm interested in.
+        - Shop button dropdown in the navbar shows categories that the user can select and will be navigated to the shop page with the selected category filter applied.
+        - Shop page has separate category buttons so that users can easily change the category that they are looking for without the need to click on Shop link in the navbar.
+    1. Sort all items by date added, name or price so that I can identify new products, products that fit my budget, and find easier what I'm looking for.
+        - Shop page has a filter button that expands into multiple sort buttons. 
+        - User can sort items (both ascending and descending) by date added, price and name.
+    1. Search for an item from anywhere on the site so that I can easily find what I'm looking for.
+        - Search icon in the desktop navbar reveals the search component which is accessible from all pages. After submitting the search query, the user will be redirected to the shop page with relevant search items showing.
+        - In the mobile view, the search component is located with the main navigation links and is revealed when the hamburger menu icon is clicked.
+    1. Be able to see the price of the item without clicking into it so that I can easily decide if I can afford the item.
+        - Prices are displayed under each item
+        - User can additionally sort items by price to identify the cheapest/most expensive items to help with decision making
+    1. Be able to quickly add the item without having to click on the product so that I can save time if I know that I want to purchase the item.
+        - Each item has a 'Buy Now' button that adds an item to the cart
+        - When a user adds an item to the cart, they can edit the quantity of the item in the cart toast without having to navigate to another page.
+    1. Be able to see more details about the product so that I can make an educated decision of whether to purchase the item.
+        - Each Item has an Item details page with more information, such as description and reviews on it.
+    1. Select the quantity of the product so that I can choose how many products I'm purchasing and not have to add the same item multiple times.
+        - User can select the quantity/remove of the product from the Item details page.
+        - User can change the quantity/remove from the cart toast.
+        - User can change the quantity/remove it from the cart page itself.
+    1. Be able to see the rating and reviews to allow me to judge if the item is worth the price based on other feedback.
+        - Rating is displayed on the shop page for each item so that the user has a quick oversight of the ratings
+        - Rating is displayed on the item detail page and under the reviews section as well
+    1. Leave a review so that I can provide my feedback and experience to the company and other shoppers.
+        - Logged-in users can add a review from the item details page by clicking on the 'Review' button
+        - Users can access the Review button of their purchased items also from their order history page
+    1. Edit my review so that I can change it in case I've changed my mind or made a mistake while adding the review.
+        - Under all reviews written by a user, there is an edit button displayed which allows the user to edit their review.
+    1. Delete my review so that I can remove it in case my review is no longer relevant or I don't want to keep it up.
+        - Under all reviews written by a user, there is a delete button displayed which allows the user to delete their review.
+    1. See my shopping cart as items are added to know how the total without having to go to another page.
+        - When an item is added, the shopping cart toast will display the new total and all items added to it so far.
+    1. Edit the quantity of added items so that I don't have to remove and add items again.
+        - User can select the quantity/remove of the product from the Item details page.
+        - User can change the quantity/remove from the cart toast.
+        - User can change the quantity/remove it from the cart page itself.
+    1. Remove added items easily so that I can purchase only the items that I want.
+        - Each item on the cart and cart toast pages has an 'I don't want this' button that removes the item from the cart.
+    1. See my shopping cart before checkout so that I can make changes before purchase.
+        - User will have an opportunity to visit the shopping cart page before the checkout
+        - If a user navigates to the checkout before the shopping cart, they can easily navigate back as checkout has a button to bring the user to the shopping cart.
+    1. See all charges included before making a payment so that I can decide if I want to proceed with the purchase.
+        - After the user selects their delivery type in the checkout, all charges discounts, and the updated total is shown with the order summary.
+    1. View my order as I'm checking out to be able to confirm what I'm purchasing.
+        - Checkout page has an order summary on the right-hand side so the user can have oversight of the items before making a payment.
+        - On the mobile screen, the order summary is collapsed but easily expandable, the total is always visible.
+    1. easily add my details without too many steps so that I don't get discouraged by the lengthy checkout process.
+        - There is only one checkout form after the user has selected the delivery type.
+        - Delivery info form can be pre-filled if the user has an account. Another great reason to sign up.
+    1. Securely add my payment information so that I feel safe giving my card details.
+        - Payments are handled by Stripe, securely, they are encrypted and card details are not shared with anyone.
+    1. See Order confirmation and receive confirmation e-mail so that I have proof of purchase and order number.
+        - E-mail confirmation is sent to the user after their order has been successfully processed.
+        - Order confirmation is displayed on the screen as well.
+        - For members, orders can be viewed on the order history page.
+
+
+- #### As a member I want to
+    1. Log in and sign out quickly and easily so that I can access or close my account.
+        - Sign In button is located in the navbar and is accessible to the user from all pages.
+        - Sign In link is displayed on the Register page so that User can easily navigate to it
+        - Checkout page further displays the Sign In link if the user isn't signed in.
+    1. See my personal account information so that I can manage my details.
+        - After signing in, if the user has a membership, they are navigated to the profile page.
+        - User can access the profile page from the navbar too.
+    1. See my membership site so that I can verify my benefits and the price of the membership.
+        - Users can view their membership on the 'My membership' site where user can see their benefits and cost.
+        - Users can see the summary of their membership on the profile page.
+        - Users can see their membership plan highlighted on the Memberships page.
+    1. Change the membership easily so that I can control what benefits and expenses I'm having.
+        - User can navigate to the Membership change page from the 'Memberships' page when membership is selected.
+        - Membership is easily changed just by clicking confirm
+    1. Cancel paid membership so that I don't have to pay for it.
+        - User can always change their membership to the Basic plan which is for free and will cancel the paid membership
+    1. See my order history so that I can have the confirmation and details for all of them in one place and manage them easily.
+        - Logged in user can access their Order history page from the navbar
+        - User can see all the details associated with the order once they click 'Details' under any given order summary
+    1. Can see the estimated date of delivery so that I can arrange to receive the package.
+        - User can see their estimated delivery date on the Delivery DEtails page
+    1. Recieve benefits as a member so that I get my money's worth.
+        - All memberships receive some benefits
+        - All paid memberships receive a first and overall discount on prices
+        - All memberships receive a quarterly gift
+
+- #### As an admin I want to
+    1. Be able to add an item so that I can update the products on the site.
+        - Admin can access admin site from which they can add items, membership plans, delivery types.
+    1. Be able to edit and remove items so that I can customize items on the site and offer new deals to customers depending on the demand and new trends.
+        - ADmin can edit the item from the admin page.
+    1. Add and edit new memberships so that I can customize the price and benefits depending on the popularity of the membership.
+        - This can be achieved from the admin page
+    1. Add and edit new delivery types to accommodate shipping to more countries.
+        - This can be achieved from the admin page
+    1. Have oversight of the user data so that if anyone is experiencing an issue I can investigate and resolve the issue.
+        - This can be achieved from the admin page
 
 
 # Bugs
